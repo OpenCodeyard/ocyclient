@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
+
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
+
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+      This is a placeholder for base href that will be replaced by the value of
+      the `--base-href` argument provided to `flutter build`.
+    -->
+    <base href="$FLUTTER_BASE_HREF">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="Official client side application of GCELT Open Source">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="gosclient">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <title>GCELT Open Source</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="google-signin-client_id" content=
+            "329653576553-7scsigkttn4e9dpod5jsq5sootjeiglu.apps.googleusercontent.com">
+
+    <style>
+
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+            height : auto
+        }
+
+        .below-center {
+            margin: 0;
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+            height : auto
+        }
+
+    </style>
+
+</head>
+<body bgcolor="#000000">
+
+<!-- Splash -->
+<div id="splash">
+    <img class="center" src="assets/assets/images/animated_gos.gif" alt="GCELT Open Source"/>
+    <img class="below-center" src="assets/assets/images/loading.gif" width="80" height="80"
+         alt="Loading...."/>
+</div>
+<!-- Splash -->
+
+<script>
+    window.addEventListener('flutter-first-frame', function () {
+    window.document.getElementById('splash')?.remove();
+  });
+
+</script>
+<!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
+<script>
+    var serviceWorkerVersion = 1;
+    var scriptLoaded = false;
+    function loadMainDartJs() {
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
+    }
+
+    if ('serviceWorker' in navigator) {
+      // Service workers are supported. Use them.
+      window.addEventListener('load', function () {
+        // Wait for registration to finish before dropping the <script> tag.
+        // Otherwise, the browser will load the script multiple times,
+        // potentially different versions.
+        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+        navigator.serviceWorker.register(serviceWorkerUrl)
+          .then((reg) => {
+            function waitForActivation(serviceWorker) {
+              serviceWorker.addEventListener('statechange', () => {
+                if (serviceWorker.state == 'activated') {
+                  console.log('Installed new service worker.');
+                  loadMainDartJs();
+                }
+              });
+            }
+            if (!reg.active && (reg.installing || reg.waiting)) {
+              // No active web worker and we have installed or are installing
+              // one for the first time. Simply wait for it to activate.
+              waitForActivation(reg.installing || reg.waiting);
+            } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
+              // When the app updates the serviceWorkerVersion changes, so we
+              // need to ask the service worker to update.
+              console.log('New service worker available.');
+              reg.update();
+              waitForActivation(reg.installing);
+            } else {
+              // Existing service worker is still good.
+              console.log('Loading app from service worker.');
+              loadMainDartJs();
+            }
+          });
+
+        // If service worker doesn't succeed in a reasonable amount of time,
+        // fallback to plaint <script> tag.
+        setTimeout(() => {
+          if (!scriptLoaded) {
+            console.warn(
+              'Failed to load app from service worker. Falling back to plain <script> tag.',
+            );
+            loadMainDartJs();
+          }
+        }, 4000);
+      });
+    } else {
+      // Service workers not supported. Just drop the <script> tag.
+      loadMainDartJs();
+    }
+
+
+
+
+
+
+</script>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+<!-- Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries -->
+<!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>-->
+<!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-messaging.js"></script>-->
+<!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>-->
+<!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-functions.js"></script>-->
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+<script>
+
+     // Firebase configuration
+      var firebaseConfig = {
+          apiKey: "AIzaSyA0SSxWPpoPCuDbMlUuF9CW0QQd9ZgGJEM",
+          authDomain: "gceltopensource.firebaseapp.com",
+          projectId: "gceltopensource",
+          storageBucket: "gceltopensource.appspot.com",
+          messagingSenderId: "329653576553",
+          appId: "1:329653576553:web:bfeb5b04c3cf85cc9953f8",
+          measurementId: "G-1HX8CWEYZK"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+
+
+
+</script>
+
+<script src="github_login.js"></script>
+</body>
+</html>
