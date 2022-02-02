@@ -71,8 +71,10 @@ class _AppDrawerState extends State<AppDrawer> {
                             GestureDetector(
                               onTap: () {
                                 if (ab.isLoggedIn) {
+                                  nb.toRoute("/profile");
+                                } else {
                                   nb.toRoute("/auth");
-                                } else {}
+                                }
                               },
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
