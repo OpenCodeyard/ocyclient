@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.4
   line_icons: ^2.0.1
   font_awesome_flutter: ^9.2.0
-  flutter_devicon: ^1.0.1
+  dev_icons: ^1.0.0
 
   #State management
   provider: ^6.0.2
@@ -50,6 +50,8 @@ dependencies:
   webview_flutter: ^3.0.0
   step_progress_indicator: ^1.0.2
   fluttertoast: ^8.0.8
+  face_pile: ^0.0.1
+  intl: ^0.17.0
 
   #Animation
   lottie: ^1.2.1
@@ -69,6 +71,8 @@ dependencies:
   #Login Providers
   google_sign_in: ^5.2.3
 
+  #Apis
+  dio: ^4.0.4
 
 dev_dependencies:
   flutter_test:

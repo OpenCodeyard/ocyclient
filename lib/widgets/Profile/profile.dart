@@ -1,6 +1,6 @@
+import 'package:dev_icons/dev_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_devicon/flutter_devicon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gosclient/blocs/auth_bloc.dart';
 import 'package:gosclient/blocs/navigation_bloc.dart';
@@ -393,7 +393,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               CircleAvatar(
                                 backgroundColor: Colors.white,
                                 child: Icon(
-                                  FlutterDEVICON.java_plain,
+                                  DevIcons.javaPlain,
                                   color: Colors.red,
                                 ),
                               ),
@@ -425,7 +425,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               CircleAvatar(
                                 backgroundColor: Colors.white,
                                 child: Icon(
-                                  FlutterDEVICON.python_plain,
+                                  DevIcons.pythonPlain,
                                   color: Colors.green,
                                 ),
                               ),
@@ -457,7 +457,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               CircleAvatar(
                                 backgroundColor: Colors.white,
                                 child: Icon(
-                                  FlutterDEVICON.cplusplus_plain,
+                                  DevIcons.cplusplusPlain,
                                   color: Colors.blue,
                                 ),
                               ),
@@ -489,7 +489,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               CircleAvatar(
                                 backgroundColor: Colors.white,
                                 child: Icon(
-                                  FlutterDEVICON.flutter_plain,
+                                  DevIcons.flutterPlain,
                                   color: Colors.blue,
                                 ),
                               ),
@@ -521,7 +521,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               CircleAvatar(
                                 backgroundColor: Colors.white,
                                 child: Icon(
-                                  FlutterDEVICON.javascript_plain,
+                                  DevIcons.javascriptPlain,
                                   color: Colors.yellow,
                                 ),
                               ),

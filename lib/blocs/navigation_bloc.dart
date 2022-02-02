@@ -4,8 +4,12 @@ import 'package:get/utils.dart';
 
 class NavigationBloc extends ChangeNotifier {
 
-  void toRoute(String s) {
-    Get.toNamed(s);
+  void toRoute(String s,{bool shouldPopCurrent = false}) {
+    if(shouldPopCurrent) {
+      Get.offAndToNamed(s);
+    }else{
+      Get.toNamed(s);
+    }
   }
 
 }

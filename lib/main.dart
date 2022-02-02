@@ -8,6 +8,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:gosclient/blocs/auth_bloc.dart';
 import 'package:gosclient/blocs/navigation_bloc.dart';
 import 'package:gosclient/blocs/profile_bloc.dart';
+import 'package:gosclient/blocs/projects_bloc.dart';
 import 'package:gosclient/blocs/theme_bloc.dart';
 import 'package:gosclient/configs/config.dart';
 import 'package:gosclient/widgets/AboutUs/about_us.dart';
@@ -72,6 +73,9 @@ class GOSApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ProfileBloc>(
           create: (context) => ProfileBloc(),
+        ),
+        ChangeNotifierProvider<ProjectsBloc>(
+          create: (context) => ProjectsBloc(),
         ),
       ],
       child: GetMaterialApp(

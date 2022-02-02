@@ -14,7 +14,7 @@ class Benefits extends StatefulWidget {
 class _BenefitsState extends State<Benefits> {
   final List<bool> _amIHovering = [false, false, false];
 
-  Size cardSize = const Size(0, 0);
+  double cardHeight = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _BenefitsState extends State<Benefits> {
     return SizedBox(
       width: size.width,
       height:
-          size.height > 800 ? size.height * 0.8 - 70 : size.height * 0.9 - 70,
+      size.height > 800 ? size.height * 0.8 - 70 : size.height * 0.9 - 70,
       child: Column(
         children: [
           const SizedBox(
@@ -57,7 +57,7 @@ class _BenefitsState extends State<Benefits> {
           const SizedBox(
             height: 40,
           ),
-          Expanded(
+          Flexible(
             child: Center(
               child: ListView(
                 shrinkWrap: true,
@@ -143,8 +143,9 @@ class _BenefitsState extends State<Benefits> {
   ) {
     return MeasureSize(
       onChange: (Size size) {
-        cardSize = size;
+        cardHeight = size.height;
       },
+      key: Key(index.toString()),
       child: MouseRegion(
         onEnter: (details) {
           setState(() {
@@ -170,7 +171,7 @@ class _BenefitsState extends State<Benefits> {
                             ? 300 - 8
                             : size.width / 5 - 8
                         : 0,
-                    height: _amIHovering[index] ? cardSize.height - 8 : 0,
+                    height: _amIHovering[index] ? cardHeight - 8 : 0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: iconColor.shade100,

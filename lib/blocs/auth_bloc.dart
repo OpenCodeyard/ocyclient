@@ -107,7 +107,10 @@ class AuthenticationBloc extends ChangeNotifier {
                 await savePrefs(List<String>.from(_loginProvidersConnected));
                 toggleInProgressStatus(false);
                 toggleGithubSignInStatus(false);
-                nb.toRoute("/home");
+                nb.toRoute(
+                  "/home",
+                  shouldPopCurrent: true,
+                );
               }
             });
           } else {
@@ -234,7 +237,10 @@ class AuthenticationBloc extends ChangeNotifier {
         await savePrefs(List<String>.from(_loginProvidersConnected));
         toggleInProgressStatus(false);
         toggleGoogleSignInStatus(false);
-        nb.toRoute("/home");
+        nb.toRoute(
+          "/home",
+          shouldPopCurrent: true,
+        );
       } else {
         toggleInProgressStatus(false);
         toggleGoogleSignInStatus(false);
@@ -270,7 +276,10 @@ class AuthenticationBloc extends ChangeNotifier {
     _loginProvidersConnected = [];
 
     if (ModalRoute.of(context)?.settings.name == "/profile") {
-      nb.toRoute("/home");
+      nb.toRoute(
+        "/home",
+        shouldPopCurrent: true,
+      );
     }
     notifyListeners();
   }
