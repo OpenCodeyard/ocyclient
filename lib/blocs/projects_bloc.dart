@@ -17,7 +17,7 @@ class ProjectsBloc extends ChangeNotifier {
 
   void getProjects() async {
     dio.options.headers["Authorization"] =
-        "token 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";
+        "token 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";
     dio.options.headers["accept"] = "application/vnd.github.v3+json";
 
     var response = await dio.get(
