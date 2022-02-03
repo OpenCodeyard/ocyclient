@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,8 @@ class AuthenticationBloc extends ChangeNotifier {
 
   bool get isPrefsLoaded => _isPrefsLoaded;
 
+  Dio dio = Dio();
+
   Future authWithGithub(BuildContext context, NavigationBloc nb,
       bool isAccountLinkOperation) async {
     final GitHubSignIn gitHubSignIn = GitHubSignIn(
@@ -81,11 +84,21 @@ class AuthenticationBloc extends ChangeNotifier {
             auth
                 .signInWithCredential(
                     GithubAuthProvider.credential(result.token ?? ""))
-                .then((result) async {
-              if (result.user != null) {
-                User? user = result.user;
+                .then((res) async {
+
+              if (res.user != null) {
+                dio.options.headers["Authorization"] =
+                "token ${result.token}";
+                dio.options.headers["accept"] = "application/vnd.github.v3+json";
+
+                var response = await dio.get(
+                    Config.ghRootUrl +
+                        Config.ghUserApi
+                );
+
+                User? user = res.user;
                 _uid = user?.uid;
-                _email = user?.email;
+                _email = response.data["email"];
                 _name = user?.displayName;
                 _profilePicUrl = user?.photoURL;
                 _isLoggedIn = true;

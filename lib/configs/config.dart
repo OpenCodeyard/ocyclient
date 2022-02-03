@@ -42,7 +42,7 @@ class Config {
   ///Routes that should not be accessible to unauthenticated users
   static const List<String> unauthenticatedPreventAccessRoutes = ["/profile"];
 
-  static const appVersion = "0.0.4-alpha";
+  static const appVersion = "0.0.5-alpha";
 
   ///Firestore Collection Names
   static const fsUser = "Users";
@@ -60,5 +60,6 @@ class Config {
   static const ghRootUrl = "https://api.github.com/";
   static const ghOrganisationsApi = "orgs";
   static const ghReposApi = "repos";
+  static const ghUserApi = "user";
 
 }

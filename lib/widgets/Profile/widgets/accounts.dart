@@ -13,16 +13,18 @@ class AccountWidget extends StatelessWidget {
 
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
+    Size size = MediaQuery.of(context).size;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           margin: const EdgeInsets.all(10),
-          child: const Text(
+          child: Text(
             "Accounts",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 40,
+              fontSize: size.width < 700 ? 25 : 40,
               fontFamily: "ProximaNova",
             ),
           ),
