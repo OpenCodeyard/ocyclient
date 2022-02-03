@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gosclient/configs/config.dart';
 import 'package:gosclient/models/project/project_model.dart';
 
@@ -15,8 +16,9 @@ class ProjectsBloc extends ChangeNotifier {
   bool get isProjectsLoading => _isProjectsLoading;
 
   void getProjects() async {
-    dio.options.headers["Authorization"] =
-        "token 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";
+    String? token = dotenv.env["github_access_token"];
+
+    dio.options.headers["Authorization"] = "token $token";
     dio.options.headers["accept"] = "application/vnd.github.v3+json";
 
     var response = await dio.get(
