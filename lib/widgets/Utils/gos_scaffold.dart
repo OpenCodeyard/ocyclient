@@ -192,7 +192,7 @@ class _GosScaffoldState extends State<GosScaffold> {
       Offset offset, AuthenticationBloc ab, NavigationBloc nb) async {
     double left = offset.dx;
 
-    showMenu(
+    await showMenu(
       context: context,
       position: RelativeRect.fromLTRB(left - 50, 65, 0, 0),
       shape: RoundedRectangleBorder(
@@ -206,17 +206,9 @@ class _GosScaffoldState extends State<GosScaffold> {
           child: SizedBox(
             height: 40,
             width: 120,
-            child: SizedBox(
-              width: 30,
-              height: 30,
-              child: getIconButton(
-                title: "Profile",
-                func: () {
-                  Navigator.pop(context);
-                  nb.toRoute("/profile");
-                },
-                icon: FontAwesomeIcons.user,
-              ),
+            child: getIconButtonBody(
+              "Profile",
+              FontAwesomeIcons.user,
             ),
           ),
         ),
@@ -226,22 +218,20 @@ class _GosScaffoldState extends State<GosScaffold> {
           child: SizedBox(
             height: 40,
             width: 120,
-            child: SizedBox(
-              width: 30,
-              height: 30,
-              child: getIconButton(
-                title: "Log Out",
-                func: () {
-                  ab.signOut(context, nb);
-                  Navigator.pop(context);
-                },
-                icon: FontAwesomeIcons.signOutAlt,
-              ),
+            child: getIconButtonBody(
+              "Log Out",
+              FontAwesomeIcons.signOutAlt,
             ),
           ),
         ),
       ],
       elevation: 8.0,
-    );
+    ).then((value){
+      if(value == 1){
+        nb.toRoute("/profile");
+      }else{
+        ab.signOut(context, nb);
+      }
+    });
   }
 }

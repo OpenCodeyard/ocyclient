@@ -8,25 +8,32 @@ Widget getIconButton(
       onTap: () {
         func();
       },
-      child: Row(
-        children: [
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: SizedBox(
-              width: 30,
-              height: 30,
-              child: getIconForButton(icon),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          getTextForButton(title)
-        ],
+      child: getIconButtonBody(
+        title,
+        icon,
       ),
     ),
+  );
+}
+
+Widget getIconButtonBody(String title, IconData icon) {
+  return Row(
+    children: [
+      Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: SizedBox(
+          width: 30,
+          height: 30,
+          child: getIconForButton(icon),
+        ),
+      ),
+      const SizedBox(
+        width: 10,
+      ),
+      getTextForButton(title)
+    ],
   );
 }
 
