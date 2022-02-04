@@ -24,7 +24,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> configureApp() async {
   setUrlStrategy(PathUrlStrategy());
-  await dotenv.load();
+  await dotenv.load(fileName: "env");
   if (!kIsWeb && Firebase.apps.isEmpty) {
     await Firebase.initializeApp();
   }
