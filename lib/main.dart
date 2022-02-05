@@ -7,6 +7,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:gosclient/blocs/auth_bloc.dart';
+import 'package:gosclient/blocs/edit_profile_bloc.dart';
 import 'package:gosclient/blocs/navigation_bloc.dart';
 import 'package:gosclient/blocs/profile_bloc.dart';
 import 'package:gosclient/blocs/projects_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:gosclient/widgets/Auth/login_signup.dart';
 import 'package:gosclient/widgets/Community/community.dart';
 import 'package:gosclient/widgets/Home/home.dart';
 import 'package:gosclient/widgets/Milestones/milestones.dart';
+import 'package:gosclient/widgets/Profile/edit_profile.dart';
 import 'package:gosclient/widgets/Profile/profile.dart';
 import 'package:gosclient/widgets/Teams/teams.dart';
 import 'package:provider/provider.dart';
@@ -75,6 +77,9 @@ class GOSApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ProfileBloc>(
           create: (context) => ProfileBloc(),
+        ),
+        ChangeNotifierProvider<EditProfileBloc>(
+          create: (context) => EditProfileBloc(),
         ),
         ChangeNotifierProvider<ProjectsBloc>(
           create: (context) => ProjectsBloc(),
@@ -203,6 +208,10 @@ class GOSApp extends StatelessWidget {
           GetPage(
             name: '/profile',
             page: () => const ProfilePage(),
+          ),
+          GetPage(
+            name: '/editProfile',
+            page: () => const EditProfilePage(),
           ),
           GetPage(
             name: '/licenses',

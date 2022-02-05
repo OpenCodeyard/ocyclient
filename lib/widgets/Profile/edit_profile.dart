@@ -3,31 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gosclient/blocs/auth_bloc.dart';
+import 'package:gosclient/blocs/edit_profile_bloc.dart';
 import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/blocs/profile_bloc.dart';
 import 'package:gosclient/widgets/Profile/widgets/accounts.dart';
-import 'package:gosclient/widgets/Profile/widgets/skill_card.dart';
 import 'package:gosclient/widgets/Utils/common_widgets.dart';
 import 'package:gosclient/widgets/Utils/gos_scaffold.dart';
-import 'package:gosclient/widgets/Utils/snackbar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _EditProfilePageState extends State<EditProfilePage> {
   ///TODO cover attribution <a href="https://www.freepik.com/vectors/background">Background vector created by freepik - www.freepik.com</a>
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    ProfileBloc pb = Provider.of<ProfileBloc>(context);
+    EditProfileBloc epb = Provider.of<EditProfileBloc>(context);
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
@@ -56,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: getProfileMenu(size, pb, ab, nb),
+                            children: getEditProfileMenu(size, epb, ab, nb),
                           ),
                         ),
                       ),
@@ -155,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           vertical: 10,
                         ),
                         child: Column(
-                          children: getProfileMenu(size, pb, ab, nb),
+                          children: getEditProfileMenu(size, epb, ab, nb),
                         ),
                       ),
                     ),
@@ -200,9 +198,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               elevation: 15,
                                               padding: const EdgeInsets.all(16),
                                             ),
-                                            onPressed: () {
-                                              nb.toRoute("/editProfile");
-                                            },
+                                            onPressed: () {},
                                             icon: const Icon(
                                               LineIcons.userEdit,
                                               size: 15,
@@ -313,16 +309,165 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontFamily: "ProximaNova",
                               ),
                             ),
-                            ...List.generate(
-                              ab.skills.length,
-                              (index) {
-                                return SkillCard(
-                                  title: ab.skills.keys.toList()[index],
-                                  experience: ab.skills.values.toList()[index],
-                                  color: Colors.red,
-                                  icon: DevIcons.javaPlain,
-                                );
-                              },
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Card(
+                              color: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  children: const [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      child: Icon(
+                                        DevIcons.javaPlain,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      "Java",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Card(
+                              color: Colors.green,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  children: const [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      child: Icon(
+                                        DevIcons.pythonPlain,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      "Python",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Card(
+                              color: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  children: const [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      child: Icon(
+                                        DevIcons.cplusplusPlain,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      "C++",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Card(
+                              color: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  children: const [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      child: Icon(
+                                        DevIcons.flutterPlain,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      "Dart",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Card(
+                              color: Colors.yellow,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  children: const [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      child: Icon(
+                                        DevIcons.javascriptPlain,
+                                        color: Colors.yellow,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      "JS",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -335,9 +480,9 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  List<Widget> getProfileMenu(
+  List<Widget> getEditProfileMenu(
     Size size,
-    ProfileBloc pb,
+    EditProfileBloc epb,
     AuthenticationBloc ab,
     NavigationBloc nb,
   ) {
@@ -358,31 +503,31 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ],
       getSideMenuButton(
-        pb,
-        "User",
+        epb,
+        "Personal",
         FontAwesomeIcons.userAlt,
         0,
         isHorizontal,
       ),
       getCustomSizedBoxForMenu(isHorizontal),
       getSideMenuButton(
-        pb,
-        "My Events",
-        FontAwesomeIcons.solidCalendarCheck,
+        epb,
+        "Education",
+        FontAwesomeIcons.userGraduate,
         1,
         isHorizontal,
       ),
       getCustomSizedBoxForMenu(isHorizontal),
       getSideMenuButton(
-        pb,
-        "My Projects",
-        FontAwesomeIcons.codeBranch,
+        epb,
+        "Experience",
+        FontAwesomeIcons.briefcase,
         2,
         isHorizontal,
       ),
       getCustomSizedBoxForMenu(isHorizontal),
       getSideMenuButton(
-        pb,
+        epb,
         "Log Out",
         FontAwesomeIcons.signOutAlt,
         3,
@@ -395,7 +540,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget getSideMenuButton(
-    ProfileBloc pb,
+    EditProfileBloc pb,
     String title,
     IconData icon,
     int index,
@@ -521,45 +666,6 @@ class _ProfilePageState extends State<ProfilePage> {
           fontWeight: FontWeight.bold,
           fontSize: 25,
         ),
-      ),
-      TextButton.icon(
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 0,
-          ),
-        ),
-        label: const Icon(
-          FontAwesomeIcons.copy,
-          size: 15,
-        ),
-        icon: RichText(
-          text: TextSpan(
-            text: "uid : ",
-            style: const TextStyle(
-              fontFamily: "Varela",
-            ),
-            children: [
-              TextSpan(
-                text: ab.uid,
-                style: const TextStyle(
-                  color: Colors.blueGrey,
-                  fontFamily: "Varela",
-                ),
-              ),
-            ],
-          ),
-        ),
-        onPressed: () {
-          Clipboard.setData(
-            ClipboardData(
-              text: ab.uid,
-            ),
-          );
-
-          showToast(
-            "Uid copied to clipboard",
-          );
-        },
       ),
     ];
   }

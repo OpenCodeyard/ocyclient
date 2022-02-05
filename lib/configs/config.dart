@@ -23,8 +23,8 @@ class Config {
   static List<IconData> get appDrawerIcons => _appDrawerIcons;
 
   ///GitHub Configs
-  static const String clientId = "ba4e3c2ad6622ba3b12c";
-  static const String clientSecret = "079b49d4b5ba6e84ad7ec4f4d4e90163c35c18ad";
+  static const String clientId = "ba4e3c2ad6622ba3b12c"; ///TODO move to env
+  static const String clientSecret = "079b49d4b5ba6e84ad7ec4f4d4e90163c35c18ad"; ///TODO move to env
   static const String redirectUrl =
       "https://gceltopensource.firebaseapp.com/__/auth/handler";
 
@@ -35,6 +35,7 @@ class Config {
   static const String prefProfilePicUrl = "profile_pic_url";
   static const String prefUid = "uid";
   static const String prefLoginProvidersConnected = "login_providers";
+  static const String prefSkills = "skills";
 
   ///Routes that should not be accessible to authenticated users
   static const List<String> authenticatedPreventAccessRoutes = ["/auth"];
@@ -42,7 +43,7 @@ class Config {
   ///Routes that should not be accessible to unauthenticated users
   static const List<String> unauthenticatedPreventAccessRoutes = ["/profile"];
 
-  static const appVersion = "0.0.5-alpha";
+  static const appVersion = "0.0.6-alpha";
 
   ///Firestore Collection Names
   static const fsUser = "Users";
@@ -54,6 +55,7 @@ class Config {
   static const userProfilePic = "profilePic";
   static const userLoginProviders = "loginProviders";
   static const userGithubAccessToken = "accessTokenGithub";
+  static const userSkills = "skills";
 
   ///Github api
   static const ghOrganisationName = "GCELTIANS2020";
@@ -61,5 +63,4 @@ class Config {
   static const ghOrganisationsApi = "orgs";
   static const ghReposApi = "repos";
   static const ghUserApi = "user";
-
 }

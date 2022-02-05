@@ -36,6 +36,7 @@ class AuthenticationBloc extends ChangeNotifier {
   String? _name;
   String? _profilePicUrl;
   String? _userGitHubAccessToken;
+  Map<String, dynamic> _skills = {};
 
   String? get userGitHubAccessToken => _userGitHubAccessToken;
 
@@ -47,6 +48,8 @@ class AuthenticationBloc extends ChangeNotifier {
 
   String get profilePicUrl => _profilePicUrl ?? "";
 
+  Map<String, dynamic> get skills => _skills;
+
   bool _isLoggedIn = false;
 
   bool get isLoggedIn => _isLoggedIn;
@@ -56,6 +59,9 @@ class AuthenticationBloc extends ChangeNotifier {
   bool get isPrefsLoaded => _isPrefsLoaded;
 
   Dio dio = Dio();
+
+  CollectionReference<Map<String, dynamic>> userCollectionRef =
+      FirebaseFirestore.instance.collection(Config.fsUser);
 
   Future authWithGithub(BuildContext context, NavigationBloc nb,
       bool isAccountLinkOperation) async {
@@ -85,16 +91,13 @@ class AuthenticationBloc extends ChangeNotifier {
                 .signInWithCredential(
                     GithubAuthProvider.credential(result.token ?? ""))
                 .then((res) async {
-
               if (res.user != null) {
-                dio.options.headers["Authorization"] =
-                "token ${result.token}";
-                dio.options.headers["accept"] = "application/vnd.github.v3+json";
+                dio.options.headers["Authorization"] = "token ${result.token}";
+                dio.options.headers["accept"] =
+                    "application/vnd.github.v3+json";
 
-                var response = await dio.get(
-                    Config.ghRootUrl +
-                        Config.ghUserApi
-                );
+                var response =
+                    await dio.get(Config.ghRootUrl + Config.ghUserApi);
 
                 User? user = res.user;
                 _uid = user?.uid;
@@ -104,11 +107,8 @@ class AuthenticationBloc extends ChangeNotifier {
                 _isLoggedIn = true;
                 _userGitHubAccessToken = accessToken;
 
-                bool existingUser = (await FirebaseFirestore.instance
-                        .collection(Config.fsUser)
-                        .doc(uid)
-                        .get())
-                    .exists;
+                bool existingUser =
+                    (await userCollectionRef.doc(uid).get()).exists;
 
                 if (!existingUser) {
                   await signUpUser(isGoogle: false);
@@ -159,6 +159,16 @@ class AuthenticationBloc extends ChangeNotifier {
     _profilePicUrl = prefs.getString(Config.prefProfilePicUrl);
     _loginProvidersConnected =
         prefs.getStringList(Config.prefLoginProvidersConnected) ?? [];
+    List skillsList = prefs.getStringList(Config.prefSkills) ?? [];
+
+    ///Traversing List to get all skills
+    ///and store them in map
+    for (String skill in skillsList) {
+      String skillToStore = skill.split(":")[0];
+      String experienceToStore = skill.split(":")[1];
+      _skills[skillToStore] = experienceToStore;
+    }
+
     _isPrefsLoaded = true;
     notifyListeners();
   }
@@ -234,11 +244,7 @@ class AuthenticationBloc extends ChangeNotifier {
         _email = googleSignInAccount.email;
         _profilePicUrl = user.photoURL;
         _isLoggedIn = true;
-        bool existingUser = (await FirebaseFirestore.instance
-                .collection(Config.fsUser)
-                .doc(uid)
-                .get())
-            .exists;
+        bool existingUser = (await userCollectionRef.doc(uid).get()).exists;
 
         if (!existingUser) {
           await signUpUser();
@@ -310,10 +316,7 @@ class AuthenticationBloc extends ChangeNotifier {
       map.putIfAbsent(
           Config.userGithubAccessToken, () => _userGitHubAccessToken);
     }
-    await FirebaseFirestore.instance
-        .collection(Config.fsUser)
-        .doc(uid)
-        .update(map);
+    await userCollectionRef.doc(uid).update(map);
 
     notifyListeners();
   }
@@ -326,6 +329,18 @@ class AuthenticationBloc extends ChangeNotifier {
     prefs.setString(Config.prefName, _name ?? "");
     prefs.setString(Config.prefProfilePicUrl, _profilePicUrl ?? "");
     prefs.setStringList(Config.prefLoginProvidersConnected, loginProviders);
+
+    List<String> skillsList = [];
+
+    ///Traversing map to get all skills
+    ///and store them in format [skill]:[experience]
+    ///Shared Preferences doesn't support storing map
+    ///and thus this is done
+    for (String skill in _skills.keys) {
+      skillsList.add(skill + ":" + _skills[skill].toString());
+    }
+
+    prefs.setStringList(Config.prefSkills, skillsList);
   }
 
   void toggleInProgressStatus(bool status) {
@@ -345,7 +360,7 @@ class AuthenticationBloc extends ChangeNotifier {
   Future signUpUser({
     bool isGoogle = true,
   }) async {
-    await FirebaseFirestore.instance.collection(Config.fsUser).doc(uid).set({
+    await userCollectionRef.doc(uid).set({
       Config.userUID: uid,
       Config.userName: name,
       Config.userEmail: email,
@@ -356,17 +371,30 @@ class AuthenticationBloc extends ChangeNotifier {
   }
 
   Future fetchDataFromFirestore() async {
-    await FirebaseFirestore.instance
-        .collection(Config.fsUser)
-        .doc(uid)
-        .get()
-        .then((value) {
-      _uid = value[Config.userUID];
-      _name = value[Config.userName];
-      _email = value[Config.userEmail];
-      _profilePicUrl = value[Config.userProfilePic];
-      _loginProvidersConnected = value[Config.userLoginProviders];
-      _userGitHubAccessToken = value[Config.userGithubAccessToken];
+    await userCollectionRef.doc(uid).get().then((value) {
+      Map<String, dynamic>? data = value.data();
+      if (data != null) {
+        _uid = data[Config.userUID];
+        _name = data[Config.userName];
+        _email = data[Config.userEmail];
+        _profilePicUrl = data[Config.userProfilePic];
+        _loginProvidersConnected = data[Config.userLoginProviders];
+        _userGitHubAccessToken = data[Config.userGithubAccessToken];
+        _skills = data[Config.userSkills] ?? {};
+      }
     });
+  }
+
+  Future updateSkills(Map<String, dynamic> newSkills) async {
+    for (String newSkill in newSkills.keys) {
+      _skills.putIfAbsent(newSkill, () => newSkills[newSkill]);
+    }
+
+    await userCollectionRef.doc(uid).update({
+      Config.userSkills: skills,
+    });
+
+    savePrefs(List<String>.from(_loginProvidersConnected));
+    notifyListeners();
   }
 }
