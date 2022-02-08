@@ -119,7 +119,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               getIconifiedDetail(
-                                ab.email.isEmpty ? "Not Provided" : ab.email,
+                                ab.userModel.email.isEmpty
+                                    ? "Not Provided"
+                                    : ab.userModel.email,
                                 FontAwesomeIcons.envelope,
                                 Colors.red,
                                 size.width - 107,
@@ -261,9 +263,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               getIconifiedDetail(
-                                                ab.email.isEmpty
+                                                ab.userModel.email.isEmpty
                                                     ? "Not Provided"
-                                                    : ab.email,
+                                                    : ab.userModel.email,
                                                 FontAwesomeIcons.envelope,
                                                 Colors.red,
                                                 200,
@@ -294,41 +296,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 1,
                     color: Colors.black12,
                   ),
-                  Card(
-                    margin: EdgeInsets.zero,
-                    child: SizedBox(
-                      height: size.height,
-                      width: size.width - 232 - ((size.width - 231) * 0.8),
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Skills",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 40,
-                                fontFamily: "ProximaNova",
-                              ),
-                            ),
-                            ...List.generate(
-                              ab.skills.length,
-                              (index) {
-                                return SkillCard(
-                                  title: ab.skills.keys.toList()[index],
-                                  experience: ab.skills.values.toList()[index],
-                                  color: Colors.red,
-                                  icon: DevIcons.javaPlain,
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+
+                  ///TODO
+                  getSkillsCard(ab, size),
                 ],
               ),
       ),
@@ -502,10 +472,10 @@ class _ProfilePageState extends State<ProfilePage> {
       child: CircleAvatar(
         backgroundColor: Colors.white,
         radius: 80,
-        backgroundImage: ab.profilePicUrl.isEmpty
+        backgroundImage: ab.userModel.profilePicUrl.isEmpty
             ? null
             : NetworkImage(
-                ab.profilePicUrl,
+                ab.userModel.profilePicUrl,
               ),
       ),
     );
@@ -514,7 +484,7 @@ class _ProfilePageState extends State<ProfilePage> {
   List<Widget> getPrimaryDetails(AuthenticationBloc ab) {
     return [
       Text(
-        ab.name,
+        ab.userModel.name,
         style: const TextStyle(
           color: Colors.black,
           fontFamily: "Varela",
@@ -540,7 +510,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             children: [
               TextSpan(
-                text: ab.uid,
+                text: ab.userModel.uid,
                 style: const TextStyle(
                   color: Colors.blueGrey,
                   fontFamily: "Varela",
@@ -552,7 +522,7 @@ class _ProfilePageState extends State<ProfilePage> {
         onPressed: () {
           Clipboard.setData(
             ClipboardData(
-              text: ab.uid,
+              text: ab.userModel.uid,
             ),
           );
 
@@ -590,6 +560,77 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget getSkillsCard(AuthenticationBloc ab, Size size) {
+    return Card(
+      margin: EdgeInsets.zero,
+      child: SizedBox(
+        height: size.height,
+        width: size.width - 232 - ((size.width - 231) * 0.8),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "Skills",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40,
+                  fontFamily: "ProximaNova",
+                ),
+              ),
+              if (ab.userModel.skills.isEmpty) ...[
+                SizedBox(
+                  height: size.height / 2 - 130,
+                ),
+                const Text(
+                  "You haven't added any skills",
+                  style: TextStyle(
+                    fontFamily: "ProximaNova",
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/add_skills.png",
+                          width: 80,
+                          height: 80,
+                        ),
+                        const Icon(
+                          FontAwesomeIcons.plus,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ] else
+                ...List.generate(
+                  ab.userModel.skills.length,
+                  (index) {
+                    return SkillCard(
+                      title: ab.userModel.skills.keys.toList()[index],
+                      experience: ab.userModel.skills.values.toList()[index],
+                      color: Colors.red,
+                      icon: DevIcons.javaPlain,
+                    );
+                  },
+                ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

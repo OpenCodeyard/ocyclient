@@ -8,9 +8,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:gosclient/blocs/navigation_bloc.dart';
 import 'package:gosclient/configs/config.dart';
 import 'package:gosclient/external/github_sign_in/lib/github_sign_in.dart';
+import 'package:gosclient/models/user/user_model.dart';
 import 'package:gosclient/widgets/Utils/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Business logic for authenticated users
 class AuthenticationBloc extends ChangeNotifier {
   bool _inProgress = false;
 
@@ -27,28 +29,9 @@ class AuthenticationBloc extends ChangeNotifier {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  List _loginProvidersConnected = [];
+  UserModel _userModel = UserModel("", "", "", "", "", {}, []);
 
-  List get loginProvidersConnected => _loginProvidersConnected;
-
-  String? _uid;
-  String? _email;
-  String? _name;
-  String? _profilePicUrl;
-  String? _userGitHubAccessToken;
-  Map<String, dynamic> _skills = {};
-
-  String? get userGitHubAccessToken => _userGitHubAccessToken;
-
-  String get uid => _uid ?? "";
-
-  String get email => _email ?? "";
-
-  String get name => _name ?? "";
-
-  String get profilePicUrl => _profilePicUrl ?? "";
-
-  Map<String, dynamic> get skills => _skills;
+  UserModel get userModel => _userModel;
 
   bool _isLoggedIn = false;
 
@@ -62,6 +45,10 @@ class AuthenticationBloc extends ChangeNotifier {
 
   CollectionReference<Map<String, dynamic>> userCollectionRef =
       FirebaseFirestore.instance.collection(Config.fsUser);
+
+  AuthenticationBloc() {
+    fetchDataFromSharedPreferences();
+  }
 
   Future authWithGithub(BuildContext context, NavigationBloc nb,
       bool isAccountLinkOperation) async {
@@ -100,24 +87,27 @@ class AuthenticationBloc extends ChangeNotifier {
                     await dio.get(Config.ghRootUrl + Config.ghUserApi);
 
                 User? user = res.user;
-                _uid = user?.uid;
-                _email = response.data["email"];
-                _name = user?.displayName;
-                _profilePicUrl = user?.photoURL;
-                _isLoggedIn = true;
-                _userGitHubAccessToken = accessToken;
 
                 bool existingUser =
-                    (await userCollectionRef.doc(uid).get()).exists;
+                    (await userCollectionRef.doc(user?.uid).get()).exists;
 
                 if (!existingUser) {
+                  _isLoggedIn = true;
+                  _userModel = UserModel(
+                    user?.uid ?? "",
+                    response.data["email"],
+                    user?.displayName ?? "",
+                    user?.photoURL ?? "",
+                    accessToken ?? "",
+                    {},
+                    ["Github"],
+                  );
                   await signUpUser(isGoogle: false);
-                  _loginProvidersConnected = ["Github"];
                 } else {
-                  await fetchDataFromFirestore();
+                  await fetchDataFromFirestore(user?.uid ?? "");
                 }
 
-                await savePrefs(List<String>.from(_loginProvidersConnected));
+                await savePrefs();
                 toggleInProgressStatus(false);
                 toggleGithubSignInStatus(false);
                 nb.toRoute(
@@ -127,10 +117,10 @@ class AuthenticationBloc extends ChangeNotifier {
               }
             });
           } else {
-            _loginProvidersConnected.add("Github");
-            _userGitHubAccessToken = accessToken;
+            _userModel.loginProvidersConnected.add("Github");
+            _userModel.userGitHubAccessToken = accessToken ?? "";
             await updateLoginProviders(
-              List<String>.from(loginProvidersConnected),
+              _userModel.loginProvidersConnected as List<String>,
             );
             notifyListeners();
           }
@@ -153,13 +143,10 @@ class AuthenticationBloc extends ChangeNotifier {
   Future fetchDataFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _isLoggedIn = prefs.getBool(Config.prefIsLoggedIn) ?? false;
-    _uid = prefs.getString(Config.prefUid);
-    _email = prefs.getString(Config.prefEmail);
-    _name = prefs.getString(Config.prefName);
-    _profilePicUrl = prefs.getString(Config.prefProfilePicUrl);
-    _loginProvidersConnected =
-        prefs.getStringList(Config.prefLoginProvidersConnected) ?? [];
+
     List skillsList = prefs.getStringList(Config.prefSkills) ?? [];
+
+    Map<String, dynamic> _skills = {};
 
     ///Traversing List to get all skills
     ///and store them in map
@@ -168,6 +155,28 @@ class AuthenticationBloc extends ChangeNotifier {
       String experienceToStore = skill.split(":")[1];
       _skills[skillToStore] = experienceToStore;
     }
+
+    String? dob = prefs.getString(Config.prefDOB);
+    String? bio = prefs.getString(Config.prefBio);
+    String? phone = prefs.getString(Config.prefPhone);
+    String? employment = prefs.getString(Config.prefEmploymentStatus);
+    String? locality = prefs.getString(Config.prefLocality);
+
+    _userModel = UserModel(
+      prefs.getString(Config.prefUid) ?? "",
+      prefs.getString(Config.prefEmail) ?? "",
+      prefs.getString(Config.prefName) ?? "",
+      prefs.getString(Config.prefProfilePicUrl) ?? "",
+      prefs.getString(Config.prefGithubAccessToken) ?? "",
+      _skills,
+      prefs.getStringList(Config.prefLoginProvidersConnected) ?? [],
+      gender: prefs.getString(Config.prefGender),
+      dob: (dob ?? "").isEmpty ? null : dob,
+      bio: (bio ?? "").isEmpty ? null : bio,
+      phoneNumber: (phone ?? "").isEmpty ? null : phone,
+      employmentStatus: (employment ?? "").isEmpty ? null : employment,
+      locality: (locality ?? "").isEmpty ? null : locality,
+    );
 
     _isPrefsLoaded = true;
     notifyListeners();
@@ -239,21 +248,28 @@ class AuthenticationBloc extends ChangeNotifier {
 
     if (!isAccountLinkOperation) {
       if (user != null && userCredential != null) {
-        _uid = user.uid;
-        _name = user.displayName;
-        _email = googleSignInAccount.email;
-        _profilePicUrl = user.photoURL;
         _isLoggedIn = true;
-        bool existingUser = (await userCollectionRef.doc(uid).get()).exists;
+
+        bool existingUser =
+            (await userCollectionRef.doc(user.uid).get()).exists;
 
         if (!existingUser) {
+          _userModel = UserModel(
+            user.uid,
+            googleSignInAccount.email,
+            user.displayName ?? "",
+            user.photoURL ?? "",
+            "",
+            {},
+            ["Google"],
+          );
           await signUpUser();
-          _loginProvidersConnected = ["Google"];
         } else {
-          await fetchDataFromFirestore();
+          await fetchDataFromFirestore(user.uid);
         }
 
-        await savePrefs(List<String>.from(_loginProvidersConnected));
+        await savePrefs();
+
         toggleInProgressStatus(false);
         toggleGoogleSignInStatus(false);
         nb.toRoute(
@@ -268,8 +284,10 @@ class AuthenticationBloc extends ChangeNotifier {
         );
       }
     } else {
-      _loginProvidersConnected.add("Google");
-      await updateLoginProviders(List<String>.from(loginProvidersConnected));
+      _userModel.loginProvidersConnected.add("Google");
+      await updateLoginProviders(
+        _userModel.loginProvidersConnected as List<String>,
+      );
     }
   }
 
@@ -286,13 +304,8 @@ class AuthenticationBloc extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
 
-    _uid = null;
-    _name = null;
-    _email = null;
-    _profilePicUrl = null;
+    _userModel = UserModel("", "", "", "", "", {}, []);
     _isLoggedIn = false;
-    _userGitHubAccessToken = null;
-    _loginProvidersConnected = [];
 
     if (ModalRoute.of(context)?.settings.name == "/profile") {
       nb.toRoute(
@@ -312,23 +325,37 @@ class AuthenticationBloc extends ChangeNotifier {
       Config.userLoginProviders: loginProviders,
     };
 
-    if (_userGitHubAccessToken != null) {
+    if (_userModel.userGitHubAccessToken.isNotEmpty) {
       map.putIfAbsent(
-          Config.userGithubAccessToken, () => _userGitHubAccessToken);
+          Config.userGithubAccessToken, () => _userModel.userGitHubAccessToken);
     }
-    await userCollectionRef.doc(uid).update(map);
+    await userCollectionRef.doc(_userModel.uid).update(map);
 
     notifyListeners();
   }
 
-  Future savePrefs(List<String> loginProviders) async {
+  Future savePrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(Config.prefIsLoggedIn, true);
-    prefs.setString(Config.prefEmail, _email ?? "");
-    prefs.setString(Config.prefUid, _uid ?? "");
-    prefs.setString(Config.prefName, _name ?? "");
-    prefs.setString(Config.prefProfilePicUrl, _profilePicUrl ?? "");
-    prefs.setStringList(Config.prefLoginProvidersConnected, loginProviders);
+    prefs.setString(Config.prefEmail, _userModel.email);
+    prefs.setString(Config.prefUid, _userModel.uid);
+    prefs.setString(Config.prefName, _userModel.name);
+    prefs.setString(Config.prefProfilePicUrl, _userModel.profilePicUrl);
+    prefs.setStringList(
+      Config.prefLoginProvidersConnected,
+      List<String>.from(_userModel.loginProvidersConnected),
+    );
+    prefs.setString(
+      Config.prefGithubAccessToken,
+      _userModel.userGitHubAccessToken,
+    );
+    prefs.setString(Config.prefPhone, _userModel.phoneNumber ?? "");
+    prefs.setString(Config.prefGender, _userModel.gender ?? "");
+    prefs.setString(Config.prefDOB, _userModel.dob ?? "");
+    prefs.setString(Config.prefBio, _userModel.bio ?? "");
+    prefs.setString(
+        Config.prefEmploymentStatus, _userModel.employmentStatus ?? "");
+    prefs.setString(Config.prefLocality, _userModel.locality ?? "");
 
     List<String> skillsList = [];
 
@@ -336,8 +363,8 @@ class AuthenticationBloc extends ChangeNotifier {
     ///and store them in format [skill]:[experience]
     ///Shared Preferences doesn't support storing map
     ///and thus this is done
-    for (String skill in _skills.keys) {
-      skillsList.add(skill + ":" + _skills[skill].toString());
+    for (String skill in (_userModel.skills).keys) {
+      skillsList.add(skill + ":" + _userModel.skills[skill].toString());
     }
 
     prefs.setStringList(Config.prefSkills, skillsList);
@@ -360,41 +387,64 @@ class AuthenticationBloc extends ChangeNotifier {
   Future signUpUser({
     bool isGoogle = true,
   }) async {
-    await userCollectionRef.doc(uid).set({
-      Config.userUID: uid,
-      Config.userName: name,
-      Config.userEmail: email,
-      Config.userProfilePic: profilePicUrl,
+    await userCollectionRef.doc(_userModel.uid).set({
+      Config.userUID: _userModel.uid,
+      Config.userName: _userModel.name,
+      Config.userEmail: _userModel.email,
+      Config.userProfilePic: _userModel.profilePicUrl,
       Config.userLoginProviders: isGoogle ? ["Google"] : ["Github"],
-      Config.userGithubAccessToken: userGitHubAccessToken,
+      Config.userGithubAccessToken: _userModel.userGitHubAccessToken,
     });
   }
 
-  Future fetchDataFromFirestore() async {
+  Future fetchDataFromFirestore(String uid) async {
     await userCollectionRef.doc(uid).get().then((value) {
       Map<String, dynamic>? data = value.data();
       if (data != null) {
-        _uid = data[Config.userUID];
-        _name = data[Config.userName];
-        _email = data[Config.userEmail];
-        _profilePicUrl = data[Config.userProfilePic];
-        _loginProvidersConnected = data[Config.userLoginProviders];
-        _userGitHubAccessToken = data[Config.userGithubAccessToken];
-        _skills = data[Config.userSkills] ?? {};
+        _userModel = UserModel(
+          data[Config.userUID],
+          data[Config.userEmail],
+          data[Config.userName],
+          data[Config.userProfilePic],
+          data[Config.userGithubAccessToken] ?? "",
+          data[Config.userSkills] ?? {},
+          data[Config.userLoginProviders],
+          bio: data[Config.userBio],
+          phoneNumber: data[Config.userPhone],
+          dob: data[Config.userDob],
+          gender: data[Config.userGender],
+          employmentStatus: data[Config.userEmploymentStatus],
+          locality: data[Config.userLocality],
+        );
+        _isLoggedIn = true;
       }
     });
   }
 
   Future updateSkills(Map<String, dynamic> newSkills) async {
     for (String newSkill in newSkills.keys) {
-      _skills.putIfAbsent(newSkill, () => newSkills[newSkill]);
+      _userModel.skills.putIfAbsent(newSkill, () => newSkills[newSkill]);
     }
 
-    await userCollectionRef.doc(uid).update({
-      Config.userSkills: skills,
+    await userCollectionRef.doc(_userModel.uid).update({
+      Config.userSkills: _userModel.skills,
     });
 
-    savePrefs(List<String>.from(_loginProvidersConnected));
+    await savePrefs();
+    notifyListeners();
+  }
+
+  Future updatePersonal(Map<String, dynamic> data) async {
+    await userCollectionRef.doc(_userModel.uid).update(data);
+
+    _userModel.gender = data[Config.userGender];
+    _userModel.bio = data[Config.userBio];
+    _userModel.phoneNumber = data[Config.userPhone];
+    _userModel.dob = data[Config.userDob];
+    _userModel.employmentStatus = data[Config.userEmploymentStatus];
+    _userModel.locality = data[Config.userLocality];
+
+    await savePrefs();
     notifyListeners();
   }
 }

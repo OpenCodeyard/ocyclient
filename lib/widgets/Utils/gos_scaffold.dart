@@ -18,17 +18,6 @@ class GosScaffold extends StatefulWidget {
 }
 
 class _GosScaffoldState extends State<GosScaffold> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
-      AuthenticationBloc ab =
-          Provider.of<AuthenticationBloc>(context, listen: false);
-      if (!ab.isPrefsLoaded) {
-        await ab.fetchDataFromSharedPreferences();
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +132,7 @@ class _GosScaffoldState extends State<GosScaffold> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child: ab.isLoggedIn
-                              ? Image.network(ab.profilePicUrl)
+                              ? Image.network(ab.userModel.profilePicUrl)
                               : null,
                         ),
                       ),
@@ -226,10 +215,10 @@ class _GosScaffoldState extends State<GosScaffold> {
         ),
       ],
       elevation: 8.0,
-    ).then((value){
-      if(value == 1){
+    ).then((value) {
+      if (value == 1) {
         nb.toRoute("/profile");
-      }else{
+      } else if (value == 2) {
         ab.signOut(context, nb);
       }
     });

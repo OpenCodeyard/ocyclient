@@ -74,12 +74,12 @@ class AccountWidget extends StatelessWidget {
               height: 20,
             ),
             MouseRegion(
-              cursor: !ab.loginProvidersConnected.contains(name)
+              cursor: !ab.userModel.loginProvidersConnected.contains(name)
                   ? SystemMouseCursors.click
                   : SystemMouseCursors.basic,
               child: GestureDetector(
                 onTap: () {
-                  if (!ab.loginProvidersConnected.contains(name)) {
+                  if (!ab.userModel.loginProvidersConnected.contains(name)) {
                     if (name == "Google") {
                       ab.authWithGoogle(nb, true);
                     } else {
@@ -90,7 +90,7 @@ class AccountWidget extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ab.loginProvidersConnected.contains(name)
+                    ab.userModel.loginProvidersConnected.contains(name)
                         ? const Icon(
                             FontAwesomeIcons.checkCircle,
                             color: Colors.green,

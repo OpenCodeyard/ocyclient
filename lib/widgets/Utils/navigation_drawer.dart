@@ -80,7 +80,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 backgroundColor: Colors.white,
                                 radius: 30,
                                 backgroundImage: ab.isLoggedIn
-                                    ? NetworkImage(ab.profilePicUrl)
+                                    ? NetworkImage(ab.userModel.profilePicUrl)
                                     : null,
                                 child: ab.isLoggedIn
                                     ? null
@@ -96,7 +96,7 @@ class _AppDrawerState extends State<AppDrawer> {
                           height: 20,
                         ),
                         Text(
-                          "Welcome ${ab.isLoggedIn ? getFirstName(ab.name) : "Guest!"}",
+                          "Welcome ${ab.isLoggedIn ? getFirstName(ab.userModel.name) : "Guest!"}",
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
@@ -153,7 +153,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       hoverColor: Colors.blueGrey.shade200,
                       selected: false,
                       onTap: () {
-                        ab.signOut(context,nb);
+                        ab.signOut(context, nb);
                       },
                     ),
                 ],

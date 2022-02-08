@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 class Config {
@@ -23,8 +23,12 @@ class Config {
   static List<IconData> get appDrawerIcons => _appDrawerIcons;
 
   ///GitHub Configs
-  static const String clientId = "ba4e3c2ad6622ba3b12c"; ///TODO move to env
-  static const String clientSecret = "079b49d4b5ba6e84ad7ec4f4d4e90163c35c18ad"; ///TODO move to env
+  static const String clientId = "ba4e3c2ad6622ba3b12c";
+
+  ///TODO move to env
+  static const String clientSecret = "079b49d4b5ba6e84ad7ec4f4d4e90163c35c18ad";
+
+  ///TODO move to env
   static const String redirectUrl =
       "https://gceltopensource.firebaseapp.com/__/auth/handler";
 
@@ -34,8 +38,15 @@ class Config {
   static const String prefEmail = "email";
   static const String prefProfilePicUrl = "profile_pic_url";
   static const String prefUid = "uid";
+  static const String prefGithubAccessToken = "user_github_access_token";
   static const String prefLoginProvidersConnected = "login_providers";
   static const String prefSkills = "skills";
+  static const String prefPhone = "user_phone";
+  static const String prefGender = "user_gender";
+  static const String prefDOB = "user_dob";
+  static const String prefBio = "user_bio";
+  static const String prefEmploymentStatus = "employment_status";
+  static const String prefLocality = "locality";
 
   ///Routes that should not be accessible to authenticated users
   static const List<String> authenticatedPreventAccessRoutes = ["/auth"];
@@ -56,6 +67,12 @@ class Config {
   static const userLoginProviders = "loginProviders";
   static const userGithubAccessToken = "accessTokenGithub";
   static const userSkills = "skills";
+  static const userBio = "bio";
+  static const userGender = "gender";
+  static const userDob = "dob";
+  static const userEmploymentStatus = "employment";
+  static const userLocality = "locality";
+  static const userPhone = "phone";
 
   ///Github api
   static const ghOrganisationName = "GCELTIANS2020";
@@ -63,4 +80,6 @@ class Config {
   static const ghOrganisationsApi = "orgs";
   static const ghReposApi = "repos";
   static const ghUserApi = "user";
+
+  static const Color themeColor = Colors.deepPurple;
 }

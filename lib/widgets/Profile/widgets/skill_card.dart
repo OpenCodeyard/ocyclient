@@ -19,7 +19,8 @@ class SkillCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return SizedBox(
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
       width: size.width - 232 - ((size.width - 231) * 0.8) * 0.8,
       child: Card(
         elevation: 5,
