@@ -52,9 +52,12 @@ class Config {
   static const List<String> authenticatedPreventAccessRoutes = ["/auth"];
 
   ///Routes that should not be accessible to unauthenticated users
-  static const List<String> unauthenticatedPreventAccessRoutes = ["/profile"];
+  static const List<String> unauthenticatedPreventAccessRoutes = [
+    "/profile",
+    "/editProfile"
+  ];
 
-  static const appVersion = "0.0.6-alpha";
+  static const appVersion = "0.1.0-alpha";
 
   ///Firestore Collection Names
   static const fsUser = "Users";

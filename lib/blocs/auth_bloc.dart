@@ -302,12 +302,13 @@ class AuthenticationBloc extends ChangeNotifier {
     await auth.signOut();
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    await prefs.clear();
 
     _userModel = UserModel("", "", "", "", "", {}, []);
     _isLoggedIn = false;
 
-    if (ModalRoute.of(context)?.settings.name == "/profile") {
+    if (Config.unauthenticatedPreventAccessRoutes
+        .contains(ModalRoute.of(context)?.settings.name)) {
       nb.toRoute(
         "/home",
         shouldPopCurrent: true,
