@@ -1,6 +1,9 @@
+import 'package:dev_icons/dev_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gosclient/blocs/auth_bloc.dart';
+import 'package:gosclient/widgets/Profile/widgets/skill_card.dart';
 import 'package:gosclient/widgets/Utils/custom_inputfields.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -128,13 +131,19 @@ class _PersonalTabState extends State<PersonalTab> {
                 ],
               ),
               getPersonalDataForm(size),
+              const SizedBox(
+                height: 20,
+              ),
+              ...getSkillsWidget(size, ab),
             ],
           )
         : Card(
             margin: EdgeInsets.zero,
             child: SizedBox(
               height: size.height,
-              width: (size.width - 231) * 0.8,
+              width: size.width < 1500
+                  ? size.width - 232
+                  : (size.width - 231) * 0.8,
               child: SingleChildScrollView(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
@@ -156,7 +165,10 @@ class _PersonalTabState extends State<PersonalTab> {
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: getPrimaryDetails(ab, size),
+                                    children: getPrimaryDetails(
+                                      ab,
+                                      size,
+                                    ),
                                   ),
                                   const Spacer(),
                                   if (wasPersonalDataUpdated)
@@ -192,23 +204,22 @@ class _PersonalTabState extends State<PersonalTab> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          child: const Text(
-                            "Edit Personal Details",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40,
-                              fontFamily: "ProximaNova",
-                            ),
-                          ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: const Text(
+                        "Edit Personal Details",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
+                          fontFamily: "ProximaNova",
                         ),
-                        getPersonalDataForm(size),
-                      ],
+                      ),
                     ),
+                    getPersonalDataForm(size),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ...getSkillsWidget(size, ab),
                   ],
                 ),
               ),
@@ -216,11 +227,69 @@ class _PersonalTabState extends State<PersonalTab> {
           );
   }
 
+  List<Widget> getSkillsWidget(Size size, AuthenticationBloc ab) {
+    if (size.width < 1500) {
+      return [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal : size.width < 1000 ? 23 : 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                "Skills",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40,
+                  fontFamily: "ProximaNova",
+                ),
+              ),
+              const SizedBox(
+                width: 30,
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.edit,
+                  color: Colors.deepPurple,
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(
+          width: size.width < 1000 ? size.width : size.width - 233,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ...List.generate(
+                  ab.userModel.skills.length,
+                  (index) {
+                    return SkillCard(
+                      title: ab.userModel.skills.keys.toList()[index],
+                      experience: ab.userModel.skills.values.toList()[index],
+                      color: Colors.red,
+                      icon: DevIcons.javaPlain,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ];
+    } else {
+      return [const SizedBox()];
+    }
+  }
+
   Form getPersonalDataForm(Size size) {
     return Form(
       child: Container(
         margin: const EdgeInsets.all(10),
-        width: size.width < 1000 ? size.width * 0.95 : (size.width - 231) * 0.7,
+        width: size.width < 1500 ? size.width * 0.95 : (size.width - 231) * 0.7,
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[

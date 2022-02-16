@@ -157,6 +157,7 @@ class AuthenticationBloc extends ChangeNotifier {
     }
 
     String? dob = prefs.getString(Config.prefDOB);
+    String? gender = prefs.getString(Config.prefGender);
     String? bio = prefs.getString(Config.prefBio);
     String? phone = prefs.getString(Config.prefPhone);
     String? employment = prefs.getString(Config.prefEmploymentStatus);
@@ -170,7 +171,7 @@ class AuthenticationBloc extends ChangeNotifier {
       prefs.getString(Config.prefGithubAccessToken) ?? "",
       _skills,
       prefs.getStringList(Config.prefLoginProvidersConnected) ?? [],
-      gender: prefs.getString(Config.prefGender),
+      gender: (gender ?? "").isEmpty ? null : gender,
       dob: (dob ?? "").isEmpty ? null : dob,
       bio: (bio ?? "").isEmpty ? null : bio,
       phoneNumber: (phone ?? "").isEmpty ? null : phone,
@@ -311,7 +312,7 @@ class AuthenticationBloc extends ChangeNotifier {
         .contains(ModalRoute.of(context)?.settings.name)) {
       nb.toRoute(
         "/home",
-        shouldPopCurrent: true,
+        shouldPopAll: true,
       );
     }
     notifyListeners();

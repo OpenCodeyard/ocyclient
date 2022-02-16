@@ -111,7 +111,6 @@ buildDescInputFieldThemColor(
         controller: controller,
         autocorrect: true,
         keyboardType: type,
-        minLines: 5,
         autofocus: false,
         maxLines: null,
         style: const TextStyle(

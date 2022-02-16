@@ -90,6 +90,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     width: 1,
                     color: Colors.black12,
                   ),
+                  if(size.width >= 1500)
                   Card(
                     margin: EdgeInsets.zero,
                     child: SizedBox(
@@ -97,7 +98,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       width: size.width - 232 - ((size.width - 231) * 0.8),
                       child: SingleChildScrollView(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 20),
+                            horizontal: 30, vertical: 20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [

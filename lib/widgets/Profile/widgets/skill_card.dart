@@ -20,8 +20,7 @@ class SkillCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: size.width - 232 - ((size.width - 231) * 0.8) * 0.8,
+      margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
       child: Card(
         elevation: 5,
         color: Colors.white,
@@ -29,7 +28,7 @@ class SkillCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
               Icon(
