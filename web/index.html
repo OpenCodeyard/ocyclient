@@ -55,15 +55,47 @@
             height : auto
         }
 
-        .below-center {
-            margin: 0;
-            position: absolute;
-            top: 80%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%);
-            height : auto
+        .lds-ripple {
+          display: inline-block;
+          margin: 0;
+          position: absolute;
+          top: 80%;
+          left: 50%;
+          margin-right: -50%;
+          transform: translate(-50%, -50%);
+          width: 80px;
+          height: 80px;
         }
+
+        .lds-ripple div {
+          position: absolute;
+          border: 4px solid #fff;
+          opacity: 1;
+          border-radius: 50%;
+          animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+
+        .lds-ripple div:nth-child(2) {
+          animation-delay: -0.5s;
+        }
+
+        @keyframes lds-ripple {
+          0% {
+            top: 36px;
+            left: 36px;
+            width: 0;
+            height: 0;
+            opacity: 1;
+          }
+          100% {
+            top: 0px;
+            left: 0px;
+            width: 72px;
+            height: 72px;
+            opacity: 0;
+          }
+        }
+
 
     </style>
 
@@ -73,8 +105,10 @@
 <!-- Splash -->
 <div id="splash">
     <img class="center" src="assets/assets/images/animated_gos.gif" alt="GCELT Open Source"/>
-    <img class="below-center" src="assets/assets/images/loading.gif" width="80" height="80"
-         alt="Loading...."/>
+    <div class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
 </div>
 <!-- Splash -->
 
@@ -83,12 +117,13 @@
     window.document.getElementById('splash')?.remove();
   });
 
+
 </script>
 <!-- This script installs service_worker.js to provide PWA functionality to
      application. For more information, see:
      https://developers.google.com/web/fundamentals/primers/service-workers -->
 <script>
-    var serviceWorkerVersion = 3;
+    var serviceWorkerVersion = 4;
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -156,6 +191,7 @@
 
 
 
+
 </script>
 
 
@@ -184,6 +220,7 @@
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+
 
 
 
