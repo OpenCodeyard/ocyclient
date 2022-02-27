@@ -85,4 +85,23 @@ class Config {
   static const ghUserApi = "user";
 
   static const Color themeColor = Colors.deepPurple;
+
+  ///Curtain pics
+  static final Map<String, dynamic> _curtainImagesLeft = {
+    "Events": "assets/images/curtain_event.png",
+    "SizedBox": 40,
+    "Projects": "assets/images/curtain_project.png",
+  };
+
+  static final Map<String, dynamic> _curtainImagesRight = {
+    "Learn": "assets/images/curtain_learn.png",
+    "SizedBox": 40,
+    "Grow": "assets/images/curtain_grow.png",
+  };
+
+  static Map<String, dynamic> get curtainImagesLeft => _curtainImagesLeft;
+
+  static Map<String, dynamic> get curtainImagesRight => _curtainImagesRight;
+
+  static const String communityLogoPath = "assets/images/animated_gos.gif";
 }

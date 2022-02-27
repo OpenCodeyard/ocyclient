@@ -7,6 +7,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:gosclient/blocs/auth_bloc.dart';
+import 'package:gosclient/blocs/community_bloc.dart';
 import 'package:gosclient/blocs/edit_profile_bloc.dart';
 import 'package:gosclient/blocs/navigation_bloc.dart';
 import 'package:gosclient/blocs/profile_bloc.dart';
@@ -83,6 +84,9 @@ class GOSApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ProjectsBloc>(
           create: (context) => ProjectsBloc(),
+        ),
+        ChangeNotifierProvider<CommunityBloc>(
+          create: (context) => CommunityBloc(),
         ),
       ],
       child: GetMaterialApp(
