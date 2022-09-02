@@ -6,51 +6,50 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/blocs/community_bloc.dart';
-import 'package:gosclient/blocs/edit_profile_bloc.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/blocs/profile_bloc.dart';
-import 'package:gosclient/blocs/projects_bloc.dart';
-import 'package:gosclient/blocs/theme_bloc.dart';
-import 'package:gosclient/configs/config.dart';
-import 'package:gosclient/widgets/AboutUs/about_us.dart';
-import 'package:gosclient/widgets/Auth/login_signup.dart';
-import 'package:gosclient/widgets/Community/community.dart';
-import 'package:gosclient/widgets/Home/home.dart';
-import 'package:gosclient/widgets/Milestones/milestones.dart';
-import 'package:gosclient/widgets/Profile/edit_profile.dart';
-import 'package:gosclient/widgets/Profile/profile.dart';
-import 'package:gosclient/widgets/Teams/teams.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/blocs/community_bloc.dart';
+import 'package:oskclient/blocs/edit_profile_bloc.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/blocs/profile_bloc.dart';
+import 'package:oskclient/blocs/projects_bloc.dart';
+import 'package:oskclient/blocs/theme_bloc.dart';
+import 'package:oskclient/configs/config.dart';
+import 'package:oskclient/widgets/AboutUs/about_us.dart';
+import 'package:oskclient/widgets/Auth/login_signup.dart';
+import 'package:oskclient/widgets/Community/community.dart';
+import 'package:oskclient/widgets/Home/home.dart';
+import 'package:oskclient/widgets/Milestones/milestones.dart';
+import 'package:oskclient/widgets/Profile/edit_profile.dart';
+import 'package:oskclient/widgets/Profile/profile.dart';
+import 'package:oskclient/widgets/Teams/teams.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'firebase_options.dart';
 
 Future<void> configureApp() async {
   setUrlStrategy(PathUrlStrategy());
   await dotenv.load(fileName: "env");
-  if (!kIsWeb && Firebase.apps.isEmpty) {
-    await Firebase.initializeApp();
+  if (kIsWeb || Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform
+    );
   }
   SharedPreferences sp = await SharedPreferences.getInstance();
 
   bool isLoggedIn = sp.getBool(Config.prefIsLoggedIn) ?? false;
 
-  final String? defaultRouteName =
-      WidgetsBinding.instance?.window.defaultRouteName;
+  final String defaultRouteName =
+      WidgetsBinding.instance.window.defaultRouteName;
 
-  if (defaultRouteName == null) {
-    return;
-  } else {
-    bool allowAuthenticated =
-        Config.authenticatedPreventAccessRoutes.contains(defaultRouteName);
-    bool allowUnauthenticated =
-        Config.unauthenticatedPreventAccessRoutes.contains(defaultRouteName);
-    if (isLoggedIn && allowAuthenticated) {
-      SystemNavigator.routeUpdated(routeName: '/home', previousRouteName: null);
-    }
-    if (!isLoggedIn && allowUnauthenticated) {
-      SystemNavigator.routeUpdated(routeName: '/home', previousRouteName: null);
-    }
+  bool allowAuthenticated =
+      Config.authenticatedPreventAccessRoutes.contains(defaultRouteName);
+  bool allowUnauthenticated =
+      Config.unauthenticatedPreventAccessRoutes.contains(defaultRouteName);
+  if (isLoggedIn && allowAuthenticated) {
+    SystemNavigator.routeUpdated(routeName: '/home', previousRouteName: null);
+  }
+  if (!isLoggedIn && allowUnauthenticated) {
+    SystemNavigator.routeUpdated(routeName: '/home', previousRouteName: null);
   }
 }
 
@@ -221,7 +220,7 @@ class GOSApp extends StatelessWidget {
             name: '/licenses',
             page: () => LicensePage(
               applicationIcon: Image.asset("assets/images/animated_gos.gif"),
-              applicationName: "GCELT Open Source",
+              applicationName: "Open Source Kolkata",
               applicationVersion: Config.appVersion,
             ),
           ),

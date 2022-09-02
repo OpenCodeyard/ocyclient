@@ -1,13 +1,13 @@
 import 'package:dev_icons/dev_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/blocs/edit_profile_bloc.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/widgets/Profile/sub_pages/edit_personal.dart';
-import 'package:gosclient/widgets/Profile/widgets/skill_card.dart';
-import 'package:gosclient/widgets/Utils/common_widgets.dart';
-import 'package:gosclient/widgets/Utils/gos_scaffold.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/blocs/edit_profile_bloc.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/widgets/Profile/sub_pages/edit_personal.dart';
+import 'package:oskclient/widgets/Profile/widgets/skill_card.dart';
+import 'package:oskclient/widgets/Utils/common_widgets.dart';
+import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
 import 'package:provider/provider.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
-    return GosScaffold(
+    return OskScaffold(
       body: SizedBox(
         height: size.height - 70,
         child: size.width < 1000
@@ -90,59 +90,59 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     width: 1,
                     color: Colors.black12,
                   ),
-                  if(size.width >= 1500)
-                  Card(
-                    margin: EdgeInsets.zero,
-                    child: SizedBox(
-                      height: size.height,
-                      width: size.width - 232 - ((size.width - 231) * 0.8),
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Skills",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 40,
-                                    fontFamily: "ProximaNova",
+                  if (size.width >= 1500)
+                    Card(
+                      margin: EdgeInsets.zero,
+                      child: SizedBox(
+                        height: size.height,
+                        width: size.width - 232 - ((size.width - 231) * 0.8),
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "Skills",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 40,
+                                      fontFamily: "ProximaNova",
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 30,
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    color: Colors.deepPurple,
+                                  const SizedBox(
+                                    width: 30,
                                   ),
-                                )
-                              ],
-                            ),
-                            ...List.generate(
-                              ab.userModel.skills.length,
-                              (index) {
-                                return SkillCard(
-                                  title:
-                                      ab.userModel.skills.keys.toList()[index],
-                                  experience: ab.userModel.skills.values
-                                      .toList()[index],
-                                  color: Colors.red,
-                                  icon: DevIcons.javaPlain,
-                                );
-                              },
-                            ),
-                          ],
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.deepPurple,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              ...List.generate(
+                                ab.userModel.skills.length,
+                                (index) {
+                                  return SkillCard(
+                                    title: ab.userModel.skills.keys
+                                        .toList()[index],
+                                    experience: ab.userModel.skills.values
+                                        .toList()[index],
+                                    color: Colors.red,
+                                    icon: DevIcons.javaPlain,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
       ),
@@ -174,7 +174,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       getSideMenuButton(
         epb,
         "Personal",
-        FontAwesomeIcons.userAlt,
+        FontAwesomeIcons.userLarge,
         0,
         isHorizontal,
       ),
@@ -193,16 +193,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         FontAwesomeIcons.briefcase,
         2,
         isHorizontal,
-      ),
-      getCustomSizedBoxForMenu(isHorizontal),
-      getSideMenuButton(
-        epb,
-        "Log Out",
-        FontAwesomeIcons.signOutAlt,
-        3,
-        isHorizontal,
-        authBloc: ab,
-        navBloc: nb,
       ),
       getCustomSizedBoxForMenu(isHorizontal),
     ];

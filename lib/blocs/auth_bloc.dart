@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/configs/config.dart';
-import 'package:gosclient/external/github_sign_in/lib/github_sign_in.dart';
-import 'package:gosclient/models/user/user_model.dart';
-import 'package:gosclient/widgets/Utils/snackbar.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/configs/config.dart';
+import 'package:oskclient/external/github_sign_in/lib/github_sign_in.dart';
+import 'package:oskclient/models/user/user_model.dart';
+import 'package:oskclient/widgets/Utils/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Business logic for authenticated users
@@ -120,9 +120,10 @@ class AuthenticationBloc extends ChangeNotifier {
             _userModel.loginProvidersConnected.add("Github");
             _userModel.userGitHubAccessToken = accessToken ?? "";
             await updateLoginProviders(
-              _userModel.loginProvidersConnected as List<String>,
+                List<String>.from(_userModel.loginProvidersConnected),
             );
-            notifyListeners();
+            toggleInProgressStatus(false);
+            toggleGoogleSignInStatus(false);
           }
         }
         break;
@@ -287,8 +288,10 @@ class AuthenticationBloc extends ChangeNotifier {
     } else {
       _userModel.loginProvidersConnected.add("Google");
       await updateLoginProviders(
-        _userModel.loginProvidersConnected as List<String>,
+          List<String>.from(_userModel.loginProvidersConnected),
       );
+      toggleInProgressStatus(false);
+      toggleGoogleSignInStatus(false);
     }
   }
 
