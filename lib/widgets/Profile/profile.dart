@@ -1,13 +1,13 @@
 import 'package:dev_icons/dev_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/blocs/profile_bloc.dart';
-import 'package:gosclient/widgets/Profile/sub_pages/profile_user.dart';
-import 'package:gosclient/widgets/Profile/widgets/skill_card.dart';
-import 'package:gosclient/widgets/Utils/common_widgets.dart';
-import 'package:gosclient/widgets/Utils/gos_scaffold.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/blocs/profile_bloc.dart';
+import 'package:oskclient/widgets/Profile/sub_pages/profile_user.dart';
+import 'package:oskclient/widgets/Profile/widgets/skill_card.dart';
+import 'package:oskclient/widgets/Utils/common_widgets.dart';
+import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
-    return GosScaffold(
+    return OskScaffold(
       body: SizedBox(
         height: size.height - 70,
         child: size.width < 1000
@@ -170,9 +170,10 @@ class _ProfilePageState extends State<ProfilePage> {
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: () {
-          pb.setCurrentSelectedItem(index);
           if (index == 3) {
             authBloc?.signOut(context, navBloc!);
+          } else {
+            pb.setCurrentSelectedItem(index);
           }
         },
         child: AnimatedContainer(

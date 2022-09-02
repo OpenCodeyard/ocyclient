@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gosclient/blocs/community_bloc.dart';
-import 'package:gosclient/configs/config.dart';
-import 'package:gosclient/enums/curtain.dart';
-import 'package:gosclient/widgets/Community/utils/curtain_image.dart';
+import 'package:oskclient/blocs/community_bloc.dart';
+import 'package:oskclient/configs/config.dart';
+import 'package:oskclient/enums/curtain.dart';
+import 'package:oskclient/widgets/Community/utils/curtain_image.dart';
 import 'package:provider/provider.dart';
 
 class DesktopCurtain extends StatefulWidget {
@@ -32,6 +32,23 @@ class _DesktopCurtainState extends State<DesktopCurtain> {
         isLeft ? Config.curtainImagesLeft : Config.curtainImagesRight;
 
     return AnimatedPositioned(
+      duration: const Duration(
+        milliseconds: 1500,
+      ),
+      curve: Curves.bounceOut,
+      height: size.height,
+      width: size.width / 2,
+      top: 0,
+      left: !isLeft
+          ? null
+          : cb.hasCompletedCurtainAnimation
+              ? -size.width / 2
+              : 0,
+      right: isLeft
+          ? null
+          : cb.hasCompletedCurtainAnimation
+              ? -size.width / 2
+              : 0,
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -73,23 +90,6 @@ class _DesktopCurtainState extends State<DesktopCurtain> {
           ),
         ),
       ),
-      duration: const Duration(
-        milliseconds: 1500,
-      ),
-      curve: Curves.bounceOut,
-      height: size.height,
-      width: size.width / 2,
-      top: 0,
-      left: !isLeft
-          ? null
-          : cb.hasCompletedCurtainAnimation
-              ? -size.width / 2
-              : 0,
-      right: isLeft
-          ? null
-          : cb.hasCompletedCurtainAnimation
-              ? -size.width / 2
-              : 0,
     );
   }
 }

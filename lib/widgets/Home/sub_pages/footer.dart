@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/widgets/Utils/common_widgets.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/widgets/Utils/common_widgets.dart';
 import 'package:provider/provider.dart';
 
 class Footer extends StatelessWidget {
@@ -56,7 +56,6 @@ class Footer extends StatelessWidget {
       ),
     );
   }
-
 
   Widget contactUs(Size size) {
     return Column(
@@ -118,7 +117,7 @@ class Footer extends StatelessWidget {
           func: () {
             // nb.toRoute("/licenses");
           },
-          icon: FontAwesomeIcons.balanceScale,
+          icon: FontAwesomeIcons.scaleBalanced,
         ),
         const SizedBox(
           height: 20,
@@ -275,7 +274,6 @@ class Footer extends StatelessWidget {
     );
   }
 
-  
   List<Widget> getFooterWidgets(Size size, NavigationBloc nb) {
     return [
       about(size),
@@ -283,5 +281,4 @@ class Footer extends StatelessWidget {
       legal(size, nb),
     ];
   }
-
 }

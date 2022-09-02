@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:gosclient/widgets/Utils/gos_scaffold.dart';
+import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
 
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -22,15 +22,15 @@ class _AboutUsPageState extends State<AboutUsPage> {
       ),
     );
 
-    double height = MediaQuery.of(context).size.height;
+    Size size = MediaQuery.of(context).size;
 
-    return GosScaffold(
+    return OskScaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 70,
+              width: size.width,
+              height: size.height - 70,
               child: Image.asset("assets/images/animated_gos.gif"),
             ),
           ],

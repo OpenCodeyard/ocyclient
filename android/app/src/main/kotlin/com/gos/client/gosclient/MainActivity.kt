@@ -1,4 +1,4 @@
-package com.gos.client.gosclient
+package com.osk.client.oskclient
 
 import io.flutter.embedding.android.FlutterActivity
 

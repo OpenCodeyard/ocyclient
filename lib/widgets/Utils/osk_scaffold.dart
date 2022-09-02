@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/configs/config.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/configs/config.dart';
 import 'package:provider/provider.dart';
 
 import 'common_widgets.dart';
 import 'navigation_drawer.dart';
 
-class GosScaffold extends StatefulWidget {
+class OskScaffold extends StatefulWidget {
   final Widget body;
 
-  const GosScaffold({Key? key, required this.body}) : super(key: key);
+  const OskScaffold({Key? key, required this.body}) : super(key: key);
 
   @override
-  State<GosScaffold> createState() => _GosScaffoldState();
+  State<OskScaffold> createState() => _OskScaffoldState();
 }
 
-class _GosScaffoldState extends State<GosScaffold> {
-
+class _OskScaffoldState extends State<OskScaffold> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,53 +25,55 @@ class _GosScaffoldState extends State<GosScaffold> {
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
 
-    return Scaffold(
-      drawer: size.width > 900 ? null : const AppDrawer(),
-      appBar: AppBar(
-        toolbarHeight: 70,
-        titleSpacing: size.width > 900 ? 40 : 0,
-        centerTitle: size.width > 900 ? false : true,
-        title: RichText(
-          text: TextSpan(
-            text: "{",
-            style: TextStyle(
-              fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+    return SelectionArea(
+      child: Scaffold(
+        drawer: size.width > 900 ? null : const AppDrawer(),
+        appBar: AppBar(
+          toolbarHeight: 70,
+          titleSpacing: size.width > 900 ? 40 : 0,
+          centerTitle: size.width > 900 ? false : true,
+          title: RichText(
+            text: TextSpan(
+              text: "{",
+              style: TextStyle(
+                fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: " Open Source",
+                  style: TextStyle(
+                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "ProximaNova",
+                    color: Colors.black,
+                  ),
+                ),
+                TextSpan(
+                  text: " Kolkata ",
+                  style: TextStyle(
+                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey.shade700,
+                    fontFamily: "ProximaNova",
+                  ),
+                ),
+                TextSpan(
+                  text: "} ;",
+                  style: TextStyle(
+                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            children: <TextSpan>[
-              TextSpan(
-                text: " GCELT ",
-                style: TextStyle(
-                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "ProximaNova",
-                  color: Colors.black,
-                ),
-              ),
-              TextSpan(
-                text: "Open Source ",
-                style: TextStyle(
-                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.grey.shade700,
-                  fontFamily: "ProximaNova",
-                ),
-              ),
-              TextSpan(
-                text: "} ;",
-                style: TextStyle(
-                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ],
           ),
+          actions: getAppBarActions(nb, size, ab),
         ),
-        actions: getAppBarActions(nb, size, ab),
+        body: widget.body,
       ),
-      body: widget.body,
     );
   }
 
@@ -209,7 +210,7 @@ class _GosScaffoldState extends State<GosScaffold> {
             width: 120,
             child: getIconButtonBody(
               "Log Out",
-              FontAwesomeIcons.signOutAlt,
+              FontAwesomeIcons.rightFromBracket,
             ),
           ),
         ),

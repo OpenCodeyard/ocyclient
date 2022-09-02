@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:gosclient/widgets/Utils/gos_scaffold.dart';
+import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
 
 class MilestonesPage extends StatefulWidget {
   const MilestonesPage({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _MilestonesPageState extends State<MilestonesPage> {
 
     double height = MediaQuery.of(context).size.height;
 
-    return GosScaffold(
+    return OskScaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/widgets/Profile/widgets/accounts.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/widgets/Profile/widgets/accounts.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
@@ -96,7 +96,7 @@ class _UserTabState extends State<UserTab> {
                         ),
                         getIconifiedDetail(
                           "Government College of Engineering and Leather Technology",
-                          FontAwesomeIcons.university,
+                          FontAwesomeIcons.buildingColumns,
                           Colors.blue,
                           size.width - 107,
                         ),
@@ -213,7 +213,7 @@ class _UserTabState extends State<UserTab> {
                                       ),
                                       getIconifiedDetail(
                                           "Government College of Engineering and Leather Technology",
-                                          FontAwesomeIcons.university,
+                                          FontAwesomeIcons.buildingColumns,
                                           Colors.blue,
                                           200),
                                     ],
@@ -255,7 +255,7 @@ class _UserTabState extends State<UserTab> {
                                         (ab.userModel.locality?.isEmpty ?? true)
                                             ? "Not Provided"
                                             : ab.userModel.locality ?? "",
-                                        FontAwesomeIcons.mapMarkerAlt,
+                                        FontAwesomeIcons.locationDot,
                                         Colors.red,
                                         170,
                                       ),
@@ -434,9 +434,9 @@ class _UserTabState extends State<UserTab> {
     if (gender == null) {
       return null;
     } else if (gender == "Male") {
-      return FontAwesomeIcons.male;
+      return FontAwesomeIcons.person;
     } else if (gender == "Female") {
-      return FontAwesomeIcons.female;
+      return FontAwesomeIcons.personDress;
     } else {
       return FontAwesomeIcons.transgender;
     }

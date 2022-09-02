@@ -18,7 +18,7 @@
 
     <meta charset="UTF-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta name="description" content="Official client side application of GCELT Open Source">
+    <meta name="description" content="Official client side application of Open Source Kolkata">
 
     <meta property="og:image"
           content="https://i.imgur.com/TqrR7Hh.png">
@@ -31,7 +31,7 @@
     <!-- iOS meta tags & icons -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="gosclient">
+    <meta name="apple-mobile-web-app-title" content="oskclient">
     <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
     <!-- Favicon -->
@@ -97,6 +97,8 @@
         }
 
 
+
+
     </style>
 
 </head>
@@ -118,12 +120,14 @@
   });
 
 
+
+
 </script>
 <!-- This script installs service_worker.js to provide PWA functionality to
      application. For more information, see:
      https://developers.google.com/web/fundamentals/primers/service-workers -->
 <script>
-    var serviceWorkerVersion = 4;
+    var serviceWorkerVersion = 5;
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -185,45 +189,6 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
-
-
-
-
-
-
-
-</script>
-
-
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
-
-<!-- Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries -->
-<!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>-->
-<!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-messaging.js"></script>-->
-<!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>-->
-<!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-functions.js"></script>-->
-<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js"></script>
-
-<script>
-
-     // Firebase configuration
-      var firebaseConfig = {
-          apiKey: "AIzaSyA0SSxWPpoPCuDbMlUuF9CW0QQd9ZgGJEM",
-          authDomain: "gceltopensource.firebaseapp.com",
-          projectId: "gceltopensource",
-          storageBucket: "gceltopensource.appspot.com",
-          messagingSenderId: "329653576553",
-          appId: "1:329653576553:web:bfeb5b04c3cf85cc9953f8",
-          measurementId: "G-1HX8CWEYZK"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-
-
-
-
 
 </script>
 

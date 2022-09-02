@@ -1,8 +1,8 @@
 import 'package:face_pile/face_pile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gosclient/blocs/projects_bloc.dart';
-import 'package:gosclient/models/project/project_model.dart';
+import 'package:oskclient/blocs/projects_bloc.dart';
+import 'package:oskclient/models/project/project_model.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,7 +17,7 @@ class Projects extends StatefulWidget {
 class _ProjectsState extends State<Projects> {
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<ProjectsBloc>(context, listen: false).getProjects();
     });
     super.initState();

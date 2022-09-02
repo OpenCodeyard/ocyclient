@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/widgets/Auth/page_view/login_intro_page.dart';
-import 'package:gosclient/widgets/Utils/gos_scaffold.dart';
-import 'package:gosclient/widgets/Utils/snackbar.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/widgets/Auth/page_view/login_intro_page.dart';
+import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
+import 'package:oskclient/widgets/Utils/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -24,7 +24,7 @@ class _LoginSingUpState extends State<LoginSingUp> {
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
-    return GosScaffold(
+    return OskScaffold(
       body: Center(
         child: SizedBox(
           height: size.width < 600 ? size.height : size.height * 0.8,
@@ -147,16 +147,7 @@ class _LoginSingUpState extends State<LoginSingUp> {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: " GCELT ",
-                  style: TextStyle(
-                    fontSize: size.width < 1100 && size.width > 900 ? 22 : 28,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "ProximaNova",
-                    color: Colors.black,
-                  ),
-                ),
-                TextSpan(
-                  text: "Open Source ",
+                  text: " Open Source ",
                   style: TextStyle(
                     fontSize: size.width < 1100 && size.width > 900 ? 22 : 28,
                     fontWeight: FontWeight.normal,
@@ -164,6 +155,16 @@ class _LoginSingUpState extends State<LoginSingUp> {
                     fontFamily: "ProximaNova",
                   ),
                 ),
+                TextSpan(
+                  text: " Kolkata ",
+                  style: TextStyle(
+                    fontSize: size.width < 1100 && size.width > 900 ? 22 : 28,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "ProximaNova",
+                    color: Colors.black,
+                  ),
+                ),
+
                 TextSpan(
                   text: "} ;",
                   style: TextStyle(
@@ -193,7 +194,7 @@ class _LoginSingUpState extends State<LoginSingUp> {
             height: 50,
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                primary: Colors.white,
+                backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -255,7 +256,7 @@ class _LoginSingUpState extends State<LoginSingUp> {
             height: 50,
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                primary: Colors.white,
+                backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),

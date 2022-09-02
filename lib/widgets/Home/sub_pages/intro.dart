@@ -1,7 +1,8 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:math' as math;
 
 class Intro extends StatelessWidget {
   const Intro({Key? key}) : super(key: key);
@@ -21,12 +22,12 @@ class Intro extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     logoDescription(size),
-                    gos(size),
+                    osk(size),
                   ],
                 )
               : Row(
                   children: [
-                    gos(size),
+                    osk(size),
                     logoDescription(size),
                   ],
                 ),
@@ -47,7 +48,7 @@ class Intro extends StatelessWidget {
     );
   }
 
-  Widget gos(Size size) {
+  Widget osk(Size size) {
     return SizedBox(
       width: size.width < 700 ? size.width : size.width / 2,
       child: Column(
@@ -131,30 +132,30 @@ class Intro extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  text: "GCELT",
+                  text: "Open Source",
                   style: TextStyle(
                     fontSize: size.width < 500
                         ? 23
                         : size.width < 700
                             ? 35
-                            : 50,
-                    fontWeight: FontWeight.bold,
+                            : size.width < 1200
+                                ? 45
+                                : 50,
+                    fontWeight: FontWeight.normal,
                     color: Colors.white,
+                    fontFamily: "ProximaNova",
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                      text: " Open Source",
+                      text: " Kolkata",
                       style: TextStyle(
                         fontSize: size.width < 500
                             ? 23
                             : size.width < 700
                                 ? 35
-                                : size.width < 1200
-                                    ? 45
-                                    : 50,
-                        fontWeight: FontWeight.normal,
+                                : 50,
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontFamily: "ProximaNova",
                       ),
                     ),
                   ],

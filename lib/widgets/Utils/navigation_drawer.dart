@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
-import 'package:gosclient/configs/config.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/configs/config.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatefulWidget {

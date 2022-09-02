@@ -1,11 +1,10 @@
 import 'package:dev_icons/dev_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/widgets/Profile/widgets/skill_card.dart';
-import 'package:gosclient/widgets/Utils/custom_inputfields.dart';
 import 'package:intl/intl.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/widgets/Profile/widgets/skill_card.dart';
+import 'package:oskclient/widgets/Utils/custom_inputfields.dart';
 import 'package:provider/provider.dart';
 
 import '../../../configs/config.dart';
@@ -50,7 +49,7 @@ class _PersonalTabState extends State<PersonalTab> {
 
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       AuthenticationBloc ab =
           Provider.of<AuthenticationBloc>(context, listen: false);
 
@@ -93,10 +92,10 @@ class _PersonalTabState extends State<PersonalTab> {
                     ),
                   ),
                   Positioned(
+                    bottom: 10,
                     child: getUserCircleAvatar(
                       ab,
                     ),
-                    bottom: 10,
                   ),
                 ],
               ),
@@ -122,7 +121,7 @@ class _PersonalTabState extends State<PersonalTab> {
                         saveData(ab);
                       },
                       icon: const Icon(
-                        FontAwesomeIcons.solidSave,
+                        FontAwesomeIcons.floppyDisk,
                       ),
                     ),
                   const SizedBox(
@@ -181,7 +180,7 @@ class _PersonalTabState extends State<PersonalTab> {
                                         saveData(ab);
                                       },
                                       icon: const Icon(
-                                        FontAwesomeIcons.solidSave,
+                                        FontAwesomeIcons.floppyDisk,
                                         size: 15,
                                       ),
                                       label: const Text("Save Personal"),
@@ -195,9 +194,9 @@ class _PersonalTabState extends State<PersonalTab> {
                           ],
                         ),
                         Positioned(
-                          child: getUserCircleAvatar(ab),
                           bottom: 30,
                           left: 30,
+                          child: getUserCircleAvatar(ab),
                         ),
                       ],
                     ),
@@ -231,7 +230,7 @@ class _PersonalTabState extends State<PersonalTab> {
     if (size.width < 1500) {
       return [
         Container(
-          margin: EdgeInsets.symmetric(horizontal : size.width < 1000 ? 23 : 0),
+          margin: EdgeInsets.symmetric(horizontal: size.width < 1000 ? 23 : 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -287,6 +286,12 @@ class _PersonalTabState extends State<PersonalTab> {
 
   Form getPersonalDataForm(Size size) {
     return Form(
+      key: _formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      onChanged: () {
+        wasPersonalDataUpdated = true;
+        setState(() {});
+      },
       child: Container(
         margin: const EdgeInsets.all(10),
         width: size.width < 1500 ? size.width * 0.95 : (size.width - 231) * 0.7,
@@ -306,7 +311,7 @@ class _PersonalTabState extends State<PersonalTab> {
             ),
             buildInputFieldThemColor(
               "Phone Number with country code",
-              FontAwesomeIcons.phoneAlt,
+              FontAwesomeIcons.phoneFlip,
               TextInputType.phone,
               _phoneCtrl,
               context,
@@ -328,7 +333,7 @@ class _PersonalTabState extends State<PersonalTab> {
             ),
             buildInputFieldThemColor(
               "City/Town/Village",
-              FontAwesomeIcons.mapMarkedAlt,
+              FontAwesomeIcons.mapLocationDot,
               TextInputType.streetAddress,
               _localityCtrl,
               context,
@@ -379,12 +384,6 @@ class _PersonalTabState extends State<PersonalTab> {
           ],
         ),
       ),
-      key: _formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      onChanged: () {
-        wasPersonalDataUpdated = true;
-        setState(() {});
-      },
     );
   }
 
@@ -459,8 +458,8 @@ class _PersonalTabState extends State<PersonalTab> {
               fontSize: 15,
             ),
           ),
-          ...getGenderRadio(0, FontAwesomeIcons.male),
-          ...getGenderRadio(1, FontAwesomeIcons.female),
+          ...getGenderRadio(0, FontAwesomeIcons.person),
+          ...getGenderRadio(1, FontAwesomeIcons.personDress),
           ...getGenderRadio(2, Icons.transgender),
         ],
       ),

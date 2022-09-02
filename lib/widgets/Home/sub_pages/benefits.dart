@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gosclient/widgets/Utils/measure_size_render_object.dart';
+import 'package:oskclient/widgets/Utils/measure_size_render_object.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class Benefits extends StatefulWidget {
   const Benefits({Key? key}) : super(key: key);
@@ -94,7 +94,7 @@ class _BenefitsState extends State<Benefits> {
                           iconSize: 35,
                           tooltip: "GitHub",
                           onPressed: () {
-                            launch("https://github.com/GCELTIANS2020");
+                            launchUrlString("https://github.com/GCELTIANS2020");
                           },
                         ),
                         IconButton(
@@ -104,7 +104,7 @@ class _BenefitsState extends State<Benefits> {
                           tooltip: "Discord",
                           iconSize: 35,
                           onPressed: () {
-                            launch(
+                            launchUrlString(
                                 "https://discord.com/channels/929987337742602272/929988126225616926/929993469898924063");
                           },
                         ),
@@ -165,6 +165,8 @@ class _BenefitsState extends State<Benefits> {
             child: Stack(
               children: [
                 Positioned(
+                  left: 0,
+                  bottom: 0,
                   child: AnimatedContainer(
                     width: _amIHovering[index]
                         ? size.width / 5 < 300
@@ -181,8 +183,6 @@ class _BenefitsState extends State<Benefits> {
                     ),
                     curve: Curves.fastOutSlowIn,
                   ),
-                  left: 0,
-                  bottom: 0,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(25.0),

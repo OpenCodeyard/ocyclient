@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:gosclient/configs/config.dart';
-import 'package:gosclient/models/project/project_model.dart';
+import 'package:oskclient/configs/config.dart';
+import 'package:oskclient/models/project/project_model.dart';
 
 class ProjectsBloc extends ChangeNotifier {
   Dio dio = Dio();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gosclient/configs/config.dart';
-import 'package:universal_io/io.dart';
+import 'package:oskclient/configs/config.dart';
 
 buildInputFieldThemColor(
   String label,
@@ -21,9 +20,7 @@ buildInputFieldThemColor(
       ),
       TextFormField(
         controller: controller,
-        textInputAction: (Platform.isIOS || Platform.isMacOS)
-            ? TextInputAction.none
-            : isLast
+        textInputAction:  isLast
                 ? TextInputAction.done
                 : TextInputAction.next,
         focusNode: node,
@@ -116,9 +113,7 @@ buildDescInputFieldThemColor(
         style: const TextStyle(
           color: Colors.black,
         ),
-        textInputAction: (Platform.isIOS || Platform.isMacOS)
-            ? TextInputAction.none
-            : TextInputAction.next,
+        textInputAction: TextInputAction.next,
         onFieldSubmitted: (s) {
           if (nextNode != null) {
             FocusScope.of(context).requestFocus(nextNode);

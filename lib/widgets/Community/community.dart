@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gosclient/blocs/community_bloc.dart';
-import 'package:gosclient/configs/config.dart';
-import 'package:gosclient/enums/curtain.dart';
-import 'package:gosclient/widgets/Community/sub_pages/desktop_curtain.dart';
-import 'package:gosclient/widgets/Utils/gos_scaffold.dart';
+import 'package:oskclient/blocs/community_bloc.dart';
+import 'package:oskclient/configs/config.dart';
+import 'package:oskclient/enums/curtain.dart';
+import 'package:oskclient/widgets/Community/sub_pages/desktop_curtain.dart';
+import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
 import 'package:provider/provider.dart';
 
 class CommunityPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _CommunityPageState extends State<CommunityPage> {
 
     Size size = MediaQuery.of(context).size;
     CommunityBloc cb = Provider.of<CommunityBloc>(context);
-    return GosScaffold(
+    return OskScaffold(
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -63,9 +63,9 @@ class _CommunityPageState extends State<CommunityPage> {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 20,
+            backgroundColor: Colors.white,
             shadowColor: Colors.white.withOpacity(0.5),
             padding: const EdgeInsets.all(20),
-            primary: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gosclient/blocs/auth_bloc.dart';
-import 'package:gosclient/blocs/navigation_bloc.dart';
+import 'package:oskclient/blocs/auth_bloc.dart';
+import 'package:oskclient/blocs/navigation_bloc.dart';
 import 'package:provider/provider.dart';
 
 class AccountWidget extends StatelessWidget {
@@ -92,7 +92,7 @@ class AccountWidget extends StatelessWidget {
                   children: [
                     ab.userModel.loginProvidersConnected.contains(name)
                         ? const Icon(
-                            FontAwesomeIcons.checkCircle,
+                            FontAwesomeIcons.circleCheck,
                             color: Colors.green,
                             size: 15,
                           )
