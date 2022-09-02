@@ -24,7 +24,7 @@ class UpcomingEvents extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     eventZone(size),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     featuredEvent(size),
@@ -68,7 +68,7 @@ class UpcomingEvents extends StatelessWidget {
                   : size.width / 2.4,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        border: Border.all(color: Color(0xffceb4f6), width: 4),
+        border: Border.all(color: const Color(0xffceb4f6), width: 4),
         color: const Color(0xffeaeaea),
       ),
       child: Center(
@@ -77,7 +77,7 @@ class UpcomingEvents extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
           ),
-          child: Container(
+          child: SizedBox(
             height: size.width < 540 ? size.height / 7.2 : size.height / 4.8,
             width: size.width < 540
                 ? size.width * 0.8
@@ -92,7 +92,7 @@ class UpcomingEvents extends StatelessWidget {
                   width: 20,
                 ),
                 CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/logo.png"),
+                  backgroundImage: const AssetImage("assets/images/logo.png"),
                   radius: size.width < 540 ? 30 : 60,
                 ),
                 const SizedBox(

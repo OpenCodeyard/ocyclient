@@ -22,8 +22,6 @@ class _TeamsPageState extends State<TeamsPage> {
       ),
     );
 
-    double height = MediaQuery.of(context).size.height;
-
     return OskScaffold(
       body: SingleChildScrollView(
         child: Column(

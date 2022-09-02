@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:oskclient/blocs/auth_bloc.dart';
 import 'package:oskclient/blocs/navigation_bloc.dart';
 import 'package:oskclient/widgets/Profile/widgets/accounts.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 import '../../Utils/snackbar.dart';
@@ -43,10 +43,8 @@ class _UserTabState extends State<UserTab> {
                     ),
                   ),
                   Positioned(
-                    child: getUserCircleAvatar(
-                      ab,
-                    ),
                     bottom: 10,
+                    child: getUserCircleAvatar(ab),
                   ),
                 ],
               ),
@@ -159,9 +157,9 @@ class _UserTabState extends State<UserTab> {
                           ],
                         ),
                         Positioned(
-                          child: getUserCircleAvatar(ab),
                           bottom: 30,
                           left: 30,
+                          child: getUserCircleAvatar(ab),
                         ),
                       ],
                     ),
@@ -266,7 +264,7 @@ class _UserTabState extends State<UserTab> {
                                           (ab.userModel.dob?.isEmpty ?? true)
                                               ? "Not Provided"
                                               : ab.userModel.dob ?? "",
-                                          FontAwesomeIcons.calendarAlt,
+                                          FontAwesomeIcons.calendarDays,
                                           Colors.blue,
                                           170),
                                     ],

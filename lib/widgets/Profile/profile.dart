@@ -123,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
       getSideMenuButton(
         pb,
         "User",
-        FontAwesomeIcons.userAlt,
+        FontAwesomeIcons.userLarge,
         0,
         isHorizontal,
       ),
@@ -147,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
       getSideMenuButton(
         pb,
         "Log Out",
-        FontAwesomeIcons.signOutAlt,
+        FontAwesomeIcons.rightFromBracket,
         3,
         isHorizontal,
         authBloc: ab,

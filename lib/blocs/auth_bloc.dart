@@ -369,7 +369,7 @@ class AuthenticationBloc extends ChangeNotifier {
     ///Shared Preferences doesn't support storing map
     ///and thus this is done
     for (String skill in (_userModel.skills).keys) {
-      skillsList.add(skill + ":" + _userModel.skills[skill].toString());
+      skillsList.add("$skill:${_userModel.skills[skill]}");
     }
 
     prefs.setStringList(Config.prefSkills, skillsList);

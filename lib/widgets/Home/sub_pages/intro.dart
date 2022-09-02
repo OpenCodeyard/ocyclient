@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class Intro extends StatelessWidget {
   const Intro({Key? key}) : super(key: key);
@@ -82,7 +82,7 @@ class Intro extends StatelessWidget {
                 iconSize: 35,
                 tooltip: "GitHub",
                 onPressed: () {
-                  launch("https://github.com/GCELTIANS2020");
+                  launchUrlString("https://github.com/GCELTIANS2020");
                 },
               ),
               IconButton(
@@ -93,7 +93,7 @@ class Intro extends StatelessWidget {
                 tooltip: "Discord",
                 iconSize: 35,
                 onPressed: () {
-                  launch(
+                  launchUrlString(
                       "https://discord.com/channels/929987337742602272/929988126225616926/929993469898924063");
                 },
               ),

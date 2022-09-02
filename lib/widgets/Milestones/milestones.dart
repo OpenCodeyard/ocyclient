@@ -22,8 +22,6 @@ class _MilestonesPageState extends State<MilestonesPage> {
       ),
     );
 
-    double height = MediaQuery.of(context).size.height;
-
     return OskScaffold(
       body: SingleChildScrollView(
         child: Column(

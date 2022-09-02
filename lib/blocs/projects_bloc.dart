@@ -22,12 +22,7 @@ class ProjectsBloc extends ChangeNotifier {
     dio.options.headers["accept"] = "application/vnd.github.v3+json";
 
     var response = await dio.get(
-      Config.ghRootUrl +
-          Config.ghOrganisationsApi +
-          "/" +
-          Config.ghOrganisationName +
-          "/" +
-          Config.ghReposApi,
+      "${Config.ghRootUrl}${Config.ghOrganisationsApi}/${Config.ghOrganisationName}/${Config.ghReposApi}",
     );
 
     List<dynamic> projectsResponse = response.data;
