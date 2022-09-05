@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:oskclient/blocs/navigation_bloc.dart';
-import 'package:oskclient/configs/config.dart';
-import 'package:oskclient/external/github_sign_in/lib/github_sign_in.dart';
-import 'package:oskclient/models/user/user_model.dart';
-import 'package:oskclient/widgets/Utils/snackbar.dart';
+import 'package:ocyclient/blocs/navigation_bloc.dart';
+import 'package:ocyclient/configs/config.dart';
+import 'package:ocyclient/external/github_sign_in/lib/github_sign_in.dart';
+import 'package:ocyclient/models/user/user_model.dart';
+import 'package:ocyclient/widgets/Utils/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Business logic for authenticated users

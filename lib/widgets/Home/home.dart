@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oskclient/widgets/Home/sub_pages/benefits.dart';
-import 'package:oskclient/widgets/Home/sub_pages/events.dart';
-import 'package:oskclient/widgets/Home/sub_pages/footer.dart';
-import 'package:oskclient/widgets/Home/sub_pages/intro.dart';
-import 'package:oskclient/widgets/Home/sub_pages/projects.dart';
-import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/widgets/Home/sub_pages/benefits.dart';
+import 'package:ocyclient/widgets/Home/sub_pages/events.dart';
+import 'package:ocyclient/widgets/Home/sub_pages/footer.dart';
+import 'package:ocyclient/widgets/Home/sub_pages/intro.dart';
+import 'package:ocyclient/widgets/Home/sub_pages/projects.dart';
+import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     //Add attribution
     //<a target="_blank" href="https://icons8.com/icon/51geCPj1J4bd/community">Community</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
-    return OskScaffold(
+    return OcyScaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

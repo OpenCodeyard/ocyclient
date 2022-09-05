@@ -57,7 +57,7 @@ class Config {
     "/editProfile"
   ];
 
-  static const appVersion = "0.1.1-alpha";
+  static const appVersion = "0.2.0-alpha";
 
   ///Firestore Collection Names
   static const fsUser = "Users";

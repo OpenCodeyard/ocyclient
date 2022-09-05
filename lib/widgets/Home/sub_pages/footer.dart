@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:oskclient/blocs/navigation_bloc.dart';
-import 'package:oskclient/widgets/Utils/common_widgets.dart';
+import 'package:ocyclient/blocs/navigation_bloc.dart';
+import 'package:ocyclient/widgets/Utils/common_widgets.dart';
 import 'package:provider/provider.dart';
 
 class Footer extends StatelessWidget {
@@ -153,24 +153,22 @@ class Footer extends StatelessWidget {
               fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
               fontWeight: FontWeight.bold,
               color: Colors.white,
+              fontFamily: "ProximaNova",
             ),
             children: <TextSpan>[
               TextSpan(
-                text: " GCELT ",
-                style: TextStyle(
-                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "ProximaNova",
-                  color: Colors.white,
-                ),
-              ),
-              TextSpan(
-                text: "Open Source ",
+                text: " Open ",
                 style: TextStyle(
                   fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
                   fontWeight: FontWeight.normal,
-                  color: Colors.grey.shade700,
-                  fontFamily: "ProximaNova",
+                  color: Colors.white38,
+                ),
+              ),
+              TextSpan(
+                text: "Codeyard ",
+                style: TextStyle(
+                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               TextSpan(
@@ -178,7 +176,6 @@ class Footer extends StatelessWidget {
                 style: TextStyle(
                   fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
                 ),
               ),
             ],

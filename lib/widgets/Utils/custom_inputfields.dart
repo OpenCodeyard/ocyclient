@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oskclient/configs/config.dart';
+import 'package:ocyclient/configs/config.dart';
 
 buildInputFieldThemColor(
   String label,

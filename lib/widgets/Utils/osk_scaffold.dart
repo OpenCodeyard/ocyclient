@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:oskclient/blocs/auth_bloc.dart';
-import 'package:oskclient/blocs/navigation_bloc.dart';
-import 'package:oskclient/configs/config.dart';
+import 'package:ocyclient/blocs/auth_bloc.dart';
+import 'package:ocyclient/blocs/navigation_bloc.dart';
+import 'package:ocyclient/configs/config.dart';
 import 'package:provider/provider.dart';
 
 import 'common_widgets.dart';
 import 'navigation_drawer.dart';
 
-class OskScaffold extends StatefulWidget {
+class OcyScaffold extends StatefulWidget {
   final Widget body;
+  final bool enableSelection;
 
-  const OskScaffold({Key? key, required this.body}) : super(key: key);
+  const OcyScaffold({
+    Key? key,
+    required this.body,
+    this.enableSelection = true,
+  }) : super(key: key);
 
   @override
-  State<OskScaffold> createState() => _OskScaffoldState();
+  State<OcyScaffold> createState() => _OcyScaffoldState();
 }
 
-class _OskScaffoldState extends State<OskScaffold> {
+class _OcyScaffoldState extends State<OcyScaffold> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,55 +30,61 @@ class _OskScaffoldState extends State<OskScaffold> {
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
 
-    return SelectionArea(
-      child: Scaffold(
-        drawer: size.width > 900 ? null : const AppDrawer(),
-        appBar: AppBar(
-          toolbarHeight: 70,
-          titleSpacing: size.width > 900 ? 40 : 0,
-          centerTitle: size.width > 900 ? false : true,
-          title: RichText(
-            text: TextSpan(
-              text: "{",
-              style: TextStyle(
-                fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: " Open Source",
-                  style: TextStyle(
-                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "ProximaNova",
-                    color: Colors.black,
-                  ),
-                ),
-                TextSpan(
-                  text: " Kolkata ",
-                  style: TextStyle(
-                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.grey.shade700,
-                    fontFamily: "ProximaNova",
-                  ),
-                ),
-                TextSpan(
-                  text: "} ;",
-                  style: TextStyle(
-                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
+    return widget.enableSelection
+        ? SelectionArea(
+            child: getCustomScaffold(size, nb, ab),
+          )
+        : getCustomScaffold(size, nb, ab);
+  }
+
+  Widget getCustomScaffold(
+      Size size, NavigationBloc nb, AuthenticationBloc ab) {
+    return Scaffold(
+      drawer: size.width > 900 ? null : const AppDrawer(),
+      appBar: AppBar(
+        toolbarHeight: 70,
+        titleSpacing: size.width > 900 ? 40 : 0,
+        centerTitle: size.width > 900 ? false : true,
+        title: RichText(
+          text: TextSpan(
+            text: "{",
+            style: TextStyle(
+              fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: "ProximaNova",
+              color: Colors.black,
             ),
+            children: <TextSpan>[
+              TextSpan(
+                text: " Open ",
+                style: TextStyle(
+                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey.shade700,
+                ),
+              ),
+              TextSpan(
+                text: "Codeyard ",
+                style: TextStyle(
+                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              TextSpan(
+                text: "} ;",
+                style: TextStyle(
+                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ],
           ),
-          actions: getAppBarActions(nb, size, ab),
         ),
-        body: widget.body,
+        actions: getAppBarActions(nb, size, ab),
       ),
+      body: widget.body,
     );
   }
 

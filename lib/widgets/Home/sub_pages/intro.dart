@@ -22,12 +22,12 @@ class Intro extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     logoDescription(size),
-                    osk(size),
+                    ocy(size),
                   ],
                 )
               : Row(
                   children: [
-                    osk(size),
+                    ocy(size),
                     logoDescription(size),
                   ],
                 ),
@@ -48,7 +48,7 @@ class Intro extends StatelessWidget {
     );
   }
 
-  Widget osk(Size size) {
+  Widget ocy(Size size) {
     return SizedBox(
       width: size.width < 700 ? size.width : size.width / 2,
       child: Column(
@@ -132,28 +132,26 @@ class Intro extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  text: "Open Source",
+                  text: "Open ",
                   style: TextStyle(
                     fontSize: size.width < 500
                         ? 23
-                        : size.width < 700
-                            ? 35
-                            : size.width < 1200
-                                ? 45
-                                : 50,
-                    fontWeight: FontWeight.normal,
+                        : size.width < 1200
+                            ? 33
+                            : 40,
+                    fontWeight: FontWeight.bold,
                     color: Colors.white,
                     fontFamily: "ProximaNova",
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                      text: " Kolkata",
+                      text: "Codeyard",
                       style: TextStyle(
                         fontSize: size.width < 500
                             ? 23
-                            : size.width < 700
-                                ? 35
-                                : 50,
+                            : size.width < 1200
+                                ? 33
+                                : 40,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

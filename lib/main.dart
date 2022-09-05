@@ -6,22 +6,22 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:oskclient/blocs/auth_bloc.dart';
-import 'package:oskclient/blocs/community_bloc.dart';
-import 'package:oskclient/blocs/edit_profile_bloc.dart';
-import 'package:oskclient/blocs/navigation_bloc.dart';
-import 'package:oskclient/blocs/profile_bloc.dart';
-import 'package:oskclient/blocs/projects_bloc.dart';
-import 'package:oskclient/blocs/theme_bloc.dart';
-import 'package:oskclient/configs/config.dart';
-import 'package:oskclient/widgets/AboutUs/about_us.dart';
-import 'package:oskclient/widgets/Auth/login_signup.dart';
-import 'package:oskclient/widgets/Community/community.dart';
-import 'package:oskclient/widgets/Home/home.dart';
-import 'package:oskclient/widgets/Milestones/milestones.dart';
-import 'package:oskclient/widgets/Profile/edit_profile.dart';
-import 'package:oskclient/widgets/Profile/profile.dart';
-import 'package:oskclient/widgets/Teams/teams.dart';
+import 'package:ocyclient/blocs/auth_bloc.dart';
+import 'package:ocyclient/blocs/community_bloc.dart';
+import 'package:ocyclient/blocs/edit_profile_bloc.dart';
+import 'package:ocyclient/blocs/navigation_bloc.dart';
+import 'package:ocyclient/blocs/profile_bloc.dart';
+import 'package:ocyclient/blocs/projects_bloc.dart';
+import 'package:ocyclient/blocs/theme_bloc.dart';
+import 'package:ocyclient/configs/config.dart';
+import 'package:ocyclient/widgets/AboutUs/about_us.dart';
+import 'package:ocyclient/widgets/Auth/login_signup.dart';
+import 'package:ocyclient/widgets/Community/community.dart';
+import 'package:ocyclient/widgets/Home/home.dart';
+import 'package:ocyclient/widgets/Milestones/milestones.dart';
+import 'package:ocyclient/widgets/Profile/edit_profile.dart';
+import 'package:ocyclient/widgets/Profile/profile.dart';
+import 'package:ocyclient/widgets/Teams/teams.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
@@ -46,21 +46,21 @@ Future<void> configureApp() async {
   bool allowUnauthenticated =
       Config.unauthenticatedPreventAccessRoutes.contains(defaultRouteName);
   if (isLoggedIn && allowAuthenticated) {
-    SystemNavigator.routeUpdated(routeName: '/home', previousRouteName: null);
+    SystemNavigator.routeInformationUpdated(location: '/home', replace: true);
   }
   if (!isLoggedIn && allowUnauthenticated) {
-    SystemNavigator.routeUpdated(routeName: '/home', previousRouteName: null);
+    SystemNavigator.routeInformationUpdated(location: '/home', replace: true);
   }
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureApp();
-  runApp(const GOSApp());
+  runApp(const OCYApp());
 }
 
-class GOSApp extends StatelessWidget {
-  const GOSApp({Key? key}) : super(key: key);
+class OCYApp extends StatelessWidget {
+  const OCYApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +206,7 @@ class GOSApp extends StatelessWidget {
           ),
           GetPage(
             name: '/auth',
-            page: () => const LoginSingUp(),
+            page: () => const LoginSignUp(),
           ),
           GetPage(
             name: '/profile',
@@ -220,7 +220,7 @@ class GOSApp extends StatelessWidget {
             name: '/licenses',
             page: () => LicensePage(
               applicationIcon: Image.asset("assets/images/animated_gos.gif"),
-              applicationName: "Open Source Kolkata",
+              applicationName: "Open Codeyard",
               applicationVersion: Config.appVersion,
             ),
           ),

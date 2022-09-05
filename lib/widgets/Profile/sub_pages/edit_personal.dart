@@ -2,9 +2,9 @@ import 'package:dev_icons/dev_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:oskclient/blocs/auth_bloc.dart';
-import 'package:oskclient/widgets/Profile/widgets/skill_card.dart';
-import 'package:oskclient/widgets/Utils/custom_inputfields.dart';
+import 'package:ocyclient/blocs/auth_bloc.dart';
+import 'package:ocyclient/widgets/Profile/widgets/skill_card.dart';
+import 'package:ocyclient/widgets/Utils/custom_inputfields.dart';
 import 'package:provider/provider.dart';
 
 import '../../../configs/config.dart';

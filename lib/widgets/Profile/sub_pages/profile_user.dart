@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:oskclient/blocs/auth_bloc.dart';
-import 'package:oskclient/blocs/navigation_bloc.dart';
-import 'package:oskclient/widgets/Profile/widgets/accounts.dart';
+import 'package:ocyclient/blocs/auth_bloc.dart';
+import 'package:ocyclient/blocs/navigation_bloc.dart';
+import 'package:ocyclient/widgets/Profile/widgets/accounts.dart';
 import 'package:provider/provider.dart';
 
 import '../../Utils/snackbar.dart';

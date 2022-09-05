@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
 
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
     Size size = MediaQuery.of(context).size;
 
-    return OskScaffold(
+    return OcyScaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

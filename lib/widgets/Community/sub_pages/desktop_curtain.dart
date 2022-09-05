@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:oskclient/blocs/community_bloc.dart';
-import 'package:oskclient/configs/config.dart';
-import 'package:oskclient/enums/curtain.dart';
-import 'package:oskclient/widgets/Community/utils/curtain_image.dart';
+import 'package:ocyclient/blocs/community_bloc.dart';
+import 'package:ocyclient/configs/config.dart';
+import 'package:ocyclient/enums/curtain.dart';
+import 'package:ocyclient/widgets/Community/utils/curtain_image.dart';
 import 'package:provider/provider.dart';
 
 class DesktopCurtain extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oskclient/blocs/community_bloc.dart';
-import 'package:oskclient/configs/config.dart';
-import 'package:oskclient/enums/curtain.dart';
-import 'package:oskclient/widgets/Community/sub_pages/desktop_curtain.dart';
-import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/blocs/community_bloc.dart';
+import 'package:ocyclient/configs/config.dart';
+import 'package:ocyclient/enums/curtain.dart';
+import 'package:ocyclient/widgets/Community/sub_pages/desktop_curtain.dart';
+import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
 import 'package:provider/provider.dart';
 
 class CommunityPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _CommunityPageState extends State<CommunityPage> {
 
     Size size = MediaQuery.of(context).size;
     CommunityBloc cb = Provider.of<CommunityBloc>(context);
-    return OskScaffold(
+    return OcyScaffold(
       body: Stack(
         alignment: Alignment.center,
         children: [

@@ -1,6 +1,6 @@
 {
-    "name": "oskclient",
-    "short_name": "oskclient",
+    "name": "ocyclient",
+    "short_name": "ocyclient",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

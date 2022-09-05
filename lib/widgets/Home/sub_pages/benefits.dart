@@ -1,17 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:oskclient/widgets/Utils/measure_size_render_object.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:ocyclient/widgets/Utils/measure_size_render_object.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class Benefits extends StatefulWidget {
   const Benefits({Key? key}) : super(key: key);
 
   @override
-  _BenefitsState createState() => _BenefitsState();
+  BenefitsState createState() => BenefitsState();
 }
 
-class _BenefitsState extends State<Benefits> {
+class BenefitsState extends State<Benefits> {
   final List<bool> _amIHovering = [false, false, false];
 
   double cardHeight = 0;
@@ -23,7 +22,7 @@ class _BenefitsState extends State<Benefits> {
     return SizedBox(
       width: size.width,
       height:
-      size.height > 800 ? size.height * 0.8 - 70 : size.height * 0.9 - 70,
+          size.height > 800 ? size.height * 0.8 - 70 : size.height * 0.9 - 70,
       child: Column(
         children: [
           const SizedBox(
@@ -83,7 +82,7 @@ class _BenefitsState extends State<Benefits> {
                         "always have a people first approach.",
                     1,
                     Colors.blue,
-                    CupertinoIcons.group,
+                    LineIcons.peopleCarry,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:oskclient/blocs/auth_bloc.dart';
-import 'package:oskclient/blocs/navigation_bloc.dart';
-import 'package:oskclient/widgets/Auth/page_view/login_intro_page.dart';
-import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
-import 'package:oskclient/widgets/Utils/snackbar.dart';
+import 'package:ocyclient/blocs/auth_bloc.dart';
+import 'package:ocyclient/blocs/navigation_bloc.dart';
+import 'package:ocyclient/widgets/Auth/page_view/login_intro_page.dart';
+import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/widgets/Utils/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-class LoginSingUp extends StatefulWidget {
-  const LoginSingUp({Key? key}) : super(key: key);
+class LoginSignUp extends StatefulWidget {
+  const LoginSignUp({Key? key}) : super(key: key);
 
   @override
-  _LoginSingUpState createState() => _LoginSingUpState();
+  LoginSignUpState createState() => LoginSignUpState();
 }
 
-class _LoginSingUpState extends State<LoginSingUp> {
+class LoginSignUpState extends State<LoginSignUp> {
   final PageController _pageController = PageController(keepPage: true);
   int _currentPage = 0;
 
@@ -24,7 +24,8 @@ class _LoginSingUpState extends State<LoginSingUp> {
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
-    return OskScaffold(
+    return OcyScaffold(
+      enableSelection: false,
       body: Center(
         child: SizedBox(
           height: size.width < 600 ? size.height : size.height * 0.8,
@@ -147,7 +148,7 @@ class _LoginSingUpState extends State<LoginSingUp> {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: " Open Source ",
+                  text: " Open ",
                   style: TextStyle(
                     fontSize: size.width < 1100 && size.width > 900 ? 22 : 28,
                     fontWeight: FontWeight.normal,
@@ -156,7 +157,7 @@ class _LoginSingUpState extends State<LoginSingUp> {
                   ),
                 ),
                 TextSpan(
-                  text: " Kolkata ",
+                  text: "Codeyard ",
                   style: TextStyle(
                     fontSize: size.width < 1100 && size.width > 900 ? 22 : 28,
                     fontWeight: FontWeight.bold,

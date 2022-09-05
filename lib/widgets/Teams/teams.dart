@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:oskclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
 
 class TeamsPage extends StatefulWidget {
   const TeamsPage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _TeamsPageState extends State<TeamsPage> {
       ),
     );
 
-    return OskScaffold(
+    return OcyScaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
