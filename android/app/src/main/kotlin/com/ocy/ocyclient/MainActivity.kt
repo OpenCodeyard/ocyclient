@@ -1,4 +1,4 @@
-package com.osk.client.oskclient
+package com.ocy.ocyclient
 
 import io.flutter.embedding.android.FlutterActivity
 

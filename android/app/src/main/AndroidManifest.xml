@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.osk.client.oskclient">
+    package="com.ocy.ocyclient">
    <application
-        android:label="oskclient"
+        android:label="ocyclient"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -78,7 +78,7 @@ class Config {
   static const userPhone = "phone";
 
   ///Github api
-  static const ghOrganisationName = "GCELTIANS2020";
+  static const ghOrganisationName = "OpenCodeyard";
   static const ghRootUrl = "https://api.github.com/";
   static const ghOrganisationsApi = "orgs";
   static const ghReposApi = "repos";
