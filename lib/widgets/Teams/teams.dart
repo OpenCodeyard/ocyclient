@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/widgets/ComingSoon/coming_soon.dart';
+import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 
 class TeamsPage extends StatefulWidget {
   const TeamsPage({Key? key}) : super(key: key);
@@ -22,18 +23,6 @@ class _TeamsPageState extends State<TeamsPage> {
       ),
     );
 
-    return OcyScaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 70,
-              child: Image.asset("assets/images/animated_gos.gif"),
-            ),
-          ],
-        ),
-      ),
-    );
+    return ComingSoon();
   }
 }

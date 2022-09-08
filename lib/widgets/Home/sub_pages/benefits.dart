@@ -93,7 +93,7 @@ class BenefitsState extends State<Benefits> {
                           iconSize: 35,
                           tooltip: "GitHub",
                           onPressed: () {
-                            launchUrlString("https://github.com/GCELTIANS2020");
+                            launchUrlString("https://github.com/OpenCodeyard");
                           },
                         ),
                         IconButton(

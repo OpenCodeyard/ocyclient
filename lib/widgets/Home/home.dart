@@ -6,7 +6,7 @@ import 'package:ocyclient/widgets/Home/sub_pages/events.dart';
 import 'package:ocyclient/widgets/Home/sub_pages/footer.dart';
 import 'package:ocyclient/widgets/Home/sub_pages/intro.dart';
 import 'package:ocyclient/widgets/Home/sub_pages/projects.dart';
-import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

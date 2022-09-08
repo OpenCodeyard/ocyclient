@@ -219,7 +219,7 @@ class OCYApp extends StatelessWidget {
           GetPage(
             name: '/licenses',
             page: () => LicensePage(
-              applicationIcon: Image.asset("assets/images/animated_gos.gif"),
+              applicationIcon: Image.asset("assets/images/ocy_logo.png"),
               applicationName: "Open Codeyard",
               applicationVersion: Config.appVersion,
             ),

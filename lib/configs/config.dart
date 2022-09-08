@@ -24,13 +24,10 @@ class Config {
 
   ///GitHub Configs
   static const String clientId = "ba4e3c2ad6622ba3b12c";
-
-  ///TODO move to env
   static const String clientSecret = "079b49d4b5ba6e84ad7ec4f4d4e90163c35c18ad";
 
-  ///TODO move to env
   static const String redirectUrl =
-      "https://gceltopensource.firebaseapp.com/__/auth/handler";
+      "https://opencodeyard.firebaseapp.com/__/auth/handler";
 
   ///Shared Preferences Keys
   static const String prefIsLoggedIn = "is_logged_in";
@@ -103,5 +100,14 @@ class Config {
 
   static Map<String, dynamic> get curtainImagesRight => _curtainImagesRight;
 
-  static const String communityLogoPath = "assets/images/animated_gos.gif";
+  static const String communityLogoPath = "assets/images/ocy_logo.png";
+
+  ///Env names
+  static const String envGhAccessToken = "github_access_token";
+
+  ///Social
+  static const String linkedInUrl = "https://www.linkedin.com/company/83490580/";
+  static const String ghUrl = "https://github.com/OpenCodeyard";
+
+
 }

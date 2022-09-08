@@ -7,7 +7,7 @@ import 'package:ocyclient/blocs/profile_bloc.dart';
 import 'package:ocyclient/widgets/Profile/sub_pages/profile_user.dart';
 import 'package:ocyclient/widgets/Profile/widgets/skill_card.dart';
 import 'package:ocyclient/widgets/Utils/common_widgets.dart';
-import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
       getCustomSizedBoxForMenu(isHorizontal),
       if (!isHorizontal) ...[
         Image.asset(
-          "assets/images/animated_gos.gif",
+          "assets/images/ocy_logo.png",
           width: 100,
           height: 100,
         ),

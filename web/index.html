@@ -26,22 +26,28 @@
           content="https://i.imgur.com/TqrR7Hh.png">
     <meta content="256" property="og:image:width">
     <meta content="256" property="og:image:height">
-    <meta content="GCELT Open Source" property="og:site_name">
+    <meta content="Open Codeyard" property="og:site_name">
 
     <!-- iOS meta tags & icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#000000">
+    <meta name="application-name" content="Open Codeyard">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="ocyclient">
+    <meta name="apple-mobile-web-app-title" content="Open Codeyard">
     <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
-    <title>GCELT Open Source</title>
+    <title>Open Codeyard</title>
     <link rel="manifest" href="manifest.json">
     <meta name="google-signin-client_id" content=
-            "329653576553-7scsigkttn4e9dpod5jsq5sootjeiglu.apps.googleusercontent.com">
+            "949551990897-gv50on1bm7a8lu39gnm59pgv4d29vb2t.apps.googleusercontent.com">
 
     <style>
 
@@ -69,7 +75,7 @@
 
         .lds-ripple div {
           position: absolute;
-          border: 4px solid #fff;
+          border: 4px solid #000;
           opacity: 1;
           border-radius: 50%;
           animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -99,14 +105,16 @@
 
 
 
+
     </style>
 
 </head>
-<body bgcolor="#000000">
+<body bgcolor="#ffffff">
 
 <!-- Splash -->
 <div id="splash">
-    <img class="center" src="assets/assets/images/animated_gos.gif" alt="GCELT Open Source"/>
+    <img class="center" src="https://i.imgur.com/mxc0F3W.gif" width="200" height="200"
+         alt="Open Codeyard"/>
     <div class="lds-ripple">
         <div></div>
         <div></div>
@@ -122,7 +130,29 @@
 
 
 
+
 </script>
+
+<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js"></script>
+
+<script>
+
+     // Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBP4Jsq-23X0RDBw06zeal6KDcr4nkdMKY",
+        authDomain: "opencodeyard.firebaseapp.com",
+        projectId: "opencodeyard",
+        storageBucket: "opencodeyard.appspot.com",
+        messagingSenderId: "949551990897",
+        appId: "1:949551990897:web:9c867f0e72b777c0e673d0",
+        measurementId: "G-YZSFBMKMBF",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+</script>
+
 <!-- This script installs service_worker.js to provide PWA functionality to
      application. For more information, see:
      https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -189,6 +219,7 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
+
 
 </script>
 

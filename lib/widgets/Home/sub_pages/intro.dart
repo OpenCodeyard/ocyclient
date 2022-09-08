@@ -54,13 +54,21 @@ class Intro extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            "assets/images/animated_gos.gif",
-            height: size.width < 700 ? 120 : 150,
-            width: size.width < 700 ? 120 : 150,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15.0),
+            child: FadeInImage.assetNetwork(
+              placeholder: "assets/images/ocy_logo.png",
+              fadeInCurve: Curves.easeOutQuint,
+              image: "https://i.imgur.com/mxc0F3W.gif",
+              height: 120,
+              width: 120,
+            ),
+          ),
+          const SizedBox(
+            height: 30,
           ),
           Text(
-            "Join the Community 👇",
+            "Join the Community",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: size.width < 700 ? 14 : 20,
@@ -82,7 +90,7 @@ class Intro extends StatelessWidget {
                 iconSize: 35,
                 tooltip: "GitHub",
                 onPressed: () {
-                  launchUrlString("https://github.com/GCELTIANS2020");
+                  launchUrlString("https://github.com/OpenCodeyard");
                 },
               ),
               IconButton(

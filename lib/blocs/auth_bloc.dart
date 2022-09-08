@@ -120,7 +120,7 @@ class AuthenticationBloc extends ChangeNotifier {
             _userModel.loginProvidersConnected.add("Github");
             _userModel.userGitHubAccessToken = accessToken ?? "";
             await updateLoginProviders(
-                List<String>.from(_userModel.loginProvidersConnected),
+              List<String>.from(_userModel.loginProvidersConnected),
             );
             toggleInProgressStatus(false);
             toggleGoogleSignInStatus(false);
@@ -147,14 +147,14 @@ class AuthenticationBloc extends ChangeNotifier {
 
     List skillsList = prefs.getStringList(Config.prefSkills) ?? [];
 
-    Map<String, dynamic> _skills = {};
+    Map<String, dynamic> skills = {};
 
     ///Traversing List to get all skills
     ///and store them in map
     for (String skill in skillsList) {
       String skillToStore = skill.split(":")[0];
       String experienceToStore = skill.split(":")[1];
-      _skills[skillToStore] = experienceToStore;
+      skills[skillToStore] = experienceToStore;
     }
 
     String? dob = prefs.getString(Config.prefDOB);
@@ -170,7 +170,7 @@ class AuthenticationBloc extends ChangeNotifier {
       prefs.getString(Config.prefName) ?? "",
       prefs.getString(Config.prefProfilePicUrl) ?? "",
       prefs.getString(Config.prefGithubAccessToken) ?? "",
-      _skills,
+      skills,
       prefs.getStringList(Config.prefLoginProvidersConnected) ?? [],
       gender: (gender ?? "").isEmpty ? null : gender,
       dob: (dob ?? "").isEmpty ? null : dob,
@@ -206,6 +206,8 @@ class AuthenticationBloc extends ChangeNotifier {
         showToast(
           e.message ?? "Unknown. Contact Support",
         );
+
+        print(e.message);
       }
     } catch (e) {
       toggleInProgressStatus(false);
@@ -288,7 +290,7 @@ class AuthenticationBloc extends ChangeNotifier {
     } else {
       _userModel.loginProvidersConnected.add("Google");
       await updateLoginProviders(
-          List<String>.from(_userModel.loginProvidersConnected),
+        List<String>.from(_userModel.loginProvidersConnected),
       );
       toggleInProgressStatus(false);
       toggleGoogleSignInStatus(false);

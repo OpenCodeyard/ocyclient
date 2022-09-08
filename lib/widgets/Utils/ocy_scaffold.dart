@@ -40,6 +40,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
   Widget getCustomScaffold(
       Size size, NavigationBloc nb, AuthenticationBloc ab) {
     return Scaffold(
+      backgroundColor: Colors.white,
       drawer: size.width > 900 ? null : const AppDrawer(),
       appBar: AppBar(
         toolbarHeight: 70,

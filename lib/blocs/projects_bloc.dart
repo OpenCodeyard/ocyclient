@@ -16,32 +16,36 @@ class ProjectsBloc extends ChangeNotifier {
   bool get isProjectsLoading => _isProjectsLoading;
 
   void getProjects() async {
-    String? token = dotenv.env["github_access_token"];
+    String? token = dotenv.env[Config.envGhAccessToken];
 
     dio.options.headers["Authorization"] = "token $token";
     dio.options.headers["accept"] = "application/vnd.github.v3+json";
 
-    var response = await dio.get(
+    dio.get(
       "${Config.ghRootUrl}${Config.ghOrganisationsApi}/${Config.ghOrganisationName}/${Config.ghReposApi}",
-    );
+    ).then((value) async {
+      List<dynamic> projectsResponse = value.data;
 
-    List<dynamic> projectsResponse = response.data;
+      ///Running expensive function in a separate isolate
+      _projects = await compute(parseResponseIntoList, projectsResponse);
 
-    ///Running expensive function in a separate isolate
-    _projects = await compute(parseResponseIntoList, projectsResponse);
+      int i = 0;
+      for (var project in projectsResponse) {
+        ///Gets list of contributors for all projects
+        var responseContributors = await dio.get(project["contributors_url"]);
+        List<String> contributorsImages = await compute(
+          getImageUrls,
+          responseContributors.data as List<dynamic>,
+        );
+        _projects[i].contributorsImage = contributorsImages;
+        i++;
+      }
 
-    int i = 0;
-    for (var project in projectsResponse) {
-      ///Gets list of contributors for all projects
-      var responseContributors = await dio.get(project["contributors_url"]);
-      List<String> contributorsImages = await compute(
-          getImageUrls, responseContributors.data as List<dynamic>);
-      _projects[i].contributorsImage = contributorsImages;
-      i++;
-    }
+      _isProjectsLoading = false;
+      notifyListeners();
+    });
 
-    _isProjectsLoading = false;
-    notifyListeners();
+
   }
 }
 

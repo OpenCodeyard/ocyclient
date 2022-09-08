@@ -92,7 +92,7 @@ class UpcomingEvents extends StatelessWidget {
                   width: 20,
                 ),
                 CircleAvatar(
-                  backgroundImage: const AssetImage("assets/images/logo.png"),
+                  backgroundImage: const AssetImage("assets/images/ocy_logo.png"),
                   radius: size.width < 540 ? 30 : 60,
                 ),
                 const SizedBox(
@@ -103,14 +103,14 @@ class UpcomingEvents extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Enginerds",
+                      "Hacktober Fest",
                       style: TextStyle(
                         fontSize: size.width < 540 ? 15 : 20,
                         fontFamily: "Varela",
                       ),
                     ),
                     Text(
-                      "23rd March 2022",
+                      "October 2022",
                       style: TextStyle(
                         fontSize: size.width < 540 ? 12 : 16,
                         fontFamily: "Varela",
@@ -145,10 +145,10 @@ class UpcomingEvents extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Event Zone",
           style: TextStyle(
-            fontSize: size.width < 1000 ? 40 : 50,
+            fontSize: 40,
             fontWeight: FontWeight.w500,
             fontFamily: "Varela",
             color: Colors.black,

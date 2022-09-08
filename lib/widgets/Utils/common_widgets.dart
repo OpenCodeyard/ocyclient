@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 Widget getIconButton(
     {required String title, required Function func, required IconData icon}) {
-  return MouseRegion(
-    cursor: SystemMouseCursors.click,
-    child: GestureDetector(
-      onTap: () {
-        func();
-      },
+  return GestureDetector(
+    onTap: () {
+      func();
+    },
+    child: MouseRegion(
+      cursor: SystemMouseCursors.click,
       child: getIconButtonBody(
         title,
         icon,

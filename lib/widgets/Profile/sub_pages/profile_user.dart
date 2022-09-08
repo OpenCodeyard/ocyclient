@@ -13,10 +13,10 @@ class UserTab extends StatefulWidget {
   const UserTab({Key? key}) : super(key: key);
 
   @override
-  _UserTabState createState() => _UserTabState();
+  UserTabState createState() => UserTabState();
 }
 
-class _UserTabState extends State<UserTab> {
+class UserTabState extends State<UserTab> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -296,7 +296,8 @@ class _UserTabState extends State<UserTab> {
             color: Color(0xffe6f6f4),
             image: DecorationImage(
               image: NetworkImage(
-                  "https://image.freepik.com/free-vector/gradient-hexagonal-background_23-2148947773.jpg"),
+                "https://i.imgur.com/9NDKz2U.jpg",
+              ),
               fit: BoxFit.cover,
             ),
           ),

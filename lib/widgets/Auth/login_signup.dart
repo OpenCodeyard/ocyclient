@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/widgets/Auth/page_view/login_intro_page.dart';
-import 'package:ocyclient/widgets/Utils/osk_scaffold.dart';
+import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 import 'package:ocyclient/widgets/Utils/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -134,7 +134,7 @@ class LoginSignUpState extends State<LoginSignUp> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            "assets/images/animated_gos.gif",
+            "assets/images/ocy_logo.png",
             height: 150,
             width: 150,
           ),
