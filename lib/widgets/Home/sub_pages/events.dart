@@ -106,14 +106,14 @@ class UpcomingEvents extends StatelessWidget {
                       "Hacktober Fest",
                       style: TextStyle(
                         fontSize: size.width < 540 ? 15 : 20,
-                        fontFamily: "Varela",
+                        fontFamily: "PublicSans",
                       ),
                     ),
                     Text(
                       "October 2022",
                       style: TextStyle(
                         fontSize: size.width < 540 ? 12 : 16,
-                        fontFamily: "Varela",
+                        fontFamily: "PublicSans",
                       ),
                     ),
                     TextButton(
@@ -127,7 +127,7 @@ class UpcomingEvents extends StatelessWidget {
                         style: TextStyle(
                           fontSize: size.width < 540 ? 12 : 15,
                           color: Colors.blue,
-                          fontFamily: "Varela",
+                          fontFamily: "PublicSans",
                         ),
                       ),
                     ),
@@ -150,7 +150,7 @@ class UpcomingEvents extends StatelessWidget {
           style: TextStyle(
             fontSize: 40,
             fontWeight: FontWeight.w500,
-            fontFamily: "Varela",
+            fontFamily: "PublicSans",
             color: Colors.black,
           ),
         ),

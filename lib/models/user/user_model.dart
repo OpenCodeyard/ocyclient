@@ -28,4 +28,9 @@ class UserModel {
     this.employmentStatus,
     this.locality,
   });
+
+  @override
+  String toString() {
+    return 'UserModel{uid: $uid, email: $email, name: $name, profilePicUrl: $profilePicUrl, userGitHubAccessToken: $userGitHubAccessToken, loginProvidersConnected: $loginProvidersConnected, skills: $skills, bio: $bio, phoneNumber: $phoneNumber, dob: $dob, gender: $gender, employmentStatus: $employmentStatus, locality: $locality}';
+  }
 }

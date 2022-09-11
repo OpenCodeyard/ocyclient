@@ -11,8 +11,9 @@ buildInputFieldThemColor(
   FocusNode node,
   FocusNode? nextNode,
   bool isEnabled,
-  String? Function(String?)? validator,
-) {
+  String? Function(String?)? validator, {
+  Function(String)? onChanged,
+}) {
   return Column(
     children: [
       const SizedBox(
@@ -20,9 +21,7 @@ buildInputFieldThemColor(
       ),
       TextFormField(
         controller: controller,
-        textInputAction:  isLast
-                ? TextInputAction.done
-                : TextInputAction.next,
+        textInputAction: isLast ? TextInputAction.done : TextInputAction.next,
         focusNode: node,
         enabled: isEnabled,
         onFieldSubmitted: (s) {
@@ -34,6 +33,7 @@ buildInputFieldThemColor(
             FocusScope.of(context).nextFocus();
           }
         },
+        onChanged: onChanged,
         validator: validator,
         autofocus: false,
         style: const TextStyle(
@@ -97,8 +97,10 @@ buildDescInputFieldThemColor(
   FocusNode node,
   FocusNode? nextNode,
   bool isEnabled,
-  bool isLast,
-) {
+  bool isLast, {
+  Function(String)? onChanged,
+  int maxLength = 300,
+}) {
   return Column(
     children: [
       const SizedBox(
@@ -113,7 +115,7 @@ buildDescInputFieldThemColor(
         style: const TextStyle(
           color: Colors.black,
         ),
-        textInputAction: TextInputAction.next,
+        textInputAction: TextInputAction.newline,
         onFieldSubmitted: (s) {
           if (nextNode != null) {
             FocusScope.of(context).requestFocus(nextNode);
@@ -123,10 +125,11 @@ buildDescInputFieldThemColor(
             FocusScope.of(context).nextFocus();
           }
         },
+        onChanged: onChanged,
         focusNode: node,
         enabled: isEnabled,
         cursorColor: Config.themeColor,
-        maxLength: 300,
+        maxLength: maxLength,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: const TextStyle(color: Colors.black),

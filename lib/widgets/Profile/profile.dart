@@ -1,11 +1,9 @@
-import 'package:dev_icons/dev_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/blocs/profile_bloc.dart';
 import 'package:ocyclient/widgets/Profile/sub_pages/profile_user.dart';
-import 'package:ocyclient/widgets/Profile/widgets/skill_card.dart';
 import 'package:ocyclient/widgets/Utils/common_widgets.dart';
 import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +12,10 @@ class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  ProfilePageState createState() => ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class ProfilePageState extends State<ProfilePage> {
   ///TODO cover attribution <a href="https://www.freepik.com/vectors/background">Background vector created by freepik - www.freepik.com</a>
 
   @override
@@ -83,8 +81,116 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   getVerticalDivider(),
                   const UserTab(),
-                  getVerticalDivider(),
-                  getSkillsCard(ab, size),
+                  // getVerticalDivider(),
+                  // Column(
+                  //   children: [
+                  //
+                  //     Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Container(
+                  //           margin: const EdgeInsets.all(10),
+                  //           child: const Text(
+                  //             "Details",
+                  //             style: TextStyle(
+                  //               fontWeight: FontWeight.bold,
+                  //               fontSize: 40,
+                  //               fontFamily: "PublicSans",
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         Container(
+                  //           width: 295,
+                  //           margin: const EdgeInsets.all(10),
+                  //           child: Card(
+                  //             elevation: 10,
+                  //             shape: RoundedRectangleBorder(
+                  //               borderRadius: BorderRadius.circular(20),
+                  //             ),
+                  //             child: Container(
+                  //               padding: const EdgeInsets.all(20),
+                  //               child: Column(
+                  //                 crossAxisAlignment:
+                  //                 CrossAxisAlignment.center,
+                  //                 children: [
+                  //                   getIconifiedDetail(
+                  //                     ab.userModel.email.isEmpty
+                  //                         ? "Not Provided"
+                  //                         : ab.userModel.email,
+                  //                     FontAwesomeIcons.envelope,
+                  //                     Colors.red,
+                  //                     200,
+                  //                   ),
+                  //                   const SizedBox(
+                  //                     height: 15,
+                  //                   ),
+                  //                   getIconifiedDetail(
+                  //                       "Government College of Engineering and Leather Technology",
+                  //                       FontAwesomeIcons.buildingColumns,
+                  //                       Colors.blue,
+                  //                       200),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //     Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Container(
+                  //           margin: const EdgeInsets.all(10),
+                  //           child: const Text(
+                  //             "Details",
+                  //             style: TextStyle(
+                  //               fontWeight: FontWeight.bold,
+                  //               fontSize: 40,
+                  //               fontFamily: "PublicSans",
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         Container(
+                  //           width: 260,
+                  //           margin: const EdgeInsets.all(10),
+                  //           child: Card(
+                  //             elevation: 10,
+                  //             shape: RoundedRectangleBorder(
+                  //               borderRadius: BorderRadius.circular(20),
+                  //             ),
+                  //             child: Container(
+                  //               padding: const EdgeInsets.all(20),
+                  //               child: Column(
+                  //                 crossAxisAlignment:
+                  //                 CrossAxisAlignment.center,
+                  //                 children: [
+                  //                   getIconifiedDetail(
+                  //                     (ab.userModel.locality?.isEmpty ?? true)
+                  //                         ? "Not Provided"
+                  //                         : ab.userModel.locality ?? "",
+                  //                     FontAwesomeIcons.locationDot,
+                  //                     Colors.red,
+                  //                     170,
+                  //                   ),
+                  //                   const SizedBox(
+                  //                     height: 15,
+                  //                   ),
+                  //                   getIconifiedDetail(
+                  //                       (ab.userModel.dob?.isEmpty ?? true)
+                  //                           ? "Not Provided"
+                  //                           : ab.userModel.dob ?? "",
+                  //                       FontAwesomeIcons.calendarDays,
+                  //                       Colors.blue,
+                  //                       170),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // )
                 ],
               ),
       ),
@@ -199,7 +305,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ? FontWeight.bold
                           : FontWeight.normal,
                       fontSize: 14,
-                      fontFamily: "Varela"),
+                      fontFamily: "PublicSans"),
                 ),
                 if (isHorizontal)
                   const SizedBox(
@@ -228,76 +334,5 @@ class _ProfilePageState extends State<ProfilePage> {
         : const SizedBox(
             height: 30,
           );
-  }
-
-  Widget getSkillsCard(AuthenticationBloc ab, Size size) {
-    return Card(
-      margin: EdgeInsets.zero,
-      child: SizedBox(
-        height: size.height,
-        width: size.width - 232 - ((size.width - 231) * 0.8),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                "Skills",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                  fontFamily: "ProximaNova",
-                ),
-              ),
-              if (ab.userModel.skills.isEmpty) ...[
-                SizedBox(
-                  height: size.height / 2 - 130,
-                ),
-                const Text(
-                  "You haven't added any skills",
-                  style: TextStyle(
-                    fontFamily: "ProximaNova",
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/add_skills.png",
-                          width: 80,
-                          height: 80,
-                        ),
-                        const Icon(
-                          FontAwesomeIcons.plus,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ] else
-                ...List.generate(
-                  ab.userModel.skills.length,
-                  (index) {
-                    return SkillCard(
-                      title: ab.userModel.skills.keys.toList()[index],
-                      experience: ab.userModel.skills.values.toList()[index],
-                      color: Colors.red,
-                      icon: DevIcons.javaPlain,
-                    );
-                  },
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

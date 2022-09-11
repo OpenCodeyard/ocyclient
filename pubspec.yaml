@@ -32,10 +32,13 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
 
+  #ux
+  flutter_markdown: ^0.6.10+5
+  html2md: ^1.2.6
+
   #Icons
   line_icons: ^2.0.1
   font_awesome_flutter: ^10.1.0
-  dev_icons: ^1.0.0
 
   #State management
   provider: ^6.0.3
@@ -101,11 +104,8 @@ flutter:
     - env
 
   fonts:
-    - family: ProximaNova
+    - family: PublicSans
       fonts:
         - asset: assets/fonts/Proxima_Nova.otf
         - asset: assets/fonts/Proxima_Nova_Bold.otf
           weight: 700
-    - family: Varela
-      fonts:
-        - asset: assets/fonts/VarelaRound.ttf

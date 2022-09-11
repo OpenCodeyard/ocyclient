@@ -31,7 +31,7 @@ class ComingSoon extends StatelessWidget {
               "Coming Soon!",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
-                fontFamily: "ProximaNova",
+                fontFamily: "PublicSans",
                 fontSize: 35,
               ),
             ),

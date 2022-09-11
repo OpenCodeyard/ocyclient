@@ -1,9 +1,8 @@
-import 'package:dev_icons/dev_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
-import 'package:ocyclient/widgets/Profile/widgets/skill_card.dart';
+import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/widgets/Utils/custom_inputfields.dart';
 import 'package:provider/provider.dart';
 
@@ -13,10 +12,10 @@ class PersonalTab extends StatefulWidget {
   const PersonalTab({Key? key}) : super(key: key);
 
   @override
-  _PersonalTabState createState() => _PersonalTabState();
+  PersonalTabState createState() => PersonalTabState();
 }
 
-class _PersonalTabState extends State<PersonalTab> {
+class PersonalTabState extends State<PersonalTab> {
   DateTime? dob;
 
   DateFormat formatter = DateFormat("dd/MM/yyyy");
@@ -44,8 +43,7 @@ class _PersonalTabState extends State<PersonalTab> {
 
   int? gender;
 
-  ///TODO fix this  to change on user interaction of fields instead of form On change
-  bool wasPersonalDataUpdated = false;
+  bool dataInitialised = false;
 
   @override
   void initState() {
@@ -56,11 +54,12 @@ class _PersonalTabState extends State<PersonalTab> {
       _phoneCtrl.text = ab.userModel.phoneNumber ?? "";
       _bioCtrl.text = ab.userModel.bio ?? "";
       _localityCtrl.text = ab.userModel.locality ?? "";
-      if (ab.userModel.dob != null) {
+      if (ab.userModel.dob != null && ab.userModel.dob != "") {
         dob = formatter.parse(ab.userModel.dob ?? "");
       }
       gender = getGenderFromString(ab.userModel.gender);
       currentEmploymentStatus = ab.userModel.employmentStatus;
+      dataInitialised = true;
       setState(() {});
     });
 
@@ -72,6 +71,8 @@ class _PersonalTabState extends State<PersonalTab> {
     Size size = MediaQuery.of(context).size;
 
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
+    NavigationBloc nb = Provider.of<NavigationBloc>(context);
+
     return size.width < 1000
         ? Column(
             children: [
@@ -110,20 +111,25 @@ class _PersonalTabState extends State<PersonalTab> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: size.width < 700 ? 25 : 40,
-                        fontFamily: "ProximaNova",
+                        fontFamily: "PublicSans",
                       ),
                     ),
                   ),
                   const Spacer(),
-                  if (wasPersonalDataUpdated)
-                    IconButton(
-                      onPressed: () {
-                        saveData(ab);
-                      },
-                      icon: const Icon(
-                        FontAwesomeIcons.floppyDisk,
-                      ),
+                  IconButton(
+                    onPressed: hasChanges(ab)
+                        ? () async {
+                            await saveData(ab);
+                            nb.toRoute(
+                              "/profile",
+                              shouldPopCurrent: true,
+                            );
+                          }
+                        : null,
+                    icon: const Icon(
+                      FontAwesomeIcons.floppyDisk,
                     ),
+                  ),
                   const SizedBox(
                     width: 20,
                   ),
@@ -133,7 +139,6 @@ class _PersonalTabState extends State<PersonalTab> {
               const SizedBox(
                 height: 20,
               ),
-              ...getSkillsWidget(size, ab),
             ],
           )
         : Card(
@@ -170,21 +175,26 @@ class _PersonalTabState extends State<PersonalTab> {
                                     ),
                                   ),
                                   const Spacer(),
-                                  if (wasPersonalDataUpdated)
-                                    ElevatedButton.icon(
-                                      style: ElevatedButton.styleFrom(
-                                        elevation: 15,
-                                        padding: const EdgeInsets.all(16),
-                                      ),
-                                      onPressed: () {
-                                        saveData(ab);
-                                      },
-                                      icon: const Icon(
-                                        FontAwesomeIcons.floppyDisk,
-                                        size: 15,
-                                      ),
-                                      label: const Text("Save Personal"),
+                                  ElevatedButton.icon(
+                                    style: ElevatedButton.styleFrom(
+                                      elevation: 15,
+                                      padding: const EdgeInsets.all(16),
                                     ),
+                                    onPressed: hasChanges(ab)
+                                        ? () async {
+                                            await saveData(ab);
+                                            nb.toRoute(
+                                              "/profile",
+                                              shouldPopCurrent: true,
+                                            );
+                                          }
+                                        : null,
+                                    icon: const Icon(
+                                      FontAwesomeIcons.floppyDisk,
+                                      size: 15,
+                                    ),
+                                    label: const Text("Save Personal"),
+                                  ),
                                   const SizedBox(
                                     width: 25,
                                   ),
@@ -210,7 +220,7 @@ class _PersonalTabState extends State<PersonalTab> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
-                          fontFamily: "ProximaNova",
+                          fontFamily: "PublicSans",
                         ),
                       ),
                     ),
@@ -218,7 +228,6 @@ class _PersonalTabState extends State<PersonalTab> {
                     const SizedBox(
                       height: 20,
                     ),
-                    ...getSkillsWidget(size, ab),
                   ],
                 ),
               ),
@@ -226,72 +235,42 @@ class _PersonalTabState extends State<PersonalTab> {
           );
   }
 
-  List<Widget> getSkillsWidget(Size size, AuthenticationBloc ab) {
-    if (size.width < 1500) {
-      return [
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: size.width < 1000 ? 23 : 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                "Skills",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                  fontFamily: "ProximaNova",
-                ),
-              ),
-              const SizedBox(
-                width: 30,
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.edit,
-                  color: Colors.deepPurple,
-                ),
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          width: size.width < 1000 ? size.width : size.width - 233,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ...List.generate(
-                  ab.userModel.skills.length,
-                  (index) {
-                    return SkillCard(
-                      title: ab.userModel.skills.keys.toList()[index],
-                      experience: ab.userModel.skills.values.toList()[index],
-                      color: Colors.red,
-                      icon: DevIcons.javaPlain,
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ];
-    } else {
-      return [const SizedBox()];
+  bool hasChanges(AuthenticationBloc ab) {
+    if (!dataInitialised) {
+      return false;
     }
+
+    DateTime? databaseDob;
+    if (ab.userModel.dob != null && ab.userModel.dob != "") {
+      databaseDob = formatter.parse(ab.userModel.dob ?? "");
+    }
+
+    if (_phoneCtrl.text != (ab.userModel.phoneNumber ?? "")) {
+      return true;
+    } else if (_bioCtrl.text != (ab.userModel.bio ?? "")) {
+      return true;
+    } else if (_localityCtrl.text != (ab.userModel.locality ?? "")) {
+      return true;
+    } else if (gender != getGenderFromString(ab.userModel.gender)) {
+      return true;
+    } else if (currentEmploymentStatus != ab.userModel.employmentStatus) {
+      return true;
+    } else {
+      if (databaseDob == null) {
+        if (dob != null) {
+          return true;
+        }
+      } else if (!databaseDob.isAtSameMomentAs(dob!)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   Form getPersonalDataForm(Size size) {
     return Form(
       key: _formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      onChanged: () {
-        wasPersonalDataUpdated = true;
-        setState(() {});
-      },
       child: Container(
         margin: const EdgeInsets.all(10),
         width: size.width < 1500 ? size.width * 0.95 : (size.width - 231) * 0.7,
@@ -308,6 +287,10 @@ class _PersonalTabState extends State<PersonalTab> {
               _phoneNode,
               true,
               false,
+              onChanged: (s) {
+                setState(() {});
+              },
+              maxLength: 500,
             ),
             buildInputFieldThemColor(
               "Phone Number with country code",
@@ -328,7 +311,11 @@ class _PersonalTabState extends State<PersonalTab> {
                 } else if (!regExp.hasMatch(value)) {
                   return 'Please enter valid mobile number';
                 }
+
                 return null;
+              },
+              onChanged: (s) {
+                setState(() {});
               },
             ),
             buildInputFieldThemColor(
@@ -343,6 +330,9 @@ class _PersonalTabState extends State<PersonalTab> {
               true,
               (String? value) {
                 return null;
+              },
+              onChanged: (s) {
+                setState(() {});
               },
             ),
             if (size.width < 550)
@@ -363,7 +353,7 @@ class _PersonalTabState extends State<PersonalTab> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        fontFamily: "ProximaNova",
+                        fontFamily: "PublicSans",
                       ),
                     ),
                   TextButton.icon(
@@ -372,7 +362,8 @@ class _PersonalTabState extends State<PersonalTab> {
                     },
                     icon: const Icon(Icons.calendar_today),
                     label: Text(
-                        dob == null ? "Select DOB" : formatter.format(dob!)),
+                      dob == null ? "Select DOB" : formatter.format(dob!),
+                    ),
                   ),
                   const SizedBox(
                     width: 30,
@@ -400,7 +391,8 @@ class _PersonalTabState extends State<PersonalTab> {
             color: Color(0xffe6f6f4),
             image: DecorationImage(
               image: NetworkImage(
-                  "https://image.freepik.com/free-vector/gradient-hexagonal-background_23-2148947773.jpg"),
+                "https://i.imgur.com/9NDKz2U.jpg",
+              ),
               fit: BoxFit.cover,
             ),
           ),
@@ -438,7 +430,7 @@ class _PersonalTabState extends State<PersonalTab> {
         ab.userModel.name,
         style: const TextStyle(
           color: Colors.black,
-          fontFamily: "Varela",
+          fontFamily: "PublicSans",
           fontWeight: FontWeight.bold,
           fontSize: 25,
         ),
@@ -453,7 +445,7 @@ class _PersonalTabState extends State<PersonalTab> {
             "Gender : ",
             style: TextStyle(
               color: Colors.black,
-              fontFamily: "Varela",
+              fontFamily: "PublicSans",
               fontWeight: FontWeight.bold,
               fontSize: 15,
             ),
@@ -485,7 +477,7 @@ class _PersonalTabState extends State<PersonalTab> {
           child: Text(
             detail,
             style: const TextStyle(
-              fontFamily: "Varela",
+              fontFamily: "PublicSans",
               fontWeight: FontWeight.bold,
               fontSize: 11,
             ),
@@ -515,8 +507,9 @@ class _PersonalTabState extends State<PersonalTab> {
       initialDatePickerMode: DatePickerMode.year,
     );
     if (newPicked != null) {
-      dob = newPicked;
-      setState(() {});
+      setState(() {
+        dob = newPicked;
+      });
     }
   }
 
@@ -524,7 +517,7 @@ class _PersonalTabState extends State<PersonalTab> {
     return [
       const Text(
         "Profession :",
-        style: TextStyle(fontFamily: "Varela", fontWeight: FontWeight.bold),
+        style: TextStyle(fontFamily: "PublicSans", fontWeight: FontWeight.bold),
       ),
       const SizedBox(
         width: 10,
@@ -577,7 +570,11 @@ class _PersonalTabState extends State<PersonalTab> {
     ];
   }
 
-  void saveData(AuthenticationBloc ab) async {
+  Future saveData(AuthenticationBloc ab) async {
+    if (!ab.isLoggedIn) {
+      return;
+    }
+
     if (_formKey.currentState?.validate() ?? false) {
       Map<String, dynamic> personalData = {
         Config.userBio: _bioCtrl.text,
@@ -600,8 +597,9 @@ class _PersonalTabState extends State<PersonalTab> {
         value: val,
         groupValue: gender,
         onChanged: (int? value) {
-          gender = value;
-          setState(() {});
+          setState(() {
+            gender = value;
+          });
         },
         activeColor: Colors.deepPurpleAccent,
       ),

@@ -44,6 +44,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
       drawer: size.width > 900 ? null : const AppDrawer(),
       appBar: AppBar(
         toolbarHeight: 70,
+        elevation: 0,
         titleSpacing: size.width > 900 ? 40 : 0,
         centerTitle: size.width > 900 ? false : true,
         title: RichText(
@@ -52,7 +53,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
             style: TextStyle(
               fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
               fontWeight: FontWeight.bold,
-              fontFamily: "ProximaNova",
+              fontFamily: "PublicSans",
               color: Colors.black,
             ),
             children: <TextSpan>[
@@ -118,6 +119,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
             color: name != null && name == passedRoute
                 ? Colors.deepPurple
                 : Colors.black,
+            fontFamily: "PublicSans"
           ),
         ),
       ),

@@ -128,7 +128,7 @@ class _AppDrawerState extends State<AppDrawer> {
                           Config.routeNames.keys.toList()[index],
                           style: const TextStyle(
                             fontSize: 19,
-                            fontFamily: "ProximaNova",
+                            fontFamily: "PublicSans",
                           ),
                         ),
                         onTap: () => Navigator.of(context).pushNamed(
@@ -165,7 +165,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 19,
-                fontFamily: "ProximaNova",
+                fontFamily: "PublicSans",
               ),
             ),
             const SizedBox(

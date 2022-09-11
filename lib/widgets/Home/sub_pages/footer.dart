@@ -156,7 +156,7 @@ class Footer extends StatelessWidget {
               fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontFamily: "ProximaNova",
+              fontFamily: "PublicSans",
             ),
             children: <TextSpan>[
               TextSpan(
@@ -200,6 +200,7 @@ class Footer extends StatelessWidget {
           height: 40,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset("assets/images/handshake.png",width: 40,fit: BoxFit.cover,),
             const SizedBox(width: 15,),
@@ -210,7 +211,7 @@ class Footer extends StatelessWidget {
                 height: 1.6,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontFamily: "ProximaNova",
+                fontFamily: "PublicSans",
                 fontSize: 19,
               ),
             ),

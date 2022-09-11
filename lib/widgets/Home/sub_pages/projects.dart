@@ -42,7 +42,7 @@ class _ProjectsState extends State<Projects> {
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w700,
-              fontFamily: "ProximaNova",
+              fontFamily: "PublicSans",
               color: Colors.black,
             ),
           ),
@@ -88,7 +88,7 @@ class _ProjectsState extends State<Projects> {
                                           style: const TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.w600,
-                                            fontFamily: "Varela",
+                                            fontFamily: "PublicSans",
                                             color: Colors.black,
                                           ),
                                         ),
@@ -133,7 +133,7 @@ class _ProjectsState extends State<Projects> {
                                               fontSize: 16,
                                               height: 1.5,
                                               fontWeight: FontWeight.w400,
-                                              fontFamily: "Varela",
+                                              fontFamily: "PublicSans",
                                               color: Colors.black,
                                             ),
                                           ),
@@ -170,7 +170,7 @@ class _ProjectsState extends State<Projects> {
                                               fontSize: 16,
                                               height: 1.5,
                                               fontWeight: FontWeight.w400,
-                                              fontFamily: "Varela",
+                                              fontFamily: "PublicSans",
                                               color: Colors.black,
                                             ),
                                           ),
@@ -200,7 +200,7 @@ class _ProjectsState extends State<Projects> {
                                       Text(
                                         project.starCount.toString(),
                                         style: const TextStyle(
-                                          fontFamily: "Varela",
+                                          fontFamily: "PublicSans",
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -217,7 +217,7 @@ class _ProjectsState extends State<Projects> {
                                       Text(
                                         project.forkCount.toString(),
                                         style: const TextStyle(
-                                          fontFamily: "Varela",
+                                          fontFamily: "PublicSans",
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -235,7 +235,7 @@ class _ProjectsState extends State<Projects> {
                                       Text(
                                         project.activeIssuesCount.toString(),
                                         style: const TextStyle(
-                                          fontFamily: "Varela",
+                                          fontFamily: "PublicSans",
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -259,7 +259,7 @@ class _ProjectsState extends State<Projects> {
                                         style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400,
-                                          fontFamily: "Varela",
+                                          fontFamily: "PublicSans",
                                           color: Colors.black,
                                         ),
                                       ),

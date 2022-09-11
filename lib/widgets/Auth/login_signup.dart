@@ -153,7 +153,7 @@ class LoginSignUpState extends State<LoginSignUp> {
                     fontSize: size.width < 1100 && size.width > 900 ? 22 : 28,
                     fontWeight: FontWeight.normal,
                     color: Colors.grey.shade700,
-                    fontFamily: "ProximaNova",
+                    fontFamily: "PublicSans",
                   ),
                 ),
                 TextSpan(
@@ -161,7 +161,7 @@ class LoginSignUpState extends State<LoginSignUp> {
                   style: TextStyle(
                     fontSize: size.width < 1100 && size.width > 900 ? 22 : 28,
                     fontWeight: FontWeight.bold,
-                    fontFamily: "ProximaNova",
+                    fontFamily: "PublicSans",
                     color: Colors.black,
                   ),
                 ),
@@ -184,7 +184,7 @@ class LoginSignUpState extends State<LoginSignUp> {
             "Your journey to open source development starts here",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: "ProximaNova",
+              fontFamily: "PublicSans",
               fontSize: 18,
             ),
           ),

@@ -33,7 +33,7 @@ class BenefitsState extends State<Benefits> {
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w700,
-              fontFamily: "ProximaNova",
+              fontFamily: "PublicSans",
               color: Colors.black,
             ),
           ),
@@ -48,7 +48,7 @@ class BenefitsState extends State<Benefits> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                fontFamily: "ProximaNova",
+                fontFamily: "PublicSans",
                 color: Colors.black,
               ),
             ),

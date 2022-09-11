@@ -15,7 +15,7 @@ class Intro extends StatelessWidget {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          color: const Color(0xff3B3B3B),
+          color: const Color(0xff3b3b3b),
           height: MediaQuery.of(context).size.height * 0.9 - 70,
           child: size.width < 1150
               ? Column(
@@ -73,6 +73,7 @@ class Intro extends StatelessWidget {
             style: TextStyle(
               fontSize: size.width < 700 ? 14 : 20,
               fontWeight: FontWeight.w500,
+              fontFamily: "PublicSans",
               color: Colors.white,
             ),
           ),
@@ -149,7 +150,7 @@ class Intro extends StatelessWidget {
                             : 40,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontFamily: "ProximaNova",
+                    fontFamily: "PublicSans",
                   ),
                   children: <TextSpan>[
                     TextSpan(
@@ -177,6 +178,7 @@ class Intro extends StatelessWidget {
               style: TextStyle(
                 fontSize: size.width < 700 ? 14 : 20,
                 fontWeight: FontWeight.w500,
+                fontFamily: "PublicSans",
                 color: Colors.white,
               ),
             ),

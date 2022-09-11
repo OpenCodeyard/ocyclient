@@ -207,7 +207,7 @@ class AuthenticationBloc extends ChangeNotifier {
           e.message ?? "Unknown. Contact Support",
         );
 
-        print(e.message);
+        // print(e.message);
       }
     } catch (e) {
       toggleInProgressStatus(false);

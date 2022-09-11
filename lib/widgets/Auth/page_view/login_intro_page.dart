@@ -35,7 +35,7 @@ class LoginIntroPage extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width < 1050 ? 80 : 100,
-                fontFamily: "ProximaNova",
+                fontFamily: "PublicSans",
                 fontWeight: FontWeight.w800,
                 foreground: Paint()
                   ..strokeWidth = 3
@@ -51,7 +51,7 @@ class LoginIntroPage extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 25,
-                fontFamily: "ProximaNova",
+                fontFamily: "PublicSans",
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),

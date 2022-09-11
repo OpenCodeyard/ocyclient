@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
@@ -48,7 +49,11 @@ class UserTabState extends State<UserTab> {
                   ),
                 ],
               ),
-              ...getPrimaryDetails(ab),
+              ...getPrimaryDetails(
+                ab,
+                nb,
+                showEditIconBesideName: true,
+              ),
               const Padding(
                 padding: EdgeInsets.all(
                   13.0,
@@ -63,7 +68,7 @@ class UserTabState extends State<UserTab> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: size.width < 700 ? 25 : 40,
-                    fontFamily: "ProximaNova",
+                    fontFamily: "PublicSans",
                   ),
                 ),
               ),
@@ -105,179 +110,106 @@ class UserTabState extends State<UserTab> {
               ),
             ],
           )
-        : Card(
-            margin: EdgeInsets.zero,
-            child: SizedBox(
-              height: size.height,
-              width: (size.width - 231) * 0.8,
-              child: SingleChildScrollView(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            getCoverPhoto(size),
-                            Container(
-                              height: 100,
-                              margin: const EdgeInsets.fromLTRB(210, 10, 0, 0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: getPrimaryDetails(ab),
+        : SizedBox(
+            height: size.height,
+            width: (size.width - 231),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          getCoverPhoto(size),
+                          Container(
+                            height: 100,
+                            margin: const EdgeInsets.fromLTRB(210, 10, 0, 0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: getPrimaryDetails(ab, nb),
+                                ),
+                                const Spacer(),
+                                ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 15,
+                                    padding: const EdgeInsets.all(16),
                                   ),
-                                  const Spacer(),
-                                  ElevatedButton.icon(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 15,
-                                      padding: const EdgeInsets.all(16),
-                                    ),
-                                    onPressed: () {
-                                      nb.toRoute("/editProfile");
-                                    },
-                                    icon: const Icon(
-                                      LineIcons.userEdit,
-                                      size: 15,
-                                    ),
-                                    label: const Text("Edit Profile"),
+                                  onPressed: () {
+                                    nb.toRoute("/editProfile");
+                                  },
+                                  icon: const Icon(
+                                    LineIcons.userEdit,
+                                    size: 15,
                                   ),
-                                  const SizedBox(
-                                    width: 25,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        Positioned(
-                          bottom: 30,
-                          left: 30,
-                          child: getUserCircleAvatar(ab),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
+                                  label: const Text("Edit Profile"),
+                                ),
+                                const SizedBox(
+                                  width: 25,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Positioned(
+                        bottom: 30,
+                        left: 30,
+                        child: getUserCircleAvatar(ab),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    width: (size.width - 231),
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const AccountWidget(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.all(10),
-                              child: const Text(
-                                "Details",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 40,
-                                  fontFamily: "ProximaNova",
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 295,
-                              margin: const EdgeInsets.all(10),
-                              child: Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Container(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      getIconifiedDetail(
-                                        ab.userModel.email.isEmpty
-                                            ? "Not Provided"
-                                            : ab.userModel.email,
-                                        FontAwesomeIcons.envelope,
-                                        Colors.red,
-                                        200,
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      getIconifiedDetail(
-                                          "Government College of Engineering and Leather Technology",
-                                          FontAwesomeIcons.buildingColumns,
-                                          Colors.blue,
-                                          200),
-                                    ],
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.all(10),
+                                child: const Text(
+                                  "Bio",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 40,
+                                    fontFamily: "PublicSans",
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.all(10),
-                              child: const Text(
-                                "Details",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 40,
-                                  fontFamily: "ProximaNova",
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 260,
-                              margin: const EdgeInsets.all(10),
-                              child: Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Container(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      getIconifiedDetail(
-                                        (ab.userModel.locality?.isEmpty ?? true)
-                                            ? "Not Provided"
-                                            : ab.userModel.locality ?? "",
-                                        FontAwesomeIcons.locationDot,
-                                        Colors.red,
-                                        170,
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      getIconifiedDetail(
-                                          (ab.userModel.dob?.isEmpty ?? true)
-                                              ? "Not Provided"
-                                              : ab.userModel.dob ?? "",
-                                          FontAwesomeIcons.calendarDays,
-                                          Colors.blue,
-                                          170),
-                                    ],
+                              SizedBox(
+                                height: 160,
+                                child: Card(
+                                  elevation: 10,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Center(
+                                    child: Markdown(
+                                      data: ab.userModel.bio ??
+                                          "# Bio not provided",
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );
@@ -316,10 +248,10 @@ class UserTabState extends State<UserTab> {
   Widget getUserCircleAvatar(AuthenticationBloc ab) {
     return CircleAvatar(
       backgroundColor: Colors.white,
-      radius: 85.0,
+      radius: 75.0,
       child: CircleAvatar(
         backgroundColor: Colors.white,
-        radius: 80,
+        radius: 70,
         backgroundImage: ab.userModel.profilePicUrl.isEmpty
             ? null
             : NetworkImage(
@@ -329,31 +261,43 @@ class UserTabState extends State<UserTab> {
     );
   }
 
-  List<Widget> getPrimaryDetails(AuthenticationBloc ab) {
+  List<Widget> getPrimaryDetails(AuthenticationBloc ab, NavigationBloc nb,
+      {bool showEditIconBesideName = false}) {
     IconData? genderIcon = getIconFromGender(ab.userModel.gender);
     return [
-      RichText(
-        text: TextSpan(
-          text: ab.userModel.name,
-          style: const TextStyle(
-            color: Colors.black,
-            fontFamily: "Varela",
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            ab.userModel.name,
+            style: const TextStyle(
+              color: Colors.black,
+              fontFamily: "PublicSans",
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
           ),
-          children: [
-            if (genderIcon != null)
-              WidgetSpan(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Icon(
-                    genderIcon,
-                    size: 25,
-                  ),
-                ),
+          if (genderIcon != null && !showEditIconBesideName)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Icon(
+                genderIcon,
+                size: 25,
               ),
-          ],
-        ),
+            ),
+          if (showEditIconBesideName)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.userPen,
+                ),
+                onPressed: () {
+                  nb.toRoute("/editProfile");
+                },
+              ),
+            ),
+        ],
       ),
       const SizedBox(
         height: 5,
@@ -372,14 +316,14 @@ class UserTabState extends State<UserTab> {
           text: TextSpan(
             text: "uid : ",
             style: const TextStyle(
-              fontFamily: "Varela",
+              fontFamily: "PublicSans",
             ),
             children: [
               TextSpan(
                 text: ab.userModel.uid,
                 style: const TextStyle(
                   color: Colors.blueGrey,
-                  fontFamily: "Varela",
+                  fontFamily: "PublicSans",
                 ),
               ),
             ],
@@ -419,7 +363,7 @@ class UserTabState extends State<UserTab> {
           child: Text(
             detail,
             style: const TextStyle(
-              fontFamily: "Varela",
+              fontFamily: "PublicSans",
               fontWeight: FontWeight.bold,
               fontSize: 11,
             ),

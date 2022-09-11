@@ -100,7 +100,7 @@ class OCYApp extends StatelessWidget {
             titleTextStyle: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              fontFamily: "ProximaNova",
+              fontFamily: "PublicSans",
             ),
           ),
           iconTheme: const IconThemeData(
@@ -117,7 +117,7 @@ class OCYApp extends StatelessWidget {
             style: TextButton.styleFrom(
               textStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontFamily: "ProximaNova",
+                fontFamily: "PublicSans",
                 fontSize: 16,
               ),
             ).copyWith(
@@ -144,7 +144,7 @@ class OCYApp extends StatelessWidget {
               fontSize: 15,
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontFamily: "ProximaNova",
+              fontFamily: "PublicSans",
             ),
           ),
           iconTheme: const IconThemeData(
@@ -161,7 +161,7 @@ class OCYApp extends StatelessWidget {
             style: TextButton.styleFrom(
               textStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontFamily: "ProximaNova",
+                fontFamily: "PublicSans",
                 fontSize: 16,
               ),
             ).copyWith(

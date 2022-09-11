@@ -1,11 +1,9 @@
-import 'package:dev_icons/dev_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
 import 'package:ocyclient/blocs/edit_profile_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/widgets/Profile/sub_pages/edit_personal.dart';
-import 'package:ocyclient/widgets/Profile/widgets/skill_card.dart';
 import 'package:ocyclient/widgets/Utils/common_widgets.dart';
 import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +12,10 @@ class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
 
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  EditProfilePageState createState() => EditProfilePageState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class EditProfilePageState extends State<EditProfilePage> {
   ///TODO cover attribution <a href="https://www.freepik.com/vectors/background">Background vector created by freepik - www.freepik.com</a>
 
   @override
@@ -91,58 +89,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     color: Colors.black12,
                   ),
                   if (size.width >= 1500)
-                    Card(
-                      margin: EdgeInsets.zero,
-                      child: SizedBox(
-                        height: size.height,
-                        width: size.width - 232 - ((size.width - 231) * 0.8),
-                        child: SingleChildScrollView(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    "Skills",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 40,
-                                      fontFamily: "ProximaNova",
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.edit,
-                                      color: Colors.deepPurple,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              ...List.generate(
-                                ab.userModel.skills.length,
-                                (index) {
-                                  return SkillCard(
-                                    title: ab.userModel.skills.keys
-                                        .toList()[index],
-                                    experience: ab.userModel.skills.values
-                                        .toList()[index],
-                                    color: Colors.red,
-                                    icon: DevIcons.javaPlain,
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    const SizedBox(),
                 ],
               ),
       ),
@@ -239,7 +186,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ? FontWeight.bold
                           : FontWeight.normal,
                       fontSize: 14,
-                      fontFamily: "Varela"),
+                      fontFamily: "PublicSans"),
                 ),
                 if (isHorizontal)
                   const SizedBox(

@@ -25,7 +25,7 @@ class AccountWidget extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: size.width < 700 ? 25 : 40,
-              fontFamily: "ProximaNova",
+              fontFamily: "PublicSans",
             ),
           ),
         ),
@@ -107,7 +107,7 @@ class AccountWidget extends StatelessWidget {
                     Text(
                       name,
                       style: const TextStyle(
-                        fontFamily: "Varela",
+                        fontFamily: "PublicSans",
                         fontWeight: FontWeight.bold,
                       ),
                     ),
