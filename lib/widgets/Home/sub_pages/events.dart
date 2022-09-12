@@ -149,7 +149,7 @@ class UpcomingEvents extends StatelessWidget {
           "Event Zone",
           style: TextStyle(
             fontSize: 40,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w700,
             fontFamily: "PublicSans",
             color: Colors.black,
           ),
@@ -164,11 +164,12 @@ class UpcomingEvents extends StatelessWidget {
                   ? 380
                   : size.width * 0.3,
           child: Text(
-            "We conduct frequent events spanning over"
+            "We conduct as well as participate in frequent events spanning over"
             " a wide range of topics from technology, "
             "games, awareness campaigns, etc.",
             style: TextStyle(
               fontSize: size.width < 1000 ? 16 : 18,
+              fontFamily: "PublicSans"
             ),
           ),
         ),

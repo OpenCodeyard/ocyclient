@@ -21,17 +21,20 @@ class BenefitsState extends State<Benefits> {
 
     return SizedBox(
       width: size.width,
-      height:
-          size.height > 800 ? size.height * 0.8 - 70 : size.height * 0.9 - 70,
+      height: size.width > 950
+          ? size.height * 0.8 - 60
+          : size.width > 800
+              ? size.height * 0.8 - 40
+              : size.height * 0.9 - 100,
       child: Column(
         children: [
           const SizedBox(
             height: 25,
           ),
-          const Text(
+          Text(
             "Why Open Source ?",
             style: TextStyle(
-              fontSize: 30,
+              fontSize: size.width > 800 ? 30 : 20,
               fontWeight: FontWeight.w700,
               fontFamily: "PublicSans",
               color: Colors.black,
@@ -42,12 +45,12 @@ class BenefitsState extends State<Benefits> {
           ),
           SizedBox(
             width: size.width / 1.5,
-            child: const Text(
+            child: Text(
               "We believe software should be free for all."
               "\nUnder our open source program we plan to reduce the economic gaps of society.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: size.width > 800 ? 16 : 14,
                 fontFamily: "PublicSans",
                 color: Colors.black,
               ),
@@ -68,7 +71,7 @@ class BenefitsState extends State<Benefits> {
                     "Learn",
                     "Be a part of great projects that enhance your career and skills.",
                     0,
-                    Colors.green,
+                    const Color(0xff071a2b),
                     LineIcons.graduationCap,
                     null,
                   ),
@@ -81,14 +84,17 @@ class BenefitsState extends State<Benefits> {
                     "Projects powered by a community that will "
                         "always have a people first approach.",
                     1,
-                    Colors.blue,
+                    const Color(0xff1e2e68),
                     LineIcons.peopleCarry,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             LineIcons.github,
+                            color: _amIHovering[1]
+                                ? const Color(0xffe8f9ff)
+                                : Colors.black,
                           ),
                           iconSize: 35,
                           tooltip: "GitHub",
@@ -97,8 +103,11 @@ class BenefitsState extends State<Benefits> {
                           },
                         ),
                         IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             LineIcons.discord,
+                            color: _amIHovering[1]
+                                ? const Color(0xffe8f9ff)
+                                : Colors.black,
                           ),
                           tooltip: "Discord",
                           iconSize: 35,
@@ -118,7 +127,7 @@ class BenefitsState extends State<Benefits> {
                     "Events",
                     "Join live events that are great fun.",
                     2,
-                    Colors.indigo,
+                    const Color(0xff242435),
                     LineIcons.calendarWithWeekFocus,
                     null,
                   ),
@@ -136,7 +145,7 @@ class BenefitsState extends State<Benefits> {
     String title,
     String subtitle,
     int index,
-    MaterialColor iconColor,
+    Color iconColor,
     IconData icon,
     Widget? extra,
   ) {
@@ -157,7 +166,7 @@ class BenefitsState extends State<Benefits> {
         child: SizedBox(
           width: size.width / 5 < 300 ? 300 : size.width / 5,
           child: Card(
-            elevation: 15,
+            elevation: _amIHovering[index] ? 35 : 5,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -175,30 +184,39 @@ class BenefitsState extends State<Benefits> {
                     height: _amIHovering[index] ? cardHeight - 8 : 0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: iconColor.shade100,
+                      color: iconColor,
                     ),
                     duration: const Duration(
                       milliseconds: 1000,
                     ),
-                    curve: Curves.fastOutSlowIn,
+                    curve: Curves.easeOutQuint,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(25.0),
+                  padding:
+                      const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
                         icon,
                         size: 60,
+                        color: _amIHovering[index]
+                            ? const Color(0xffe8f9ff)
+                            : Colors.black,
                       ),
                       const SizedBox(
                         height: 15,
                       ),
                       Text(
                         title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 25,
+                          fontFamily: "PublicSans",
+                          color: _amIHovering[index]
+                              ? const Color(0xffe8f9ff)
+                              : Colors.black,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       const SizedBox(
@@ -207,9 +225,14 @@ class BenefitsState extends State<Benefits> {
                       Text(
                         subtitle,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
                           height: 1.5,
+                          color: _amIHovering[index]
+                              ? const Color(0xffe8f9ff)
+                              : Colors.black,
+                          fontFamily: "PublicSans",
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       const SizedBox(

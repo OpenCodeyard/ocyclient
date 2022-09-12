@@ -67,12 +67,24 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                     ),
                   ),
-                  // Icon(FontAwesomeIcons.rocketchat),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
+              Container(
+                width: size.width < 600 ? size.width / 1.2 : size.width / 2,
+                child: Text(
+                    "We are a community of open source enthusiasts who aim to "
+                    "make software free and accessible to all."
+                    " As individuals, we encourage each other to grow and innovate."
+                    " As an organization, we thrive to build the community we call home.",
+                    style: TextStyle(
+                      fontFamily: "PublicSans",
+                      fontSize: size.width < 600 ? 17 : 20,
+                      color: Colors.deepPurple,
+                    )),
+              )
             ],
           ),
         ),

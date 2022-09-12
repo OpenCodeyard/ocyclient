@@ -21,9 +21,11 @@ class ProjectsBloc extends ChangeNotifier {
     dio.options.headers["Authorization"] = "token $token";
     dio.options.headers["accept"] = "application/vnd.github.v3+json";
 
-    dio.get(
+    dio
+        .get(
       "${Config.ghRootUrl}${Config.ghOrganisationsApi}/${Config.ghOrganisationName}/${Config.ghReposApi}",
-    ).then((value) async {
+    )
+        .then((value) async {
       List<dynamic> projectsResponse = value.data;
 
       ///Running expensive function in a separate isolate
@@ -33,19 +35,17 @@ class ProjectsBloc extends ChangeNotifier {
       for (var project in projectsResponse) {
         ///Gets list of contributors for all projects
         var responseContributors = await dio.get(project["contributors_url"]);
-        List<String> contributorsImages = await compute(
+        List<String> contributors = await compute(
           getImageUrls,
           responseContributors.data as List<dynamic>,
         );
-        _projects[i].contributorsImage = contributorsImages;
+        _projects[i].contributors = contributors;
         i++;
       }
 
       _isProjectsLoading = false;
       notifyListeners();
     });
-
-
   }
 }
 
@@ -59,7 +59,7 @@ List<ProjectModel> parseResponseIntoList(List<dynamic> projects) {
 List<String> getImageUrls(List<dynamic> users) {
   List<String> toBeReturned = [];
   for (var user in users) {
-    toBeReturned.add(user["avatar_url"]);
+    toBeReturned.add("${user["avatar_url"]}^${user["html_url"]}");
   }
 
   return toBeReturned;

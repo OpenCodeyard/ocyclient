@@ -3,12 +3,12 @@ class ProjectModel {
   String id;
   DateTime creationDate;
   String description;
-  List<String>? contributorsImage;
+  List<String> contributors = [];
   String repoUrl;
   int starCount, watchCount, activeIssuesCount, forkCount;
 
-  setContributorsImage(List<String> urls) {
-    contributorsImage = urls;
+  setContributors(List<String> urls) {
+    contributors = urls;
   }
 
   ProjectModel({

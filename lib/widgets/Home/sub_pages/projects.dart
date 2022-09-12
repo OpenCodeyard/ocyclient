@@ -11,10 +11,10 @@ class Projects extends StatefulWidget {
   const Projects({Key? key}) : super(key: key);
 
   @override
-  _ProjectsState createState() => _ProjectsState();
+  ProjectsState createState() => ProjectsState();
 }
 
-class _ProjectsState extends State<Projects> {
+class ProjectsState extends State<Projects> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -60,7 +60,7 @@ class _ProjectsState extends State<Projects> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       ProjectModel project = pb.projects[index];
-
+                      int contributorsLength = project.contributors.length;
                       return Container(
                         margin: const EdgeInsets.symmetric(horizontal: 15),
                         width: 350,
@@ -98,7 +98,8 @@ class _ProjectsState extends State<Projects> {
                                             launchUrlString(project.repoUrl);
                                           },
                                           icon: const Icon(
-                                              FontAwesomeIcons.github),
+                                            FontAwesomeIcons.github,
+                                          ),
                                         )
                                       ],
                                     ),
@@ -209,7 +210,8 @@ class _ProjectsState extends State<Projects> {
                                       ),
                                       const ImageIcon(
                                         AssetImage(
-                                            "assets/images/fork_icon.png"),
+                                          "assets/images/fork_icon.png",
+                                        ),
                                       ),
                                       const SizedBox(
                                         width: 10,
@@ -247,6 +249,7 @@ class _ProjectsState extends State<Projects> {
                                 height: 20,
                               ),
                               const Divider(),
+                              //TODO refactoring
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 8.0, horizontal: 23),
@@ -263,16 +266,45 @@ class _ProjectsState extends State<Projects> {
                                           color: Colors.black,
                                         ),
                                       ),
-                                      FacePile(
-                                        radius: 25,
-                                        space: 25,
-                                        images: List.generate(
-                                            project.contributorsImage?.length ??
-                                                0, (i) {
-                                          return NetworkImage(
-                                            project.contributorsImage![i],
-                                          );
-                                        }),
+                                      Stack(
+                                        children: [
+                                          if (contributorsLength > 3)
+                                            Container(
+                                              width: 38 * 4,
+                                            ),
+                                          if (contributorsLength > 3)
+                                            Positioned(
+                                              width: 50,
+                                              left: 3 * 32 - 1,
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor:
+                                                    const Color(0xff071a2b),
+                                                child: Text(
+                                                  "+${contributorsLength - 3}",
+                                                  style: const TextStyle(
+                                                    fontFamily: "PublicSans",
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          FacePile(
+                                            radius: 25,
+                                            space: 30,
+                                            images: List.generate(
+                                              contributorsLength > 3
+                                                  ? 3
+                                                  : contributorsLength,
+                                              (i) {
+                                                return NetworkImage(
+                                                  project.contributors[i]
+                                                      .split("^")[0],
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ]),
                               ),
