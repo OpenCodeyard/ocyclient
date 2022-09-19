@@ -68,6 +68,7 @@ class Footer extends StatelessWidget {
           "Contact Us",
           style: TextStyle(
             color: Colors.white54,
+            fontFamily: "PublicSans",
           ),
         ),
         const SizedBox(
@@ -76,7 +77,7 @@ class Footer extends StatelessWidget {
         getIconButton(
           title: "Email",
           func: () {
-            launchUrlString("mailto:adm.opencodeyard@gmail.com");
+            launchUrlString("mailto:support@opencodeyard.tech");
           },
           icon: FontAwesomeIcons.envelope,
         ),
@@ -110,7 +111,10 @@ class Footer extends StatelessWidget {
       children: [
         const Text(
           "Legal",
-          style: TextStyle(color: Colors.white54),
+          style: TextStyle(
+            color: Colors.white54,
+            fontFamily: "PublicSans",
+          ),
         ),
         const SizedBox(
           height: 20,
@@ -190,9 +194,12 @@ class Footer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            getFooterSocialButton(FontAwesomeIcons.github,link: Config.ghUrl),
-            getFooterSocialButton(FontAwesomeIcons.linkedinIn,link: Config.linkedInUrl),
-            getFooterSocialButton(FontAwesomeIcons.discord,),
+            getFooterSocialButton(FontAwesomeIcons.github, link: Config.ghUrl),
+            getFooterSocialButton(FontAwesomeIcons.linkedinIn,
+                link: Config.linkedInUrl),
+            getFooterSocialButton(
+              FontAwesomeIcons.discord,
+            ),
             getFooterSocialButton(FontAwesomeIcons.telegram),
           ],
         ),
@@ -202,8 +209,14 @@ class Footer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/images/handshake.png",width: 40,fit: BoxFit.cover,),
-            const SizedBox(width: 15,),
+            Image.asset(
+              "assets/images/handshake.png",
+              width: 40,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(
+              width: 15,
+            ),
             const Text(
               "Powered by\nOpen Source",
               textAlign: TextAlign.center,
@@ -215,8 +228,14 @@ class Footer extends StatelessWidget {
                 fontSize: 19,
               ),
             ),
-            const SizedBox(width: 15,),
-            Image.asset("assets/images/handshake.png",width: 40,fit: BoxFit.cover,),
+            const SizedBox(
+              width: 15,
+            ),
+            Image.asset(
+              "assets/images/handshake.png",
+              width: 40,
+              fit: BoxFit.cover,
+            ),
           ],
         ),
       ],
@@ -231,12 +250,12 @@ class Footer extends StatelessWidget {
     ];
   }
 
-  Widget getFooterSocialButton(IconData icon,{String? link}){
+  Widget getFooterSocialButton(IconData icon, {String? link}) {
     return GestureDetector(
       onTap: () {
-        if(link ==null) {
+        if (link == null) {
           showToast("Coming soon");
-        }else{
+        } else {
           launchUrlString(link);
         }
       },
@@ -255,5 +274,4 @@ class Footer extends StatelessWidget {
       ),
     );
   }
-
 }

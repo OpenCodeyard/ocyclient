@@ -232,7 +232,6 @@ class BenefitsState extends State<Benefits> {
                               ? const Color(0xffe8f9ff)
                               : Colors.black,
                           fontFamily: "PublicSans",
-                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       const SizedBox(
@@ -240,6 +239,54 @@ class BenefitsState extends State<Benefits> {
                       ),
                       extra ?? const SizedBox(),
                     ],
+                  ),
+                ),
+                Positioned(
+                  right: -(size.width / 5 < 300 ? 300 : size.width / 5) / 10,
+                  bottom: -(size.width / 5 < 300 ? 300 : size.width / 5) / 10,
+                  child: AnimatedContainer(
+                    width: _amIHovering[index]
+                        ? (size.width / 5 < 300 ? 300 : size.width / 5) / 4
+                        : 0,
+                    height: _amIHovering[index]
+                        ? (size.width / 5 < 300 ? 300 : size.width / 5) / 4
+                        : 0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      border: Border.all(
+                        color: const Color(0xffe8f9ff),
+                        width: 4,
+                      ),
+                      color: Colors.transparent,
+                    ),
+                    duration: const Duration(
+                      milliseconds: 1400,
+                    ),
+                    curve: Curves.easeOutQuint,
+                  ),
+                ),
+                Positioned(
+                  left: -(size.width / 5 < 300 ? 300 : size.width / 5) / 10,
+                  top: -(size.width / 5 < 300 ? 300 : size.width / 5) / 10,
+                  child: AnimatedContainer(
+                    width: _amIHovering[index]
+                        ? (size.width / 5 < 300 ? 300 : size.width / 5) / 4
+                        : 0,
+                    height: _amIHovering[index]
+                        ? (size.width / 5 < 300 ? 300 : size.width / 5) / 4
+                        : 0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      border: Border.all(
+                        color: const Color(0xffe8f9ff),
+                        width: 4,
+                      ),
+                      color: Colors.transparent,
+                    ),
+                    duration: const Duration(
+                      milliseconds: 1400,
+                    ),
+                    curve: Curves.easeOutQuint,
                   ),
                 ),
               ],

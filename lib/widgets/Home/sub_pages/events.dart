@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
 class UpcomingEvents extends StatelessWidget {
@@ -92,7 +93,8 @@ class UpcomingEvents extends StatelessWidget {
                   width: 20,
                 ),
                 CircleAvatar(
-                  backgroundImage: const AssetImage("assets/images/ocy_logo.png"),
+                  backgroundImage:
+                      const AssetImage("assets/images/ocy_logo.png"),
                   radius: size.width < 540 ? 30 : 60,
                 ),
                 const SizedBox(
@@ -119,7 +121,7 @@ class UpcomingEvents extends StatelessWidget {
                     TextButton(
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero,
-                      alignment: Alignment.centerLeft,
+                        alignment: Alignment.centerLeft,
                       ),
                       onPressed: () {},
                       child: Text(
@@ -145,14 +147,26 @@ class UpcomingEvents extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Event Zone",
-          style: TextStyle(
-            fontSize: 40,
-            fontWeight: FontWeight.w700,
-            fontFamily: "PublicSans",
-            color: Colors.black,
-          ),
+        Row(
+          children: const [
+            Text(
+              "Event Zone",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w700,
+                fontFamily: "PublicSans",
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Icon(
+              FontAwesomeIcons.gamepad,
+              size: 30,
+              color: Colors.deepPurple,
+            )
+          ],
         ),
         const SizedBox(
           height: 30,
@@ -168,9 +182,8 @@ class UpcomingEvents extends StatelessWidget {
             " a wide range of topics from technology, "
             "games, awareness campaigns, etc.",
             style: TextStyle(
-              fontSize: size.width < 1000 ? 16 : 18,
-              fontFamily: "PublicSans"
-            ),
+                fontSize: size.width < 1000 ? 16 : 18,
+                fontFamily: "PublicSans"),
           ),
         ),
         const SizedBox(

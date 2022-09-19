@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
 class Config {
@@ -16,11 +17,23 @@ class Config {
     LineIcons.home,
     LineIcons.globe,
     LineIcons.question,
-    LineIcons.layerGroup,
-    LineIcons.trophy,
+    LineIcons.peopleCarry,
+    Icons.emoji_events_outlined,
+    Icons.logout_sharp,
+  ];
+
+  static final List<IconData> _selectedAppDrawerIcons = [
+    FontAwesomeIcons.house,
+    FontAwesomeIcons.earthAmericas,
+    FontAwesomeIcons.question,
+    FontAwesomeIcons.peopleCarryBox,
+    FontAwesomeIcons.trophy,
+    Icons.logout,
   ];
 
   static List<IconData> get appDrawerIcons => _appDrawerIcons;
+
+  static List<IconData> get selectedAppDrawerIcons => _selectedAppDrawerIcons;
 
   ///GitHub Configs
   static const String clientId = "ba4e3c2ad6622ba3b12c";
@@ -54,7 +67,7 @@ class Config {
     "/editProfile"
   ];
 
-  static const appVersion = "0.2.0-alpha";
+  static const appVersion = "0.3.1-alpha";
 
   ///Firestore Collection Names
   static const fsUser = "Users";
@@ -89,8 +102,30 @@ class Config {
   static const String envGhAccessToken = "github_access_token";
 
   ///Social
-  static const String linkedInUrl = "https://www.linkedin.com/company/83490580/";
+  static const String linkedInUrl =
+      "https://www.linkedin.com/company/83490580/";
   static const String ghUrl = "https://github.com/OpenCodeyard";
 
+  static const List<String> weAre = [
+    "Coders 💻",
+    "Students 🧑‍🎓",
+    "Professionals 💼",
+    "Dreamers 😴",
+    "builders ⚒️",
+    "Innovators 💡",
+    "Gamers 🎮",
+    "Hackers 🕶️",
+    "Brain-Stormers 💡",
+    "Techies 🧑‍💻",
+    "Dancers 🕺",
+    "Open Codeyard ♥️",
+  ];
 
+  static const List<Color> weAreColors = [
+    Color(0xfffa5457),
+    Color(0xff01b4bc),
+    Color(0xffe3c515),
+    Color(0xffa59cd3),
+    Color(0xff4b2d9f),
+  ];
 }

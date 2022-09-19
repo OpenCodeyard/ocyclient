@@ -15,7 +15,7 @@ class Intro extends StatelessWidget {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          color: const Color(0xff3b3b3b),
+          color: const Color(0xff262626),
           height: MediaQuery.of(context).size.height * 0.9 - 70,
           child: size.width < 1150
               ? Column(
@@ -171,7 +171,10 @@ class Intro extends StatelessWidget {
             ],
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 50),
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width < 420 ? 40 : 5,
+              vertical: 50,
+            ),
             child: Text(
               "We believe every contribution is special and so are you.",
               textAlign: TextAlign.center,

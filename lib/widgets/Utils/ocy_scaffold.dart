@@ -94,16 +94,18 @@ class _OcyScaffoldState extends State<OcyScaffold> {
     String? name = ModalRoute.of(context)?.settings.name;
 
     String passedRoute = Config.routeNames.values.toList()[index];
+    bool selected = (name != null && name == passedRoute);
+
     return Container(
       padding: const EdgeInsets.all(4.0),
       margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width < 1100 ? 5 : 10),
-      decoration: name != null && name == passedRoute
+          horizontal: MediaQuery.of(context).size.width < 1100 ? 5 : 10,vertical: 4),
+      decoration: selected
           ? const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
                   width: 3,
-                  color: Colors.deepPurple,
+                  color: Color(0xff071a2b),
                 ),
               ),
             )
@@ -116,10 +118,9 @@ class _OcyScaffoldState extends State<OcyScaffold> {
           label,
           style: TextStyle(
             fontSize: MediaQuery.of(context).size.width < 1100 ? 12 : 15,
-            color: name != null && name == passedRoute
-                ? Colors.deepPurple
-                : Colors.black,
-            fontFamily: "PublicSans"
+            color: selected ? const Color(0xff071a2b) : Colors.black,
+            fontFamily: "PublicSans",
+            fontWeight: selected ? FontWeight.w700 : FontWeight.normal,
           ),
         ),
       ),

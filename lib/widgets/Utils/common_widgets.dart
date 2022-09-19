@@ -41,10 +41,11 @@ Widget getTextForButton(String label, {Color? color}) {
   return Text(
     label,
     style: TextStyle(
-        color: color ?? Colors.white,
-        fontWeight: FontWeight.bold,
-        fontSize: 19,
-        fontFamily: "PublicSans"),
+      color: color ?? Colors.white,
+      fontWeight: FontWeight.bold,
+      fontSize: 19,
+      fontFamily: "PublicSans",
+    ),
   );
 }
 
