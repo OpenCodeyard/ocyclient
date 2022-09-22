@@ -5,10 +5,10 @@ import 'package:line_icons/line_icons.dart';
 class Config {
   static final Map<String, String> _routeNames = {
     "Home": "/home",
-    "Community": "/community",
+    // "Community": "/community",
     "About Us": "/about_us",
     "Teams": "/teams",
-    "Milestones": "/milestones",
+    // "Milestones": "/milestones",
   };
 
   static Map<String, String> get routeNames => _routeNames;

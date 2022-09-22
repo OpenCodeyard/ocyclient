@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 import 'package:ocyclient/widgets/Utils/scroll_animation.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -165,26 +167,21 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 50,
+                      height: 80,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Our Story",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: size.width > 900
-                                ? 50
-                                : size.width > 600
-                                    ? 35
-                                    : 24,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "PublicSans",
-                            color: const Color(0xffe8f9ff),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      "Our Mission",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: size.width > 900
+                            ? 50
+                            : size.width > 600
+                                ? 35
+                                : 24,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "PublicSans",
+                        color: const Color(0xffe8f9ff),
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
@@ -212,7 +209,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 35,
+                      height: 100,
                     ),
                     Text(
                       "What else should you know?",
@@ -228,8 +225,51 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 35,
+                      height: 50,
                     ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.1),
+                      child: ResponsiveGridList(
+                        desiredItemWidth: 250,
+                        scroll: false,
+                        rowMainAxisAlignment: MainAxisAlignment.start,
+                        minSpacing: 40,
+                        children: [
+                          singleWhatElse(
+                            size,
+                            "Remote First",
+                            FontAwesomeIcons.globe,
+                            "We use GitHub for maintaining projects and communicate"
+                                " using online community channels. Thus, members can"
+                                " set up shop from anywhere in the world and contribute.",
+                          ),
+                          singleWhatElse(
+                            size,
+                            "Mentorship",
+                            FontAwesomeIcons.handshakeAngle,
+                            "We believe in the potential of our community members. "
+                                "So we made a program to provide them with "
+                                "mentorship that will help them level up.",
+                          ),
+                          singleWhatElse(
+                            size,
+                            "Connect",
+                            FontAwesomeIcons.peopleGroup,
+                            "Through regular social and technical meetups, expand your network."
+                                " Maybe you will find your next best "
+                                "friend or idol or mentor or business partner 😉",
+                          ),
+                          singleWhatElse(
+                            size,
+                            "Swags",
+                            FontAwesomeIcons.gift,
+                            "We believe in rewarding you for your contributions."
+                                " Earn awesome swags throughout the year.",
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -250,5 +290,48 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 : size.width < 1000
                     ? 60
                     : 70;
+  }
+
+  Widget singleWhatElse(
+    Size size,
+    String heading,
+    IconData icon,
+    String description, {
+    double? height,
+  }) {
+    return SizedBox(
+      width: 250,
+      // height: height ?? 300,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            icon,
+            color: Colors.white,
+            size: 50,
+          ),
+          const SizedBox(height: 20),
+          Text(
+            heading,
+            style: TextStyle(
+              fontSize: size.width > 900 ? 22 : 18,
+              fontFamily: "PublicSans",
+              color: const Color(0xffe8f9ff),
+            ),
+          ),
+          const SizedBox(height: 15),
+          Text(
+            description,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              height: 1.3,
+              fontSize: size.width > 900 ? 19 : 16,
+              fontFamily: "PublicSans",
+              color: const Color(0xffe8f9ff).withOpacity(0.7),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
