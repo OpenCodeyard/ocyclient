@@ -51,6 +51,7 @@ A higly configurable community website template built using Flutter
 
 - ### We are participating in Hacktoberfest 2022
    * Check [Contributing.md](https://github.com/OpenCodeyard/ocyclient/blob/dev/CONTRIBUTING.md) for guidelines on contributing to this repo.
+   * Check [https://hacktoberfest.com/participation/] for rules and details about hacktoberfest
    * Get 4 pr merged and win goodies from Hacktobefest team
    
 <p align="center">
