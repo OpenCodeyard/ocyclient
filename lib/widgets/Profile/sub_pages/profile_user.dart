@@ -7,6 +7,7 @@ import 'package:ocyclient/blocs/auth_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/widgets/Profile/widgets/accounts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../Utils/snackbar.dart';
 
@@ -191,12 +192,28 @@ class UserTabState extends State<UserTab> {
                               SizedBox(
                                 height: 160,
                                 child: Card(
-                                  elevation: 10,
+                                  elevation: 3,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Center(
                                     child: Markdown(
+                                      onTapLink:
+                                          (String text, String? url, String title) {
+                                        if (url != null) {
+                                          launchUrlString(
+                                            url,
+                                            mode:
+                                                LaunchMode.externalApplication
+                                          );
+                                        } else {
+                                          showToast("Invalid URL");
+                                        }
+                                      },
+                                      physics: const BouncingScrollPhysics(),
+                                      imageBuilder: (Uri u, String? b, String? c){
+                                        return Image.network(u.toString());
+                                      },
                                       data: ab.userModel.bio ??
                                           "# Bio not provided",
                                     ),

@@ -31,16 +31,19 @@ class AccountWidget extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.all(10),
-          child: Row(
-            children: [
-              getAccountCard(
-                  ab, nb, "assets/images/google_logo.png", "Google", context),
-              const SizedBox(
-                width: 15,
-              ),
-              getAccountCard(
-                  ab, nb, "assets/images/github_logo.png", "Github", context)
-            ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                getAccountCard(
+                    ab, nb, "assets/images/google_logo.png", "Google", context),
+                const SizedBox(
+                  width: 15,
+                ),
+                getAccountCard(
+                    ab, nb, "assets/images/github_logo.png", "Github", context)
+              ],
+            ),
           ),
         ),
       ],
@@ -55,7 +58,7 @@ class AccountWidget extends StatelessWidget {
     BuildContext context,
   ) {
     return Card(
-      elevation: 8,
+      elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
