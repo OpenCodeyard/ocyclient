@@ -8,7 +8,9 @@
 
 # OCY Client
 
-This repo contains source code for the official Flutter Client of Open CodeYard 
+This repo contains source code for the official Flutter Client of Open CodeYard
+
+A higly configurable community website template built using Flutter
 
 <!-- TABLE OF CONTENTS -->
 <details>
