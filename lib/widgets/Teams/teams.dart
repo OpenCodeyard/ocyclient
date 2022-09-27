@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:ocyclient/blocs/teams_bloc.dart';
 import 'package:ocyclient/widgets/Teams/team_card.dart';
 import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
+import 'package:provider/provider.dart';
 
 class TeamsPage extends StatefulWidget {
   const TeamsPage({Key? key}) : super(key: key);
@@ -12,8 +13,6 @@ class TeamsPage extends StatefulWidget {
 }
 
 class _TeamsPageState extends State<TeamsPage> {
-  bool dark = Get.isDarkMode;
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setApplicationSwitcherDescription(
@@ -24,6 +23,8 @@ class _TeamsPageState extends State<TeamsPage> {
     );
 
     Size size = MediaQuery.of(context).size;
+
+    TeamsBloc tb = Provider.of<TeamsBloc>(context);
 
     return OcyScaffold(
       body: SingleChildScrollView(
@@ -138,6 +139,8 @@ class _TeamsPageState extends State<TeamsPage> {
                                   ),
                                   Expanded(
                                     child: ListView(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       children: [
                                         TeamCard(
@@ -184,6 +187,8 @@ class _TeamsPageState extends State<TeamsPage> {
                                     width: 50,
                                   ),
                                   ListView(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     children: [
                                       TeamCard(

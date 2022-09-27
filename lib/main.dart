@@ -12,7 +12,7 @@ import 'package:ocyclient/blocs/edit_profile_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/blocs/profile_bloc.dart';
 import 'package:ocyclient/blocs/projects_bloc.dart';
-import 'package:ocyclient/blocs/theme_bloc.dart';
+import 'package:ocyclient/blocs/teams_bloc.dart';
 import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/widgets/AboutUs/about_us.dart';
 import 'package:ocyclient/widgets/Auth/login_signup.dart';
@@ -31,8 +31,7 @@ Future<void> configureApp() async {
   await dotenv.load(fileName: "env");
   if (kIsWeb || Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform
-    );
+        options: DefaultFirebaseOptions.currentPlatform);
   }
   SharedPreferences sp = await SharedPreferences.getInstance();
 
@@ -69,9 +68,6 @@ class OCYApp extends StatelessWidget {
         ChangeNotifierProvider<NavigationBloc>(
           create: (context) => NavigationBloc(),
         ),
-        ChangeNotifierProvider<ThemeBloc>(
-          create: (context) => ThemeBloc(),
-        ),
         ChangeNotifierProvider<AuthenticationBloc>(
           create: (context) => AuthenticationBloc(),
         ),
@@ -86,6 +82,9 @@ class OCYApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<CommunityBloc>(
           create: (context) => CommunityBloc(),
+        ),
+        ChangeNotifierProvider<TeamsBloc>(
+          create: (context) => TeamsBloc(),
         ),
       ],
       child: GetMaterialApp(
@@ -127,50 +126,6 @@ class OCYApp extends StatelessWidget {
                     return const Color(0xff0f254e);
                   }
                   return Colors.black;
-                },
-              ),
-            ),
-          ),
-        ),
-        darkTheme: ThemeData(
-          appBarTheme: const AppBarTheme(
-            color: Colors.black,
-            centerTitle: false,
-            iconTheme: IconThemeData(
-              color: Colors.white,
-            ),
-            elevation: 2,
-            titleTextStyle: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontFamily: "PublicSans",
-            ),
-          ),
-          iconTheme: const IconThemeData(
-            color: Colors.white,
-          ),
-          buttonTheme: const ButtonThemeData(
-            textTheme: ButtonTextTheme.accent,
-          ),
-          colorScheme: const ColorScheme.light(
-            primary: Color(0xff0f254e),
-          ),
-          primaryColor: const Color(0xff0f254e),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: "PublicSans",
-                fontSize: 16,
-              ),
-            ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                (states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return const Color(0xff0f254e);
-                  }
-                  return Colors.white;
                 },
               ),
             ),

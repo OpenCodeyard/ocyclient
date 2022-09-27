@@ -16,7 +16,7 @@ class AboutUsPage extends StatefulWidget {
 }
 
 class _AboutUsPageState extends State<AboutUsPage> {
-  bool dark = Get.isDarkMode;
+  
 
   int currentIndex = 0;
 

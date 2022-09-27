@@ -1,6 +1,7 @@
 [
   {
     "name": "Organizers",
+    "id": "0",
     "members": [
       {
         "name": "Shatanik Mahanty",
@@ -16,16 +17,25 @@
   },
   {
     "name": "Outreach",
+    "id": "1",
     "members": [
     ]
   },
   {
+    "id": "2",
     "name": "Designers",
     "members": [
     ]
   },
   {
+    "id": "3",
     "name": "Project Leads",
+    "members": [
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Sponsor Relations",
     "members": [
     ]
   }

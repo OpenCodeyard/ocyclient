@@ -12,7 +12,7 @@ class MilestonesPage extends StatefulWidget {
 }
 
 class _MilestonesPageState extends State<MilestonesPage> {
-  bool dark = Get.isDarkMode;
+  
 
   @override
   Widget build(BuildContext context) {
