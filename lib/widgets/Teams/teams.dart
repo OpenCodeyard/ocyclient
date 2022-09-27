@@ -108,9 +108,9 @@ class _TeamsPageState extends State<TeamsPage> {
                     children: [
                       Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: size.width > 600 ? 100 : size.width * 0.1,
+                          horizontal: size.width > 800 ? 100 : 15,
                         ),
-                        child: size.width > 650
+                        child: size.width > 800
                             ? Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -159,7 +159,7 @@ class _TeamsPageState extends State<TeamsPage> {
                                     ),
                                   ),
                                   const SizedBox(
-                                    width: 50,
+                                    height: 50,
                                   ),
                                   getTeams(size, tb),
                                 ],

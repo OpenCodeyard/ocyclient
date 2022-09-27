@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ocyclient/models/team/team_model.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 class TeamCard extends StatefulWidget {
   final Size size;
@@ -59,7 +60,7 @@ class _TeamCardState extends State<TeamCard> {
                         ? 40
                         : widget.size.width > 800
                             ? 30
-                            : 18,
+                            : 25,
                   ),
                 ),
                 const Spacer(),
@@ -68,9 +69,9 @@ class _TeamCardState extends State<TeamCard> {
                       ? FontAwesomeIcons.circleMinus
                       : FontAwesomeIcons.circlePlus,
                   color: Colors.white,
-                  size: 40,
+                  size: widget.size.width > 800 ? 40 : 25,
                 ),
-                if (widget.size.width > 600)
+                if (widget.size.width > 800)
                   const SizedBox(
                     width: 22,
                   ),
@@ -79,65 +80,55 @@ class _TeamCardState extends State<TeamCard> {
           ),
           children: [
             if (widget.members.isNotEmpty) ...[
-              ListView.builder(
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  Member member = widget.members[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 45.0,
-                      vertical: 10,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(15.0),
-                          child: Image.network(
-                            member.image,
-                            width: 150,
-                            height: 150,
+              ResponsiveGridList(
+                desiredItemWidth:
+                    widget.size.width < 480 ? widget.size.width - 50 : 430,
+                scroll: false,
+                rowMainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(
+                  widget.members.length,
+                  (index) {
+                    Member member = widget.members[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 45.0,
+                        vertical: 10,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.network(
+                              member.image,
+                              width: 120,
+                              height: 120,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              member.name,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              member.title,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                itemCount: widget.members.length,
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          memberDetails(member.name, member.title),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
               const SizedBox(
                 height: 30,
               ),
             ] else ...[
-              const Text("No members found"),
+              const Text(
+                "No members found",
+                style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "PublicSans"),
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -145,6 +136,34 @@ class _TeamCardState extends State<TeamCard> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget memberDetails(
+    String name,
+    String title,
+  ) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          name,
+          style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: "PublicSans"),
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        Text(
+          title,
+          style: const TextStyle(
+              fontSize: 17, color: Colors.white, fontFamily: "PublicSans"),
+        ),
+      ],
     );
   }
 }
