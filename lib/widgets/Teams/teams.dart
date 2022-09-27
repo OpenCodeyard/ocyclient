@@ -39,10 +39,11 @@ class _TeamsPageState extends State<TeamsPage> {
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(
-                      "https://i.imgur.com/ihtqvW3.png",
+                      "https://i.imgur.com/SHXoCoG.png",
                     ),
                     fit: BoxFit.cover,
                   ),
+                  color: Color(0xff071a2b),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +95,9 @@ class _TeamsPageState extends State<TeamsPage> {
                 ),
               ),
               Container(
-                color: const Color(0xff071a2b),
+                decoration: const BoxDecoration(
+                  color: Color(0xff071a2b),
+                ),
                 width: size.width,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 25.0),
@@ -102,65 +105,111 @@ class _TeamsPageState extends State<TeamsPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 50.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              children: "TEAMS"
-                                  .split("")
-                                  .map((string) => Text(
-                                        string,
-                                        style: TextStyle(
-                                          fontFamily: "PublicSans",
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: size.width > 1100
-                                              ? 100
-                                              : size.width > 800
-                                                  ? 60
-                                                  : 40,
-                                          letterSpacing: 5,
-                                          foreground: Paint()
-                                            ..strokeWidth = 1
-                                            ..style = PaintingStyle.stroke
-                                            ..color = const Color(0xff8aafcc),
-                                        ),
-                                      ))
-                                  .toList(),
-                            ),
-                            const SizedBox(
-                              width: 50,
-                            ),
-                            Expanded(
-                              child: ListView(
-                                shrinkWrap: true,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: size.width > 600 ? 100 : size.width * 0.1,
+                        ),
+                        child: size.width > 650
+                            ? Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  TeamCard(
-                                    size: size,
-                                    title: "Organizers",
+                                  Column(
+                                    children: "TEAMS"
+                                        .split("")
+                                        .map((string) => Text(
+                                              string,
+                                              style: TextStyle(
+                                                fontFamily: "PublicSans",
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: size.width > 1100
+                                                    ? 140
+                                                    : 80,
+                                                letterSpacing: 5,
+                                                foreground: Paint()
+                                                  ..strokeWidth = 1
+                                                  ..style = PaintingStyle.stroke
+                                                  ..color =
+                                                      const Color(0xff8aafcc),
+                                              ),
+                                            ))
+                                        .toList(),
                                   ),
-                                  TeamCard(
-                                    size: size,
-                                    title: "Outreach",
+                                  const SizedBox(
+                                    width: 50,
                                   ),
-                                  TeamCard(
-                                    size: size,
-                                    title: "Designers",
+                                  Expanded(
+                                    child: ListView(
+                                      shrinkWrap: true,
+                                      children: [
+                                        TeamCard(
+                                          size: size,
+                                          title: "Organizers",
+                                        ),
+                                        TeamCard(
+                                          size: size,
+                                          title: "Outreach",
+                                        ),
+                                        TeamCard(
+                                          size: size,
+                                          title: "Designers",
+                                        ),
+                                        TeamCard(
+                                          size: size,
+                                          title: "Project Leads",
+                                        ),
+                                        TeamCard(
+                                          size: size,
+                                          title: "Sponsor Relations",
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  TeamCard(
-                                    size: size,
-                                    title: "Project Leads",
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  Text(
+                                    "TEAMS",
+                                    style: TextStyle(
+                                      fontFamily: "PublicSans",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 60,
+                                      letterSpacing: 5,
+                                      foreground: Paint()
+                                        ..strokeWidth = 1
+                                        ..style = PaintingStyle.stroke
+                                        ..color = const Color(0xff8aafcc),
+                                    ),
                                   ),
-                                  TeamCard(
-                                    size: size,
-                                    title: "Sponsor Relations",
+                                  const SizedBox(
+                                    width: 50,
+                                  ),
+                                  ListView(
+                                    shrinkWrap: true,
+                                    children: [
+                                      TeamCard(
+                                        size: size,
+                                        title: "Organizers",
+                                      ),
+                                      TeamCard(
+                                        size: size,
+                                        title: "Outreach",
+                                      ),
+                                      TeamCard(
+                                        size: size,
+                                        title: "Designers",
+                                      ),
+                                      TeamCard(
+                                        size: size,
+                                        title: "Project Leads",
+                                      ),
+                                      TeamCard(
+                                        size: size,
+                                        title: "Sponsor Relations",
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
-                        ),
                       )
                     ],
                   ),

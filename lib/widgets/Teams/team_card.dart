@@ -30,7 +30,7 @@ class _TeamCardState extends State<TeamCard> {
           child: Row(
             children: [
               const SizedBox(
-                width: 12,
+                width: 22,
               ),
               Text(
                 widget.title,
@@ -42,7 +42,7 @@ class _TeamCardState extends State<TeamCard> {
                       ? 40
                       : widget.size.width > 800
                       ? 30
-                      : 20,
+                      : 18,
                 ),
               ),
               const Spacer(),
@@ -52,7 +52,7 @@ class _TeamCardState extends State<TeamCard> {
                 size: 40,
               ),
               const SizedBox(
-                width: 12,
+                width: 22,
               ),
             ],
           ),

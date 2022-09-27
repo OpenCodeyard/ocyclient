@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Organizers",
+    "members": [
+      {
+        "name": "Shatanik Mahanty",
+        "title": "Founder",
+        "image": "https://i.imgur.com/1Yd49vH.jpeg"
+      },
+      {
+        "name": "Prosenjit Swarnakar",
+        "title": "Co-Founder",
+        "image": "https://i.imgur.com/1Yd49vH.jpeg"
+      }
+    ]
+  },
+  {
+    "name": "Outreach",
+    "members": [
+    ]
+  },
+  {
+    "name": "Designers",
+    "members": [
+    ]
+  },
+  {
+    "name": "Project Leads",
+    "members": [
+    ]
+  }
+]
