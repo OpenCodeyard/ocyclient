@@ -6,22 +6,30 @@
       {
         "name": "Shatanik Mahanty",
         "title": "Founder",
-        "image": "https://i.imgur.com/1Yd49vH.jpeg"
+        "image": "https://i.imgur.com/1Yd49vH.jpeg",
+        "linkedIn": "https://www.linkedin.com/in/shatanikmahanty/",
+        "github": "https://github.com/shatanikmahanty/"
       },
       {
         "name": "Prosenjit Swarnakar",
         "title": "Co-Founder",
-        "image": "https://i.imgur.com/kE7kqq8.jpeg"
+        "image": "https://i.imgur.com/kE7kqq8.jpeg",
+        "linkedIn": "https://www.linkedin.com/in/prosenjit-swarnakar-5baa59236/",
+        "github": "https://github.com/PROSENJIT-RONI/"
       },
       {
         "name": "Sayan Mukherjee",
         "title": "Organizer",
-        "image": "https://i.imgur.com/iJhYOE7_d.webp?maxwidth=760&fidelity=grand"
+        "image": "https://i.imgur.com/iJhYOE7_d.webp?maxwidth=760&fidelity=grand",
+        "linkedIn": "https://www.linkedin.com/in/shatanikmahanty/",
+        "github": "https://github.com/sayanm16"
       },
       {
         "name": "Manish Kr. Barnwal",
         "title": "Organizer",
-        "image": "https://i.imgur.com/Zf443Hd.png"
+        "image": "https://i.imgur.com/Zf443Hd.png",
+        "linkedIn": "https://www.linkedin.com/in/imanishbarnwal/",
+        "github": "https://github.com/imanishbarnwal"
       }
     ]
   },

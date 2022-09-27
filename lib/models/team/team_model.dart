@@ -27,11 +27,15 @@ class Member {
   String name;
   String title;
   String image;
+  String? github;
+  String? linkedIn;
 
   Member({
     required this.name,
     required this.title,
     required this.image,
+    this.github,
+    this.linkedIn,
   });
 
   static fromJson(json) {
@@ -39,6 +43,8 @@ class Member {
       name: json["name"],
       image: json["image"],
       title: json["title"],
+      github: json["github"],
+      linkedIn: json["linkedIn"],
     );
   }
 }
