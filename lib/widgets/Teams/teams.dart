@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ocyclient/blocs/teams_bloc.dart';
+import 'package:ocyclient/models/team/team_model.dart';
 import 'package:ocyclient/widgets/Teams/team_card.dart';
 import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 import 'package:provider/provider.dart';
@@ -138,33 +139,7 @@ class _TeamsPageState extends State<TeamsPage> {
                                     width: 50,
                                   ),
                                   Expanded(
-                                    child: ListView(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      children: [
-                                        TeamCard(
-                                          size: size,
-                                          title: "Organizers",
-                                        ),
-                                        TeamCard(
-                                          size: size,
-                                          title: "Outreach",
-                                        ),
-                                        TeamCard(
-                                          size: size,
-                                          title: "Designers",
-                                        ),
-                                        TeamCard(
-                                          size: size,
-                                          title: "Project Leads",
-                                        ),
-                                        TeamCard(
-                                          size: size,
-                                          title: "Sponsor Relations",
-                                        ),
-                                      ],
-                                    ),
+                                    child: getTeams(size, tb),
                                   ),
                                 ],
                               )
@@ -186,33 +161,7 @@ class _TeamsPageState extends State<TeamsPage> {
                                   const SizedBox(
                                     width: 50,
                                   ),
-                                  ListView(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    children: [
-                                      TeamCard(
-                                        size: size,
-                                        title: "Organizers",
-                                      ),
-                                      TeamCard(
-                                        size: size,
-                                        title: "Outreach",
-                                      ),
-                                      TeamCard(
-                                        size: size,
-                                        title: "Designers",
-                                      ),
-                                      TeamCard(
-                                        size: size,
-                                        title: "Project Leads",
-                                      ),
-                                      TeamCard(
-                                        size: size,
-                                        title: "Sponsor Relations",
-                                      ),
-                                    ],
-                                  ),
+                                  getTeams(size, tb),
                                 ],
                               ),
                       )
@@ -224,6 +173,22 @@ class _TeamsPageState extends State<TeamsPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget getTeams(Size size, TeamsBloc tb) {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: tb.teams.length,
+      itemBuilder: (context, index) {
+        Team t = tb.teams[index];
+        return TeamCard(
+          size: size,
+          title: t.name,
+          members: t.members,
+        );
+      },
     );
   }
 }

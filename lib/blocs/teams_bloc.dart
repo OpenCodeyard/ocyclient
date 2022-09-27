@@ -38,7 +38,6 @@ class TeamsBloc extends ChangeNotifier {
       final data = json.decode(response.body);
 
       _teams = List<Team>.from(data.map((json) {
-        print(json);
         return Team.fromJson(json);
       }).toList());
       _isLoading = false;
