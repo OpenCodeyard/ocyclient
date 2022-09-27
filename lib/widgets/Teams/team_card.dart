@@ -38,7 +38,7 @@ class _TeamCardState extends State<TeamCard> {
               isExpanded = value;
             });
           },
-          trailing: SizedBox(),
+          trailing: const SizedBox(),
           title: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 8.0,
@@ -78,7 +78,7 @@ class _TeamCardState extends State<TeamCard> {
             ),
           ),
           children: [
-            if (widget.members.isNotEmpty)
+            if (widget.members.isNotEmpty) ...[
               ListView.builder(
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -100,6 +100,9 @@ class _TeamCardState extends State<TeamCard> {
                             height: 150,
                           ),
                         ),
+                        const SizedBox(
+                          width: 20,
+                        ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,19 +110,19 @@ class _TeamCardState extends State<TeamCard> {
                             Text(
                               member.name,
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 20,
                                 color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             Text(
                               member.title,
                               style: const TextStyle(
-                                fontSize: 20,
+                                fontSize: 17,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -129,9 +132,16 @@ class _TeamCardState extends State<TeamCard> {
                   );
                 },
                 itemCount: widget.members.length,
-              )
-            else
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+            ] else ...[
               const Text("No members found"),
+              const SizedBox(
+                height: 30,
+              ),
+            ]
           ],
         ),
       ),
