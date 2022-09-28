@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ocyclient/models/team/team_model.dart';
+import 'package:ocyclient/widgets/Teams/member/member_vertical.dart';
+import 'package:ocyclient/widgets/Teams/member/member_horizontal.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class TeamCard extends StatefulWidget {
@@ -89,31 +91,9 @@ class _TeamCardState extends State<TeamCard> {
                   widget.members.length,
                   (index) {
                     Member member = widget.members[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 45.0,
-                        vertical: 10,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: Image.network(
-                              member.image,
-                              width: 120,
-                              height: 120,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          memberDetails(member.name, member.title),
-                        ],
-                      ),
-                    );
+                    return widget.size.width > 500
+                        ? MemberHorizontal(member: member)
+                        : MemberVertical(member: member);
                   },
                 ),
               ),
@@ -136,34 +116,6 @@ class _TeamCardState extends State<TeamCard> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget memberDetails(
-    String name,
-    String title,
-  ) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          name,
-          style: const TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontFamily: "PublicSans"),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Text(
-          title,
-          style: const TextStyle(
-              fontSize: 17, color: Colors.white, fontFamily: "PublicSans"),
-        ),
-      ],
     );
   }
 }
