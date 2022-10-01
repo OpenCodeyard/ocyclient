@@ -1,0 +1,20 @@
+dartdoc:
+  categories:
+    "Blocs":
+      markdown: README.md
+      name: Blocs
+    "Configs":
+      markdown: README.md
+      name: Configs
+    "Models":
+      markdown: README.md
+      name: Models
+    "External":
+      markdown: README.md
+      name: External
+    "Widgets":
+      markdown: README.md
+      name: Widgets
+  categoryOrder: [ "Blocs","Widgets","Models","External" ]
+  favicon: web/favicon.ico
+  showUndocumentedCategories: true

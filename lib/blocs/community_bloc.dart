@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// {@category Blocs}
 class CommunityBloc extends ChangeNotifier {
   bool _hasCompletedCurtainAnimation = false;
 

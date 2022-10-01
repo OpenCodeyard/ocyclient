@@ -12,6 +12,7 @@ import 'package:ocyclient/models/user/user_model.dart';
 import 'package:ocyclient/widgets/Utils/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// {@category Blocs}
 /// Business logic for authenticated users
 class AuthenticationBloc extends ChangeNotifier {
   bool _inProgress = false;

@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/models/project/project_model.dart';
 
+/// {@category Blocs}
 class ProjectsBloc extends ChangeNotifier {
   Dio dio = Dio();
 
