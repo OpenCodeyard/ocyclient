@@ -16,6 +16,7 @@ class ProjectsBloc extends ChangeNotifier {
 
   bool get isProjectsLoading => _isProjectsLoading;
 
+  ///Gets list of projects for org from Github API
   void getProjects() async {
     String? token = dotenv.env[Config.envGhAccessToken];
 
@@ -43,6 +44,9 @@ class ProjectsBloc extends ChangeNotifier {
         _projects[i].contributors = contributors;
         i++;
       }
+
+      ///Sorts projects based on star count
+      _projects.sort((a,b) => b.starCount.compareTo(a.starCount));
 
       _isProjectsLoading = false;
       notifyListeners();
