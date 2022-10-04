@@ -102,7 +102,7 @@ class _TeamsPageState extends State<TeamsPage> {
                 ),
                 width: size.width,
                 child: tb.isLoading
-                    ? Container(
+                    ? SizedBox(
                         height: 250,
                         width: size.width,
                         child: const Center(
