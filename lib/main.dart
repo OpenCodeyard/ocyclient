@@ -3,17 +3,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
 import 'package:ocyclient/blocs/community_bloc.dart';
 import 'package:ocyclient/blocs/edit_profile_bloc.dart';
+import 'package:ocyclient/blocs/locale_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/blocs/profile_bloc.dart';
 import 'package:ocyclient/blocs/projects_bloc.dart';
 import 'package:ocyclient/blocs/teams_bloc.dart';
 import 'package:ocyclient/configs/config.dart';
+import 'package:ocyclient/utils/app_localizations.dart';
 import 'package:ocyclient/widgets/AboutUs/about_us.dart';
 import 'package:ocyclient/widgets/Auth/login_signup.dart';
 import 'package:ocyclient/widgets/Community/community.dart';
@@ -87,99 +90,122 @@ class OCYApp extends StatelessWidget {
           create: (context) => TeamsBloc(),
         ),
       ],
-      child: GetMaterialApp(
-        theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-            color: Colors.white,
-            centerTitle: false,
-            elevation: 2,
-            iconTheme: IconThemeData(
-              color: Colors.black,
-            ),
-            titleTextStyle: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              fontFamily: "PublicSans",
-            ),
-          ),
-          iconTheme: const IconThemeData(
-            color: Colors.black,
-          ),
-          buttonTheme: const ButtonThemeData(
-            textTheme: ButtonTextTheme.accent,
-          ),
-          colorScheme: const ColorScheme.light(
-            primary: Color(0xff0f254e),
-          ),
-          primaryColor: const Color(0xff0f254e),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(
+      child: ChangeNotifierProvider(
+        create: (context) => LocaleBLoc(),
+        builder: (context, _) => GetMaterialApp(
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(
+              color: Colors.white,
+              centerTitle: false,
+              elevation: 2,
+              iconTheme: IconThemeData(
+                color: Colors.black,
+              ),
+              titleTextStyle: TextStyle(
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
                 fontFamily: "PublicSans",
-                fontSize: 16,
               ),
-            ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                (states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return const Color(0xff0f254e);
-                  }
-                  return Colors.black;
-                },
+            ),
+            iconTheme: const IconThemeData(
+              color: Colors.black,
+            ),
+            buttonTheme: const ButtonThemeData(
+              textTheme: ButtonTextTheme.accent,
+            ),
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xff0f254e),
+            ),
+            primaryColor: const Color(0xff0f254e),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "PublicSans",
+                  fontSize: 16,
+                ),
+              ).copyWith(
+                foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                  (states) {
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0xff0f254e);
+                    }
+                    return Colors.black;
+                  },
+                ),
               ),
             ),
           ),
+          themeMode: ThemeMode.light,
+          initialRoute: "/home",
+          debugShowCheckedModeBanner: false,
+          supportedLocales: const [
+            Locale('en', 'US'),
+            Locale('bn', 'IN'), //Bengali
+          ],
+          locale: Provider.of<LocaleBLoc>(context).currentLocale,
+          localeResolutionCallback: (deviceLocale, supportedLocales) {
+            for (var locale in supportedLocales) {
+              if (locale.languageCode == deviceLocale!.languageCode &&
+                  locale.countryCode == deviceLocale.countryCode) {
+                return deviceLocale;
+              }
+            }
+            return supportedLocales.first;
+          },
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            AppLocalization.delegate,
+          ],
+          getPages: [
+            GetPage(
+              name: '/home',
+              page: () => const HomePage(),
+            ),
+            GetPage(
+              name: '/',
+              page: () => const HomePage(),
+            ),
+            GetPage(
+              name: '/community',
+              page: () => const CommunityPage(),
+            ),
+            GetPage(
+              name: '/about_us',
+              page: () => const AboutUsPage(),
+            ),
+            GetPage(
+              name: '/milestones',
+              page: () => const MilestonesPage(),
+            ),
+            GetPage(
+              name: '/teams',
+              page: () => const TeamsPage(),
+            ),
+            GetPage(
+              name: '/auth',
+              page: () => const LoginSignUp(),
+            ),
+            GetPage(
+              name: '/profile',
+              page: () => const ProfilePage(),
+            ),
+            GetPage(
+              name: '/editProfile',
+              page: () => const EditProfilePage(),
+            ),
+            GetPage(
+              name: '/licenses',
+              page: () => LicensePage(
+                applicationIcon: Image.asset("assets/images/ocy_logo.png"),
+                applicationName: "Open Codeyard",
+                applicationVersion: Config.appVersion,
+              ),
+            ),
+          ],
         ),
-        themeMode: ThemeMode.light,
-        initialRoute: "/home",
-        debugShowCheckedModeBanner: false,
-        getPages: [
-          GetPage(
-            name: '/home',
-            page: () => const HomePage(),
-          ),
-          GetPage(
-            name: '/',
-            page: () => const HomePage(),
-          ),
-          GetPage(
-            name: '/community',
-            page: () => const CommunityPage(),
-          ),
-          GetPage(
-            name: '/about_us',
-            page: () => const AboutUsPage(),
-          ),
-          GetPage(
-            name: '/milestones',
-            page: () => const MilestonesPage(),
-          ),
-          GetPage(
-            name: '/teams',
-            page: () => const TeamsPage(),
-          ),
-          GetPage(
-            name: '/auth',
-            page: () => const LoginSignUp(),
-          ),
-          GetPage(
-            name: '/profile',
-            page: () => const ProfilePage(),
-          ),
-          GetPage(
-            name: '/editProfile',
-            page: () => const EditProfilePage(),
-          ),
-          GetPage(
-            name: '/licenses',
-            page: () => LicensePage(
-              applicationIcon: Image.asset("assets/images/ocy_logo.png"),
-              applicationName: "Open Codeyard",
-              applicationVersion: Config.appVersion,
-            ),
-          ),
-        ],
       ),
     );
   }
