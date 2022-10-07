@@ -62,6 +62,14 @@ class MemberVertical extends StatelessWidget {
                           },
                           icon: FontAwesomeIcons.github,
                         ),
+                      if ((member.twitter ?? "").isNotEmpty)
+                        getIconButton(
+                          title: "",
+                          func: () {
+                            launchUrlString(member.twitter ?? "");
+                          },
+                          icon: FontAwesomeIcons.twitter,
+                        ),
                     ],
                   ),
                 ),
