@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/configs/config.dart';
+import 'package:ocyclient/utils/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'common_widgets.dart';
@@ -99,7 +100,8 @@ class _OcyScaffoldState extends State<OcyScaffold> {
     return Container(
       padding: const EdgeInsets.all(4.0),
       margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width < 1100 ? 5 : 10,vertical: 4),
+          horizontal: MediaQuery.of(context).size.width < 1100 ? 5 : 10,
+          vertical: 4),
       decoration: selected
           ? const BoxDecoration(
               border: Border(
@@ -133,10 +135,20 @@ class _OcyScaffoldState extends State<OcyScaffold> {
 
     return size.width > 900
         ? [
-            ...List.generate(Config.routeNames.length, (index) {
-              return getAppBarButton(
-                  Config.routeNames.keys.toList()[index], nb, index);
-            }),
+            ...List.generate(
+              Config.routeNames.length,
+              (index) {
+                return getAppBarButton(
+                  AppLocalization.of(context)
+                      .getTranslatedValue(
+                        Config.routeNames.keys.toList()[index],
+                      )
+                      .toString(),
+                  nb,
+                  index,
+                );
+              },
+            ),
             ...[
               ab.isLoggedIn
                   ? GestureDetector(

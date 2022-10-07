@@ -1,4 +1,0 @@
-enum CurtainEnum{
-  left,
-  right,
-}

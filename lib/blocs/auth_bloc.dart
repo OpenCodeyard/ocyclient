@@ -12,6 +12,7 @@ import 'package:ocyclient/models/user/user_model.dart';
 import 'package:ocyclient/widgets/Utils/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// {@category Blocs}
 /// Business logic for authenticated users
 class AuthenticationBloc extends ChangeNotifier {
   bool _inProgress = false;
@@ -88,10 +89,10 @@ class AuthenticationBloc extends ChangeNotifier {
 
                 User? user = res.user;
 
-                bool existingUser =
-                    (await userCollectionRef.doc(user?.uid).get()).exists;
+                List existingUser =
+                    await checkUserExists(response.data["email"]);
 
-                if (!existingUser) {
+                if (!existingUser[0]) {
                   _isLoggedIn = true;
                   _userModel = UserModel(
                     user?.uid ?? "",
@@ -104,7 +105,13 @@ class AuthenticationBloc extends ChangeNotifier {
                   );
                   await signUpUser(isGoogle: false);
                 } else {
-                  await fetchDataFromFirestore(user?.uid ?? "");
+                  await fetchDataFromFirestore(existingUser[1]);
+                  if (_userModel.loginProvidersConnected.contains("Google")) {
+                    _userModel.loginProvidersConnected.add("Github");
+                    await updateLoginProviders(
+                      List<String>.from(_userModel.loginProvidersConnected),
+                    );
+                  }
                 }
 
                 await savePrefs();
@@ -133,7 +140,8 @@ class AuthenticationBloc extends ChangeNotifier {
         toggleInProgressStatus(false);
         toggleGithubSignInStatus(false);
         if (result.errorMessage.contains("An account already exists")) {
-          showToast("Account already exists with Google");
+          showToast("Account already exists with Google."
+              " Login using your google account and link GitHub from profile.");
         } else {
           showToast(result.errorMessage);
         }
@@ -254,10 +262,9 @@ class AuthenticationBloc extends ChangeNotifier {
       if (user != null && userCredential != null) {
         _isLoggedIn = true;
 
-        bool existingUser =
-            (await userCollectionRef.doc(user.uid).get()).exists;
+        List existingUser = await checkUserExists(googleSignInAccount.email);
 
-        if (!existingUser) {
+        if (!existingUser[0]) {
           _userModel = UserModel(
             user.uid,
             googleSignInAccount.email,
@@ -269,7 +276,13 @@ class AuthenticationBloc extends ChangeNotifier {
           );
           await signUpUser();
         } else {
-          await fetchDataFromFirestore(user.uid);
+          await fetchDataFromFirestore(existingUser[1]);
+          if (_userModel.loginProvidersConnected.contains("Github")) {
+            _userModel.loginProvidersConnected.add("Google");
+            await updateLoginProviders(
+              List<String>.from(_userModel.loginProvidersConnected),
+            );
+          }
         }
 
         await savePrefs();
@@ -453,5 +466,20 @@ class AuthenticationBloc extends ChangeNotifier {
 
     await savePrefs();
     notifyListeners();
+  }
+
+  Future<List> checkUserExists(String email) async {
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> snaps =
+        (await userCollectionRef
+                .where(Config.userEmail, isEqualTo: email)
+                .limit(1)
+                .get())
+            .docs;
+    bool exists = snaps.isNotEmpty;
+    if (exists) {
+      return [exists, snaps[0].data()[Config.userUID]];
+    } else {
+      return [exists];
+    }
   }
 }

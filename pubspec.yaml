@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.5.0-alpha+7
+version: 0.6.0-alpha+9
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -28,6 +28,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
@@ -50,7 +52,7 @@ dependencies:
   shared_preferences: 2.0.15
 
   # Extras
-  url_launcher: ^6.1.5
+  url_launcher: ^6.1.6
   webview_flutter: ^3.0.4
   step_progress_indicator: ^1.0.2
   fluttertoast: ^8.0.9
@@ -61,16 +63,16 @@ dependencies:
   http: ^0.13.5
 
   #Firebase dependencies
-  firebase_auth: ^3.7.0
-  firebase_core: ^1.21.1
-  cloud_firestore: ^3.4.6
+  firebase_auth: ^3.11.1
+  firebase_core: ^1.24.0
+  cloud_firestore: ^3.5.0
 
   #Web
   universal_html: ^2.0.8
   js: ^0.6.3
 
   #Login Providers
-  google_sign_in: ^5.4.1
+  google_sign_in: ^5.4.2
 
   #Apis
   dio: ^4.0.6
@@ -103,6 +105,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/langs/
     - env
 
   fonts:

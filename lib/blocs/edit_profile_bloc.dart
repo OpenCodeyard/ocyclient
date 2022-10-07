@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// {@category Blocs}
 class EditProfileBloc extends ChangeNotifier {
   int _currentSelectedMenuItem = 0;
 

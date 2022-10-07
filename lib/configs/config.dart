@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:ocyclient/models/localization/language.dart';
 
+/// {@category Configs}
 class Config {
   static final Map<String, String> _routeNames = {
-    "Home": "/home",
+    "home": "/home",
     // "Community": "/community",
-    "About Us": "/about_us",
-    "Teams": "/teams",
+    "about_us": "/about_us",
+    "teams": "/teams",
     // "Milestones": "/milestones",
   };
 
@@ -117,6 +119,7 @@ class Config {
     "Hackers 🕶️",
     "Brain-Stormers 💡",
     "Techies 🧑‍💻",
+    "Singers 👨‍🎤",
     "Dancers 🕺",
     "Open Codeyard ♥️",
   ];
@@ -128,4 +131,11 @@ class Config {
     Color(0xffa59cd3),
     Color(0xff4b2d9f),
   ];
+
+  static List<Language> languageList = [
+    Language("English", "US", "en"),
+    Language("বাংলা", "IN", "bn"),
+  ];
+
+
 }
