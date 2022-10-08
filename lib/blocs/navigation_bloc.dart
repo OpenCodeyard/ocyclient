@@ -4,6 +4,14 @@ import 'package:get/utils.dart';
 
 /// {@category Blocs}
 class NavigationBloc extends ChangeNotifier {
+  late GlobalKey<NavigatorState> _navigatorKey;
+
+  GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
+
+  NavigationBloc(GlobalKey<NavigatorState> navigatorKey) {
+    _navigatorKey = navigatorKey;
+  }
+
   void toRoute(String s,
       {bool shouldPopCurrent = false, bool shouldPopAll = false}) {
     if (shouldPopAll) {
