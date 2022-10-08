@@ -7,12 +7,12 @@ class LocaleBLoc extends ChangeNotifier {
   static const String english = "en";
   static const String bengali = "bn";
 
-  late Locale _currentLocale = const Locale("en", "US");
+  late Locale _currentLocale;
 
   Locale get currentLocale => _currentLocale;
 
-  LocaleBLoc() {
-    loadLocale();
+  LocaleBLoc(GlobalKey<NavigatorState> navigatorKey) {
+    loadLocale(navigatorKey);
   }
 
   void changeLanguage(Language language, context) async {
@@ -54,19 +54,29 @@ class LocaleBLoc extends ChangeNotifier {
     return Language("English", "US", "en");
   }
 
-  void loadLocale() async {
+  void loadLocale(GlobalKey<NavigatorState> navigatorKey) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
 
     String? countryCode = sp.getString("currentLanguageCountryCode");
+    String? langCode = sp.getString("currentLanguageCode") ?? "en";
+
     if (countryCode == "NULL" || countryCode == null) {
       countryCode = "US";
     }
 
     _currentLocale = Locale(
-      sp.getString("currentLanguageCode") ?? "en",
+      langCode,
       countryCode,
     );
 
-    notifyListeners();
+    changeLanguage(
+      Language(
+        sp.getString("currentLanguageName") ?? "English",
+        countryCode,
+        langCode,
+      ),
+      navigatorKey.currentContext,
+    );
+
   }
 }

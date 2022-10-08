@@ -58,18 +58,20 @@ Future<void> configureApp() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureApp();
-  runApp(const OCYApp());
+  runApp(OCYApp());
 }
 
 class OCYApp extends StatelessWidget {
-  const OCYApp({Key? key}) : super(key: key);
+  OCYApp({Key? key}) : super(key: key);
+
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<NavigationBloc>(
-          create: (context) => NavigationBloc(),
+          create: (context) => NavigationBloc(navigatorKey),
         ),
         ChangeNotifierProvider<AuthenticationBloc>(
           create: (context) => AuthenticationBloc(),
@@ -89,10 +91,14 @@ class OCYApp extends StatelessWidget {
         ChangeNotifierProvider<TeamsBloc>(
           create: (context) => TeamsBloc(),
         ),
+        ChangeNotifierProvider<LocaleBLoc>(
+          create: (context) => LocaleBLoc(navigatorKey),
+        ),
       ],
       child: ChangeNotifierProvider(
-        create: (context) => LocaleBLoc(),
+        create: (context) => LocaleBLoc(navigatorKey),
         builder: (context, _) => GetMaterialApp(
+          navigatorKey: navigatorKey,
           theme: ThemeData(
             appBarTheme: const AppBarTheme(
               color: Colors.white,
@@ -145,9 +151,11 @@ class OCYApp extends StatelessWidget {
           ],
           locale: Provider.of<LocaleBLoc>(context).currentLocale,
           localeResolutionCallback: (deviceLocale, supportedLocales) {
+            print("HERE");
             for (var locale in supportedLocales) {
               if (locale.languageCode == deviceLocale!.languageCode &&
                   locale.countryCode == deviceLocale.countryCode) {
+                print(deviceLocale.languageCode);
                 return deviceLocale;
               }
             }
