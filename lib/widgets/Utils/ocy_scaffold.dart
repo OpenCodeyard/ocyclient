@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
+import 'package:ocyclient/blocs/locale_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/configs/config.dart';
+import 'package:ocyclient/models/localization/language.dart';
 import 'package:ocyclient/utils/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -30,16 +32,21 @@ class _OcyScaffoldState extends State<OcyScaffold> {
 
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
     AuthenticationBloc ab = Provider.of<AuthenticationBloc>(context);
+    LocaleBLoc lb = Provider.of<LocaleBLoc>(context);
 
     return widget.enableSelection
         ? SelectionArea(
-            child: getCustomScaffold(size, nb, ab),
+            child: getCustomScaffold(size, nb, ab, lb),
           )
-        : getCustomScaffold(size, nb, ab);
+        : getCustomScaffold(size, nb, ab, lb);
   }
 
   Widget getCustomScaffold(
-      Size size, NavigationBloc nb, AuthenticationBloc ab) {
+    Size size,
+    NavigationBloc nb,
+    AuthenticationBloc ab,
+    LocaleBLoc lb,
+  ) {
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: size.width > 900 ? null : const AppDrawer(),
@@ -85,7 +92,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
             ],
           ),
         ),
-        actions: getAppBarActions(nb, size, ab),
+        actions: getAppBarActions(nb, size, ab, lb),
       ),
       body: widget.body,
     );
@@ -130,7 +137,11 @@ class _OcyScaffoldState extends State<OcyScaffold> {
   }
 
   List<Widget> getAppBarActions(
-      NavigationBloc nb, Size size, AuthenticationBloc ab) {
+    NavigationBloc nb,
+    Size size,
+    AuthenticationBloc ab,
+    LocaleBLoc lb,
+  ) {
     String? name = ModalRoute.of(context)?.settings.name;
 
     return size.width > 900
@@ -148,6 +159,41 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                   index,
                 );
               },
+            ),
+            DropdownButtonHideUnderline(
+              child: DropdownButton<Language>(
+                dropdownColor: Colors.white,
+                value: lb.getCurrentSelectedLanguage(),
+                items: Config.languageList.map((Language value) {
+                  return DropdownMenuItem<Language>(
+                    value: value,
+                    child: Container(
+                      width: 200,
+                      child: Text(
+                        value.name,
+                      ),
+                    ),
+                  );
+                }).toList(),
+                selectedItemBuilder: (context) {
+                  return Config.languageList.map<Widget>((Language value) {
+                    // This is the widget that will be shown when you select an item.
+                    // Here custom text style, alignment and layout size can be applied
+                    // to selected item string.
+                    return DropdownMenuItem<Language>(
+                      value: value,
+                      child: Text(
+                        value.name.substring(0, 2),
+                      ),
+                    );
+                  }).toList();
+                },
+                onChanged: (Language? l) {
+                  if (l != null) {
+                    lb.changeLanguage(l, context);
+                  }
+                },
+              ),
             ),
             ...[
               ab.isLoggedIn
