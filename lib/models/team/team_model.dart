@@ -29,6 +29,7 @@ class Member {
   String image;
   String? github;
   String? linkedIn;
+  String? twitter;
 
   Member({
     required this.name,
@@ -36,6 +37,7 @@ class Member {
     required this.image,
     this.github,
     this.linkedIn,
+    this.twitter,
   });
 
   static fromJson(json) {
@@ -45,6 +47,7 @@ class Member {
       title: json["title"],
       github: json["github"],
       linkedIn: json["linkedIn"],
+      twitter: json["twitter"],
     );
   }
 }
