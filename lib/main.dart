@@ -29,6 +29,20 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureApp();
+  runApp(OCYApp());
+}
+
+void enableEdgeToEdge({bool enable = true}) {
+  ///Necessary for edge to edge
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(systemNavigationBarColor: Colors.white),
+  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+}
+
 Future<void> configureApp() async {
   setUrlStrategy(PathUrlStrategy());
   await dotenv.load(fileName: "env");
@@ -53,12 +67,8 @@ Future<void> configureApp() async {
   if (!isLoggedIn && allowUnauthenticated) {
     SystemNavigator.routeInformationUpdated(location: '/home', replace: true);
   }
-}
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await configureApp();
-  runApp(OCYApp());
+  enableEdgeToEdge();
 }
 
 class OCYApp extends StatelessWidget {
@@ -151,11 +161,9 @@ class OCYApp extends StatelessWidget {
           ],
           locale: Provider.of<LocaleBLoc>(context).currentLocale,
           localeResolutionCallback: (deviceLocale, supportedLocales) {
-            print("HERE");
             for (var locale in supportedLocales) {
               if (locale.languageCode == deviceLocale!.languageCode &&
                   locale.countryCode == deviceLocale.countryCode) {
-                print(deviceLocale.languageCode);
                 return deviceLocale;
               }
             }
