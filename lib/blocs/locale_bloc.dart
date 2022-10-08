@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/models/localization/language.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,7 +8,7 @@ class LocaleBLoc extends ChangeNotifier {
   static const String english = "en";
   static const String bengali = "bn";
 
-  late Locale _currentLocale;
+  Locale _currentLocale = const Locale(english, "US");
 
   Locale get currentLocale => _currentLocale;
 
@@ -31,6 +32,8 @@ class LocaleBLoc extends ChangeNotifier {
     }
     _currentLocale = locale;
     notifyListeners();
+
+    Get.updateLocale(currentLocale);
 
     sp.setString("currentLanguageName", getCurrentSelectedLanguage().name);
     sp.setString("currentLanguageCode", _currentLocale.languageCode);
@@ -69,14 +72,6 @@ class LocaleBLoc extends ChangeNotifier {
       countryCode,
     );
 
-    changeLanguage(
-      Language(
-        sp.getString("currentLanguageName") ?? "English",
-        countryCode,
-        langCode,
-      ),
-      navigatorKey.currentContext,
-    );
-
+    Get.updateLocale(currentLocale);
   }
 }

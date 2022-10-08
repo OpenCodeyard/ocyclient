@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:ocyclient/blocs/auth_bloc.dart';
 import 'package:ocyclient/blocs/locale_bloc.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/models/localization/language.dart';
-import 'package:ocyclient/utils/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'common_widgets.dart';
@@ -150,11 +150,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
               Config.routeNames.length,
               (index) {
                 return getAppBarButton(
-                  AppLocalization.of(context)
-                      .getTranslatedValue(
-                        Config.routeNames.keys.toList()[index],
-                      )
-                      .toString(),
+                  Config.routeNames.keys.toList()[index].tr,
                   nb,
                   index,
                 );
@@ -167,7 +163,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                 items: Config.languageList.map((Language value) {
                   return DropdownMenuItem<Language>(
                     value: value,
-                    child: Container(
+                    child: SizedBox(
                       width: 200,
                       child: Text(
                         value.name,
