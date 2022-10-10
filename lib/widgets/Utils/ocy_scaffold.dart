@@ -114,7 +114,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
               border: Border(
                 bottom: BorderSide(
                   width: 3,
-                  color: Color(0xff071a2b),
+                  color: Color(0xff152839),
                 ),
               ),
             )
@@ -127,7 +127,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
           label,
           style: TextStyle(
             fontSize: MediaQuery.of(context).size.width < 1100 ? 12 : 15,
-            color: selected ? const Color(0xff071a2b) : Colors.black,
+            color: selected ? const Color(0xff152839) : Colors.black,
             fontFamily: "PublicSans",
             fontWeight: selected ? FontWeight.w700 : FontWeight.normal,
           ),
@@ -224,9 +224,9 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                             )
                           : null,
                       child: TextButton.icon(
-                        icon: const Icon(
+                        icon:  const Icon(
                           Icons.login,
-                          color: Colors.deepPurple,
+                          color: Color(0xff152839),
                         ),
                         onPressed: () {
                           nb.toRoute("/auth");
@@ -234,7 +234,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                         label: const Text(
                           "Log In",
                           style: TextStyle(
-                            color: Colors.deepPurple,
+                            color: Color(0xff152839),
                           ),
                         ),
                       ),

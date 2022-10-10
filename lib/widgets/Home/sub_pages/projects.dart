@@ -248,11 +248,17 @@ class ProjectsState extends State<Projects> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Divider(),
                               //TODO refactoring
-                              Padding(
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff152839),
+                                  borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(15),
+                                    bottomLeft: Radius.circular(15),
+                                  ),
+                                ),
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0, horizontal: 23),
+                                    vertical: 10.0, horizontal: 23),
                                 child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -261,9 +267,9 @@ class ProjectsState extends State<Projects> {
                                         "Top contributors",
                                         style: TextStyle(
                                           fontSize: 15,
-                                          fontWeight: FontWeight.w400,
+                                          fontWeight: FontWeight.w700,
                                           fontFamily: "PublicSans",
-                                          color: Colors.black,
+                                          color: Colors.white,
                                         ),
                                       ),
                                       Stack(
@@ -278,13 +284,13 @@ class ProjectsState extends State<Projects> {
                                               left: 3 * 32 - 1,
                                               child: CircleAvatar(
                                                 radius: 25,
-                                                backgroundColor:
-                                                    const Color(0xff071a2b),
+                                                backgroundColor: Colors.white,
                                                 child: Text(
                                                   "+${contributorsLength - 3}",
                                                   style: const TextStyle(
                                                     fontFamily: "PublicSans",
                                                     fontWeight: FontWeight.w700,
+                                                    color: Color(0xff152839),
                                                   ),
                                                 ),
                                               ),

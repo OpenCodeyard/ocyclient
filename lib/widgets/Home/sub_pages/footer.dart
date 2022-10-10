@@ -17,7 +17,7 @@ class Footer extends StatelessWidget {
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
     return Container(
-      color: const Color(0xff0f254e),
+      color: Color(0xff152839),
       height: size.width <= 700 ? null : 300,
       padding: const EdgeInsets.all(10),
       child: Column(
