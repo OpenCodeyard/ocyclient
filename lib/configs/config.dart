@@ -105,8 +105,9 @@ class Config {
 
   ///Social
   static const String linkedInUrl =
-      "https://www.linkedin.com/company/83490580/";
+      "https://www.linkedin.com/company/opencodeyard";
   static const String ghUrl = "https://github.com/OpenCodeyard";
+  static const String telegramUrl = "https://telegram.me/Open_Codeyard";
 
   static const List<String> weAre = [
     "Coders 💻",

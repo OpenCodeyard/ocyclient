@@ -17,7 +17,7 @@ class Footer extends StatelessWidget {
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
     return Container(
-      color: Color(0xff152839),
+      color: const Color(0xff152839),
       height: size.width <= 700 ? null : 300,
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -194,49 +194,36 @@ class Footer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            getFooterSocialButton(FontAwesomeIcons.github, link: Config.ghUrl),
-            getFooterSocialButton(FontAwesomeIcons.linkedinIn,
-                link: Config.linkedInUrl),
+            getFooterSocialButton(
+              FontAwesomeIcons.github,
+              link: Config.ghUrl,
+            ),
+            getFooterSocialButton(
+              FontAwesomeIcons.linkedinIn,
+              link: Config.linkedInUrl,
+            ),
             getFooterSocialButton(
               FontAwesomeIcons.discord,
             ),
-            getFooterSocialButton(FontAwesomeIcons.telegram),
+            getFooterSocialButton(
+              FontAwesomeIcons.telegram,
+              link: Config.telegramUrl,
+            ),
           ],
         ),
         const SizedBox(
           height: 40,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              "assets/images/handshake.png",
-              width: 40,
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            const Text(
-              "Powered by\nOpen Source",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                height: 1.6,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontFamily: "PublicSans",
-                fontSize: 19,
-              ),
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Image.asset(
-              "assets/images/handshake.png",
-              width: 40,
-              fit: BoxFit.cover,
-            ),
-          ],
+        const Text(
+          "Engineered with ❤️ by\nOpen Codeyard",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            height: 1.6,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: "PublicSans",
+            fontSize: 19,
+          ),
         ),
       ],
     );

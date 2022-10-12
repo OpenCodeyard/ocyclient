@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
 class UpcomingEvents extends StatelessWidget {
@@ -11,7 +10,7 @@ class UpcomingEvents extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.all(size.width < 900 ? 30 : 15),
-      color: const Color(0xffeaeaea),
+      color: Colors.white,
       width: size.width,
       // height: 400,
       child: Column(
@@ -28,25 +27,34 @@ class UpcomingEvents extends StatelessWidget {
                     const SizedBox(
                       height: 50,
                     ),
-                    featuredEvent(size),
                   ],
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // SizedBox(
-                    //   width: size.width < 1200
-                    //       ? size.width * 0.1
-                    //       : size.width * 0.2,
-                    // ),
+                    Column(
+                      children: "EVENTS"
+                          .split("")
+                          .map((string) => Text(
+                                string,
+                                style: TextStyle(
+                                  fontFamily: "PublicSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: size.width > 1100 ? 70 : 60,
+                                  letterSpacing: 4,
+                                  foreground: Paint()
+                                    ..strokeWidth = 1
+                                    ..style = PaintingStyle.stroke
+                                    ..color = const Color(
+                                      0xff071a2b,
+                                    ),
+                                ),
+                              ))
+                          .toList(),
+                    ),
                     eventZone(size),
-                    // const Spacer(),
-                    featuredEvent(size),
-                    // SizedBox(
-                    //   width: size.width < 1200
-                    //       ? size.width * 0.05
-                    //       : size.width * 0.1,
-                    // ),
+                    eventZone(size),
                   ],
                 ),
           SizedBox(
@@ -57,117 +65,10 @@ class UpcomingEvents extends StatelessWidget {
     );
   }
 
-  Widget featuredEvent(Size size) {
-    return Container(
-      height: size.width < 540 ? size.height / 6 : size.height / 4.2,
-      width: size.width < 540
-          ? size.width * 0.9
-          : size.width < 900
-              ? 480
-              : size.width > 1000
-                  ? 480
-                  : size.width / 2.4,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        border: Border.all(color: const Color(0xffceb4f6), width: 4),
-        color: const Color(0xffeaeaea),
-      ),
-      child: Center(
-        child: Card(
-          elevation: 5,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: SizedBox(
-            height: size.width < 540 ? size.height / 7.2 : size.height / 4.8,
-            width: size.width < 540
-                ? size.width * 0.8
-                : size.width < 900
-                    ? 450
-                    : size.width > 1000
-                        ? 450
-                        : size.width / 2.6,
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                CircleAvatar(
-                  backgroundImage:
-                      const AssetImage("assets/images/ocy_logo.png"),
-                  radius: size.width < 540 ? 30 : 60,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Hacktober Fest",
-                      style: TextStyle(
-                        fontSize: size.width < 540 ? 15 : 20,
-                        fontFamily: "PublicSans",
-                      ),
-                    ),
-                    Text(
-                      "October 2022",
-                      style: TextStyle(
-                        fontSize: size.width < 540 ? 12 : 16,
-                        fontFamily: "PublicSans",
-                      ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        alignment: Alignment.centerLeft,
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        "View",
-                        style: TextStyle(
-                          fontSize: size.width < 540 ? 12 : 15,
-                          color: Colors.blue,
-                          fontFamily: "PublicSans",
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget eventZone(Size size) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: const [
-            Text(
-              "Event Zone",
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.w700,
-                fontFamily: "PublicSans",
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            Icon(
-              FontAwesomeIcons.gamepad,
-              size: 30,
-              color: Colors.deepPurple,
-            )
-          ],
-        ),
         const SizedBox(
           height: 30,
         ),
@@ -182,8 +83,10 @@ class UpcomingEvents extends StatelessWidget {
             " a wide range of topics from technology, "
             "games, awareness campaigns, etc.",
             style: TextStyle(
-                fontSize: size.width < 1000 ? 16 : 18,
-                fontFamily: "PublicSans"),
+              fontSize: size.width < 1000 ? 16 : 18,
+              fontFamily: "PublicSans",
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         const SizedBox(

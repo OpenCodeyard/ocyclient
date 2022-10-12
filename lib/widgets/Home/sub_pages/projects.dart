@@ -37,13 +37,13 @@ class ProjectsState extends State<Projects> {
           const SizedBox(
             height: 25,
           ),
-          const Text(
+          Text(
             "Projects",
             style: TextStyle(
-              fontSize: 30,
+              fontSize: size.width > 800 ? 40 : 35,
               fontWeight: FontWeight.w700,
               fontFamily: "PublicSans",
-              color: Colors.black,
+              color: const Color(0xff071a2b),
             ),
           ),
           const SizedBox(

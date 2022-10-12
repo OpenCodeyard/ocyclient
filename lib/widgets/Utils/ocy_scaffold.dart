@@ -202,7 +202,15 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child: ab.isLoggedIn
-                              ? Image.network(ab.userModel.profilePicUrl)
+                              ? Image.network(
+                                  ab.userModel.profilePicUrl,
+                                  errorBuilder: (ctx, _, __) {
+                                    return const Icon(
+                                      FontAwesomeIcons.userSecret,
+                                      size: 25,
+                                    );
+                                  },
+                                )
                               : null,
                         ),
                       ),
@@ -224,7 +232,7 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                             )
                           : null,
                       child: TextButton.icon(
-                        icon:  const Icon(
+                        icon: const Icon(
                           Icons.login,
                           color: Color(0xff152839),
                         ),

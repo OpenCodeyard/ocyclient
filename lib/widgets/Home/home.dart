@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ocyclient/widgets/Home/sub_pages/benefits.dart';
@@ -34,7 +33,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const <Widget>[
             Intro(),
-            if (kDebugMode) UpcomingEvents(),
+            // if (kDebugMode) UpcomingEvents(),
             Benefits(),
             Projects(),
             Footer(),
