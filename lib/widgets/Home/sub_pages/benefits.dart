@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/widgets/Utils/measure_size_render_object.dart';
+import 'package:ocyclient/widgets/Utils/snackbar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class Benefits extends StatefulWidget {
@@ -22,9 +24,9 @@ class BenefitsState extends State<Benefits> {
     return SizedBox(
       width: size.width,
       height: size.width > 950
-          ? size.height * 0.8 - 60
+          ? size.height * 0.8 - 50
           : size.width > 800
-              ? size.height * 0.8 - 40
+              ? size.height * 0.8 - 20
               : size.height * 0.9 - 100,
       child: Column(
         children: [
@@ -34,17 +36,21 @@ class BenefitsState extends State<Benefits> {
           Text(
             "Why Open Source ?",
             style: TextStyle(
-              fontSize: size.width > 800 ? 30 : 20,
+              fontSize: size.width > 800
+                  ? 40
+                  : size.width > 400
+                      ? 35
+                      : 25,
               fontWeight: FontWeight.w700,
               fontFamily: "PublicSans",
-              color: Colors.black,
+              color: const Color(0xff071a2b),
             ),
           ),
           const SizedBox(
             height: 40,
           ),
           SizedBox(
-            width: size.width / 1.5,
+            width: size.width > 400 ? size.width / 1.5 : size.width,
             child: Text(
               "We believe software should be free for all."
               "\nUnder our open source program we plan to reduce the economic gaps of society.",
@@ -73,7 +79,24 @@ class BenefitsState extends State<Benefits> {
                     0,
                     const Color(0xff071a2b),
                     LineIcons.graduationCap,
-                    null,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            LineIcons.github,
+                            color: _amIHovering[0]
+                                ? const Color(0xffe8f9ff)
+                                : Colors.black,
+                          ),
+                          iconSize: 35,
+                          tooltip: "GitHub",
+                          onPressed: () {
+                            launchUrlString("https://github.com/OpenCodeyard");
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     width: 40,
@@ -87,19 +110,19 @@ class BenefitsState extends State<Benefits> {
                     const Color(0xff1e2e68),
                     LineIcons.peopleCarry,
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         IconButton(
                           icon: Icon(
-                            LineIcons.github,
+                            LineIcons.linkedinIn,
                             color: _amIHovering[1]
                                 ? const Color(0xffe8f9ff)
                                 : Colors.black,
                           ),
                           iconSize: 35,
-                          tooltip: "GitHub",
+                          tooltip: "LinkedIn",
                           onPressed: () {
-                            launchUrlString("https://github.com/OpenCodeyard");
+                            launchUrlString(Config.linkedInUrl);
                           },
                         ),
                         IconButton(
@@ -112,8 +135,20 @@ class BenefitsState extends State<Benefits> {
                           tooltip: "Discord",
                           iconSize: 35,
                           onPressed: () {
-                            launchUrlString(
-                                "https://discord.com/channels/929987337742602272/929988126225616926/929993469898924063");
+                            showToast("Coming Soon");
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            LineIcons.telegram,
+                            color: _amIHovering[1]
+                                ? const Color(0xffe8f9ff)
+                                : Colors.black,
+                          ),
+                          tooltip: "Telegram",
+                          iconSize: 35,
+                          onPressed: () {
+                            launchUrlString(Config.telegramUrl);
                           },
                         ),
                       ],
