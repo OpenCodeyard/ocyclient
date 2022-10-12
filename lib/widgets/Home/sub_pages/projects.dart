@@ -241,6 +241,23 @@ class ProjectsState extends State<Projects> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
+                                      const SizedBox(
+                                        width: 25,
+                                      ),
+                                      const Icon(
+                                        Icons.remove_red_eye,
+                                        size: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        project.watchCount.toString(),
+                                        style: const TextStyle(
+                                          fontFamily: "PublicSans",
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
