@@ -35,7 +35,7 @@ class _TeamsPageState extends State<TeamsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: size.width < 650 ? size.height / 2 : size.height,
+                height: size.width < 650 ? size.height / 1.6 : size.height,
                 width: size.width,
                 padding: EdgeInsets.only(left: size.width * 0.1),
                 decoration: const BoxDecoration(
@@ -51,7 +51,7 @@ class _TeamsPageState extends State<TeamsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 60,
+                      height: 150,
                     ),
                     SizedBox(
                       width: size.width / (size.width > 550 ? 2 : 1),
@@ -123,7 +123,7 @@ class _TeamsPageState extends State<TeamsPage> {
                               child: size.width > 800
                                   ? Row(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Column(
                                           children: "TEAMS"
@@ -138,13 +138,14 @@ class _TeamsPageState extends State<TeamsPage> {
                                                           size.width > 1100
                                                               ? 140
                                                               : 80,
-                                                      letterSpacing: 5,
+                                                      height: 1.5,
                                                       foreground: Paint()
                                                         ..strokeWidth = 1
                                                         ..style =
                                                             PaintingStyle.stroke
                                                         ..color = const Color(
-                                                            0xff8aafcc),
+                                                          0xff8aafcc,
+                                                        ),
                                                     ),
                                                   ))
                                               .toList(),
@@ -171,9 +172,6 @@ class _TeamsPageState extends State<TeamsPage> {
                                               ..style = PaintingStyle.stroke
                                               ..color = const Color(0xff8aafcc),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 50,
                                         ),
                                         getTeams(size, tb),
                                       ],

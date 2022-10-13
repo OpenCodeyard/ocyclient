@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ocyclient/blocs/navigation_bloc.dart';
 import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/widgets/Utils/common_widgets.dart';
-import 'package:ocyclient/widgets/Utils/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -237,28 +236,4 @@ class Footer extends StatelessWidget {
     ];
   }
 
-  Widget getFooterSocialButton(IconData icon, {String? link}) {
-    return GestureDetector(
-      onTap: () {
-        if (link == null) {
-          showToast("Coming soon");
-        } else {
-          launchUrlString(link);
-        }
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: SizedBox(
-          width: 30,
-          height: 30,
-          child: MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: getIconForButton(icon),
-          ),
-        ),
-      ),
-    );
-  }
 }

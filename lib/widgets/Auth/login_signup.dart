@@ -25,6 +25,7 @@ class LoginSignUpState extends State<LoginSignUp> {
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
     return OcyScaffold(
+      useDarkAppBarColor: true,
       enableSelection: false,
       body: Center(
         child: SizedBox(
@@ -165,7 +166,6 @@ class LoginSignUpState extends State<LoginSignUp> {
                     color: Colors.black,
                   ),
                 ),
-
                 TextSpan(
                   text: "} ;",
                   style: TextStyle(
@@ -217,7 +217,7 @@ class LoginSignUpState extends State<LoginSignUp> {
                   showToast("Please wait. Login in progress");
                   return;
                 }
-                ab.authWithGoogle(nb,false);
+                ab.authWithGoogle(nb, false);
               },
               icon: !isMobile && ab.isGoogleSignInOngoing
                   ? Stack(
@@ -279,7 +279,7 @@ class LoginSignUpState extends State<LoginSignUp> {
                   showToast("Please wait. Login in progress");
                   return;
                 }
-                ab.authWithGithub(context, nb,false);
+                ab.authWithGithub(context, nb, false);
               },
               icon: !isMobile && ab.isGithubSignInOngoing
                   ? Stack(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ocyclient/widgets/Utils/snackbar.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 Widget getIconButton(
     {required String title, required Function func, required IconData icon}) {
@@ -54,5 +56,31 @@ Widget getIconForButton(IconData icon) {
     icon,
     color: const Color(0xff0f254e),
     size: 15,
+  );
+}
+
+
+Widget getFooterSocialButton(IconData icon, {String? link}) {
+  return GestureDetector(
+    onTap: () {
+      if (link == null) {
+        showToast("Coming soon");
+      } else {
+        launchUrlString(link);
+      }
+    },
+    child: Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: SizedBox(
+        width: 30,
+        height: 30,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: getIconForButton(icon),
+        ),
+      ),
+    ),
   );
 }

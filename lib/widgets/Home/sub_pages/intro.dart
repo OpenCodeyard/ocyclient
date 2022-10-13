@@ -1,7 +1,8 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ocyclient/configs/config.dart';
+import 'package:ocyclient/widgets/Utils/common_widgets.dart';
+import 'package:ocyclient/widgets/Utils/snackbar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class Intro extends StatelessWidget {
@@ -14,36 +15,34 @@ class Intro extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/welcome.jpg",
+              ),
+              fit: BoxFit.cover,
+              opacity: 0.8,
+            ),
+            color: Color(0xff152839),
+          ),
           width: MediaQuery.of(context).size.width,
-          color: const Color(0xff262626),
-          height: MediaQuery.of(context).size.height * 0.9 - 70,
+          height: MediaQuery.of(context).size.height,
           child: size.width < 1150
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     logoDescription(size),
-                    ocy(size),
+                    // ocy(size),
                   ],
                 )
               : Row(
                   children: [
-                    ocy(size),
+                    // ocy(size),
                     logoDescription(size),
                   ],
                 ),
         ),
-        if (size.width > 1150)
-          Positioned(
-            left: size.width / 2.1,
-            child: Transform.rotate(
-              angle: math.pi / 30,
-              child: Container(
-                color: Colors.white,
-                height: size.height,
-                width: 5,
-              ),
-            ),
-          )
       ],
     );
   }
@@ -64,50 +63,6 @@ class Intro extends StatelessWidget {
               width: 120,
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          Text(
-            "Join the Community",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: size.width < 700 ? 14 : 20,
-              fontWeight: FontWeight.w500,
-              fontFamily: "PublicSans",
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: const Icon(
-                  LineIcons.github,
-                  color: Colors.white,
-                ),
-                iconSize: 35,
-                tooltip: "GitHub",
-                onPressed: () {
-                  launchUrlString("https://github.com/OpenCodeyard");
-                },
-              ),
-              IconButton(
-                icon: const Icon(
-                  LineIcons.discord,
-                  color: Colors.white,
-                ),
-                tooltip: "Discord",
-                iconSize: 35,
-                onPressed: () {
-                  launchUrlString(
-                      "https://discord.com/channels/929987337742602272/929988126225616926/929993469898924063");
-                },
-              ),
-            ],
-          ),
         ],
       ),
     );
@@ -115,75 +70,97 @@ class Intro extends StatelessWidget {
 
   Widget logoDescription(Size size) {
     return SizedBox(
-      width: size.width < 1150 ? size.width : size.width / 2,
+      width: size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Spacer(),
+          const SizedBox(
+            height: 50,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/images/icon_community.png",
-                width: size.width < 500
-                    ? 40
-                    : size.width < 700
-                        ? 60
-                        : 80,
-                height: size.width < 500
-                    ? 40
-                    : size.width < 700
-                        ? 60
-                        : 80,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(
-                width: 30,
-              ),
-              RichText(
-                text: TextSpan(
-                  text: "Open ",
-                  style: TextStyle(
+              Text(
+                "OPEN CODEYARD",
+                style: TextStyle(
                     fontSize: size.width < 500
-                        ? 23
+                        ? 40
                         : size.width < 1200
-                            ? 33
-                            : 40,
+                            ? 50
+                            : 100,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
                     fontFamily: "PublicSans",
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: "Codeyard",
-                      style: TextStyle(
-                        fontSize: size.width < 500
-                            ? 23
-                            : size.width < 1200
-                                ? 33
-                                : 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                    color: Colors.white),
+              )
             ],
           ),
+          // Container(
+          //   padding: EdgeInsets.symmetric(
+          //     horizontal: size.width < 420 ? 40 : 5,
+          //     vertical: 50,
+          //   ),
+          //   child: Text(
+          //     "We believe every contribution is special and so are you.",
+          //     textAlign: TextAlign.center,
+          //     style: TextStyle(
+          //       fontSize: size.width < 700 ? 20 : 30,
+          //       fontFamily: "PublicSans",
+          //       color: const Color(0xff152839),
+          //       fontWeight: FontWeight.bold,
+          //     ),
+          //   ),
+          // ),
+          const Spacer(),
           Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: size.width < 420 ? 40 : 5,
-              vertical: 50,
+            height: 50,
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                getIconButton(
+                  title: "LinkedIn",
+                  func: () {
+                    launchUrlString(Config.linkedInUrl);
+                  },
+                  icon: FontAwesomeIcons.linkedinIn,
+                ),
+                const SizedBox(
+                  width: 40,
+                ),
+                getIconButton(
+                  title: "Telegram",
+                  func: () {
+                    launchUrlString(Config.telegramUrl);
+                  },
+                  icon: FontAwesomeIcons.github,
+                ),
+                const SizedBox(
+                  width: 40,
+                ),
+                getIconButton(
+                  title: "GitHub",
+                  func: () {
+                    launchUrlString(Config.ghUrl);
+                  },
+                  icon: FontAwesomeIcons.github,
+                ),
+                const SizedBox(
+                  width: 40,
+                ),
+                getIconButton(
+                  title: "Discord",
+                  func: () {
+                    showToast("Coming Soon!");
+                  },
+                  icon: FontAwesomeIcons.discord,
+                ),
+              ],
             ),
-            child: Text(
-              "We believe every contribution is special and so are you.",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: size.width < 700 ? 14 : 20,
-                fontFamily: "PublicSans",
-                color: Colors.white,
-              ),
-            ),
+          ),
+          const SizedBox(
+            height: 40,
           ),
         ],
       ),
