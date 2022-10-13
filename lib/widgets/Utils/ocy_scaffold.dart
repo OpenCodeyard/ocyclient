@@ -14,11 +14,13 @@ import 'navigation_drawer.dart';
 class OcyScaffold extends StatefulWidget {
   final Widget body;
   final bool enableSelection;
+  final bool useDarkAppBarColor;
 
   const OcyScaffold({
     Key? key,
     required this.body,
     this.enableSelection = true,
+    this.useDarkAppBarColor = false,
   }) : super(key: key);
 
   @override
@@ -48,50 +50,59 @@ class _OcyScaffoldState extends State<OcyScaffold> {
     LocaleBLoc lb,
   ) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       drawer: size.width > 900 ? null : const AppDrawer(),
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: !widget.useDarkAppBarColor
+              ? Colors.white
+              : const Color(0xff152839),
+        ),
+        backgroundColor: Colors.transparent,
         toolbarHeight: 70,
         elevation: 0,
         titleSpacing: size.width > 900 ? 40 : 0,
         centerTitle: size.width > 900 ? false : true,
-        title: RichText(
-          text: TextSpan(
-            text: "{",
-            style: TextStyle(
-              fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-              fontWeight: FontWeight.bold,
-              fontFamily: "PublicSans",
-              color: Colors.black,
-            ),
-            children: <TextSpan>[
-              TextSpan(
-                text: " Open ",
-                style: TextStyle(
-                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.grey.shade700,
+        title: size.width > 900
+            ? const SizedBox()
+            : RichText(
+                text: TextSpan(
+                  text: "{",
+                  style: TextStyle(
+                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "PublicSans",
+                    color: !widget.useDarkAppBarColor
+                        ? Colors.white
+                        : const Color(0xff152839),
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: " Open ",
+                      style: TextStyle(
+                        fontSize:
+                            size.width < 1100 && size.width > 900 ? 14 : 20,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "Codeyard ",
+                      style: TextStyle(
+                        fontSize:
+                            size.width < 1100 && size.width > 900 ? 14 : 20,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "} ;",
+                      style: TextStyle(
+                        fontSize:
+                            size.width < 1100 && size.width > 900 ? 14 : 20,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              TextSpan(
-                text: "Codeyard ",
-                style: TextStyle(
-                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              TextSpan(
-                text: "} ;",
-                style: TextStyle(
-                  fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
-        ),
         actions: getAppBarActions(nb, size, ab, lb),
       ),
       body: widget.body,
@@ -110,11 +121,13 @@ class _OcyScaffoldState extends State<OcyScaffold> {
           horizontal: MediaQuery.of(context).size.width < 1100 ? 5 : 10,
           vertical: 4),
       decoration: selected
-          ? const BoxDecoration(
+          ? BoxDecoration(
               border: Border(
                 bottom: BorderSide(
                   width: 3,
-                  color: Color(0xff152839),
+                  color: !widget.useDarkAppBarColor
+                      ? Colors.white
+                      : const Color(0xff152839),
                 ),
               ),
             )
@@ -127,9 +140,11 @@ class _OcyScaffoldState extends State<OcyScaffold> {
           label,
           style: TextStyle(
             fontSize: MediaQuery.of(context).size.width < 1100 ? 12 : 15,
-            color: selected ? const Color(0xff152839) : Colors.black,
+            color: !widget.useDarkAppBarColor
+                ? Colors.white
+                : const Color(0xff152839),
             fontFamily: "PublicSans",
-            fontWeight: selected ? FontWeight.w700 : FontWeight.normal,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -146,6 +161,52 @@ class _OcyScaffoldState extends State<OcyScaffold> {
 
     return size.width > 900
         ? [
+            const SizedBox(
+              width: 60,
+            ),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  text: "{",
+                  style: TextStyle(
+                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "PublicSans",
+                    color: !widget.useDarkAppBarColor
+                        ? Colors.white
+                        : const Color(0xff152839),
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: " Open ",
+                      style: TextStyle(
+                        fontSize:
+                            size.width < 1100 && size.width > 900 ? 14 : 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "Codeyard ",
+                      style: TextStyle(
+                        fontSize:
+                            size.width < 1100 && size.width > 900 ? 14 : 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "} ;",
+                      style: TextStyle(
+                        fontSize:
+                            size.width < 1100 && size.width > 900 ? 14 : 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const Spacer(),
             ...List.generate(
               Config.routeNames.length,
               (index) {
@@ -156,41 +217,81 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                 );
               },
             ),
-            DropdownButtonHideUnderline(
-              child: DropdownButton<Language>(
-                dropdownColor: Colors.white,
-                value: lb.getCurrentSelectedLanguage(),
-                items: Config.languageList.map((Language value) {
-                  return DropdownMenuItem<Language>(
-                    value: value,
-                    child: SizedBox(
-                      width: 200,
-                      child: Text(
-                        value.name,
+            Container(
+              margin: const EdgeInsets.symmetric(
+                vertical: 5,
+                horizontal: 18,
+              ),
+              child: Theme(
+                data: ThemeData(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Language>(
+                    borderRadius: BorderRadius.circular(10),
+                    focusColor: Colors.transparent,
+                    icon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                      child: Icon(
+                        FontAwesomeIcons.caretDown,
+                        color: !widget.useDarkAppBarColor
+                            ? Colors.white
+                            : const Color(0xff152839),
+                        size: 16,
                       ),
                     ),
-                  );
-                }).toList(),
-                selectedItemBuilder: (context) {
-                  return Config.languageList.map<Widget>((Language value) {
-                    // This is the widget that will be shown when you select an item.
-                    // Here custom text style, alignment and layout size can be applied
-                    // to selected item string.
-                    return DropdownMenuItem<Language>(
-                      value: value,
-                      child: Text(
-                        value.name.substring(0, 2),
-                      ),
-                    );
-                  }).toList();
-                },
-                onChanged: (Language? l) {
-                  if (l != null) {
-                    lb.changeLanguage(l, context);
-                  }
-                },
+                    dropdownColor: const Color(0xff152839),
+                    value: lb.getCurrentSelectedLanguage(),
+                    items: Config.languageList.map((Language value) {
+                      return DropdownMenuItem<Language>(
+                        value: value,
+                        child: SizedBox(
+                          child: Text(
+                            value.name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "PublicSans",
+                              color: Colors.white,
+                              fontSize: MediaQuery.of(context).size.width < 1100
+                                  ? 12
+                                  : 15,
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    selectedItemBuilder: (context) {
+                      return Config.languageList.map<Widget>((Language value) {
+                        return DropdownMenuItem<Language>(
+                          value: value,
+                          child: Text(
+                            value.name.substring(0, 3),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "PublicSans",
+                              color: !widget.useDarkAppBarColor
+                                  ? Colors.white
+                                  : const Color(0xff152839),
+                              fontSize: MediaQuery.of(context).size.width < 1100
+                                  ? 12
+                                  : 15,
+                            ),
+                          ),
+                        );
+                      }).toList();
+                    },
+                    onChanged: (Language? l) {
+                      if (l != null) {
+                        lb.changeLanguage(l, context);
+                      }
+                    },
+                  ),
+                ),
               ),
             ),
+            const Spacer(),
             ...[
               ab.isLoggedIn
                   ? GestureDetector(
@@ -205,9 +306,12 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                               ? Image.network(
                                   ab.userModel.profilePicUrl,
                                   errorBuilder: (ctx, _, __) {
-                                    return const Icon(
+                                    return Icon(
                                       FontAwesomeIcons.userSecret,
                                       size: 25,
+                                      color: !widget.useDarkAppBarColor
+                                          ? Colors.white
+                                          : const Color(0xff152839),
                                     );
                                   },
                                 )
@@ -232,17 +336,21 @@ class _OcyScaffoldState extends State<OcyScaffold> {
                             )
                           : null,
                       child: TextButton.icon(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.login,
-                          color: Color(0xff152839),
+                          color: !widget.useDarkAppBarColor
+                              ? Colors.white
+                              : const Color(0xff152839),
                         ),
                         onPressed: () {
                           nb.toRoute("/auth");
                         },
-                        label: const Text(
+                        label: Text(
                           "Log In",
                           style: TextStyle(
-                            color: Color(0xff152839),
+                            color: !widget.useDarkAppBarColor
+                                ? Colors.white
+                                : const Color(0xff152839),
                           ),
                         ),
                       ),

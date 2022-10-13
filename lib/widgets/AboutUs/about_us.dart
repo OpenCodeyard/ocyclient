@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/widgets/Utils/ocy_scaffold.dart';
 import 'package:ocyclient/widgets/Utils/scroll_animation.dart';
@@ -16,8 +15,6 @@ class AboutUsPage extends StatefulWidget {
 }
 
 class _AboutUsPageState extends State<AboutUsPage> {
-  
-
   int currentIndex = 0;
 
   ScrollController sc = ScrollController();
@@ -34,6 +31,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
     Size size = MediaQuery.of(context).size;
 
     return OcyScaffold(
+      useDarkAppBarColor: true,
       body: SingleChildScrollView(
         controller: sc,
         child: SizedBox(
@@ -43,7 +41,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
             children: [
               SizedBox(
                 width: size.width,
-                height: size.height - 80,
+                height: size.height,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
