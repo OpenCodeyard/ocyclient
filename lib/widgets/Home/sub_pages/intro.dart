@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ocyclient/configs/config.dart';
 import 'package:ocyclient/widgets/Utils/common_widgets.dart';
 import 'package:ocyclient/widgets/Utils/snackbar.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class Intro extends StatelessWidget {
@@ -15,56 +16,26 @@ class Intro extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          decoration: const BoxDecoration(
+          height: size.width > 700 ? size.height : size.height / 1.8,
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(
+              image: const AssetImage(
                 "assets/images/welcome.jpg",
               ),
-              fit: BoxFit.cover,
+              fit: size.width < 700 ? BoxFit.fill : BoxFit.cover,
               opacity: 0.8,
             ),
-            color: Color(0xff152839),
+            color: const Color(0xff152839),
           ),
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: size.width < 1150
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    logoDescription(size),
-                    // ocy(size),
-                  ],
-                )
-              : Row(
-                  children: [
-                    // ocy(size),
-                    logoDescription(size),
-                  ],
-                ),
+          // height: MediaQuery.of(context).size.height,
+          child: Row(
+            children: [
+              logoDescription(size),
+            ],
+          ),
         ),
       ],
-    );
-  }
-
-  Widget ocy(Size size) {
-    return SizedBox(
-      width: size.width < 700 ? size.width : size.width / 2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-            child: FadeInImage.assetNetwork(
-              placeholder: "assets/images/ocy_logo.png",
-              fadeInCurve: Curves.easeOutQuint,
-              image: "https://i.imgur.com/mxc0F3W.gif",
-              height: 120,
-              width: 120,
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -95,72 +66,45 @@ class Intro extends StatelessWidget {
               )
             ],
           ),
-          // Container(
-          //   padding: EdgeInsets.symmetric(
-          //     horizontal: size.width < 420 ? 40 : 5,
-          //     vertical: 50,
-          //   ),
-          //   child: Text(
-          //     "We believe every contribution is special and so are you.",
-          //     textAlign: TextAlign.center,
-          //     style: TextStyle(
-          //       fontSize: size.width < 700 ? 20 : 30,
-          //       fontFamily: "PublicSans",
-          //       color: const Color(0xff152839),
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // ),
           const Spacer(),
-          Container(
-            height: 50,
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                getIconButton(
-                  title: "LinkedIn",
-                  func: () {
-                    launchUrlString(Config.linkedInUrl);
-                  },
-                  icon: FontAwesomeIcons.linkedinIn,
-                ),
-                const SizedBox(
-                  width: 40,
-                ),
-                getIconButton(
-                  title: "Telegram",
-                  func: () {
-                    launchUrlString(Config.telegramUrl);
-                  },
-                  icon: FontAwesomeIcons.github,
-                ),
-                const SizedBox(
-                  width: 40,
-                ),
-                getIconButton(
-                  title: "GitHub",
-                  func: () {
-                    launchUrlString(Config.ghUrl);
-                  },
-                  icon: FontAwesomeIcons.github,
-                ),
-                const SizedBox(
-                  width: 40,
-                ),
-                getIconButton(
-                  title: "Discord",
-                  func: () {
-                    showToast("Coming Soon!");
-                  },
-                  icon: FontAwesomeIcons.discord,
-                ),
-              ],
-            ),
+          ResponsiveGridList(
+            desiredItemWidth: size.width < 700 ? 50 : 140,
+            scroll: false,
+            rowMainAxisAlignment: MainAxisAlignment.center,
+            minSpacing: 20,
+            children: [
+              getIconButton(
+                title: size.width < 700 ? "" : "LinkedIn",
+                func: () {
+                  launchUrlString(Config.linkedInUrl);
+                },
+                icon: FontAwesomeIcons.linkedinIn,
+              ),
+              getIconButton(
+                title: size.width < 700 ? "" : "Telegram",
+                func: () {
+                  launchUrlString(Config.telegramUrl);
+                },
+                icon: FontAwesomeIcons.telegram,
+              ),
+              getIconButton(
+                title: size.width < 700 ? "" : "GitHub",
+                func: () {
+                  launchUrlString(Config.ghUrl);
+                },
+                icon: FontAwesomeIcons.github,
+              ),
+              getIconButton(
+                title: size.width < 700 ? "" : "Discord",
+                func: () {
+                  showToast("Coming Soon!");
+                },
+                icon: FontAwesomeIcons.discord,
+              ),
+            ],
           ),
           const SizedBox(
-            height: 40,
+            height: 10,
           ),
         ],
       ),
