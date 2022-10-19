@@ -136,7 +136,6 @@ class Config {
   static List<Language> languageList = [
     Language("English", "US", "en"),
     Language("বাংলা", "IN", "bn"),
+    Language("हिंदी", "IN", "hn")
   ];
-
-
 }
