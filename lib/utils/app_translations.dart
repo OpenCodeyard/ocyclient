@@ -12,6 +12,11 @@ class AppTranslations extends Translations {
           "home": "ঘর",
           "about_us": "আমাদের সম্পর্কে",
           "teams": "দল",
-        }
+        },
+        'hn_IN': {
+          "home": "घर",
+          "about_us": "हमारे बारे में",
+          "teams": "दल",
+        },
       };
 }

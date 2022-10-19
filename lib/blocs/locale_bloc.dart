@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocaleBLoc extends ChangeNotifier {
   static const String english = "en";
   static const String bengali = "bn";
+  static const String hindi = "hn";
 
   Locale _currentLocale = const Locale(english, "US");
 
@@ -25,6 +26,9 @@ class LocaleBLoc extends ChangeNotifier {
         locale = Locale(language.languageCode, "US");
         break;
       case bengali:
+        locale = Locale(language.languageCode, "IN");
+        break;
+      case hindi:
         locale = Locale(language.languageCode, "IN");
         break;
       default:
