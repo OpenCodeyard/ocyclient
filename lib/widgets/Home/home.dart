@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
 
     return OcyScaffold(
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const <Widget>[

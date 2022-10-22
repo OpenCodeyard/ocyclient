@@ -58,6 +58,7 @@ class ProjectsState extends State<Projects> {
                     itemCount: 3,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       ProjectModel project = pb.projects[index];
                       int contributorsLength = project.contributors.length;

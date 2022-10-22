@@ -31,6 +31,7 @@ class ProfilePageState extends State<ProfilePage> {
         height: size.height - 70,
         child: size.width < 1000
             ? SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     const SizedBox(
@@ -69,6 +70,7 @@ class ProfilePageState extends State<ProfilePage> {
                       height: size.height,
                       width: 230,
                       child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 25,
                           vertical: 10,
