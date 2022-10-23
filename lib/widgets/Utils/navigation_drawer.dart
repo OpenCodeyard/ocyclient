@@ -130,6 +130,7 @@ class AppDrawerState extends State<AppDrawer> {
               child: ListView(
                 padding: const EdgeInsets.all(5),
                 scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 children: [
                   ...List.generate(

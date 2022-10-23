@@ -70,6 +70,7 @@ class BenefitsState extends State<Benefits> {
               child: ListView(
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(20),
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 children: [
                   getBenefitsCard(

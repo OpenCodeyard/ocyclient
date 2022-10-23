@@ -116,6 +116,7 @@ class UserTabState extends State<UserTab> {
             width: (size.width - 231),
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
