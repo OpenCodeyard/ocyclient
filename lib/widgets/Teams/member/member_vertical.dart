@@ -51,7 +51,7 @@ class MemberVertical extends StatelessWidget {
                           },
                           icon: FontAwesomeIcons.linkedinIn,
                         ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       if ((member.github ?? "").isNotEmpty)
