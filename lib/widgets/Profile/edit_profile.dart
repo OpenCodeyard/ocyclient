@@ -31,6 +31,7 @@ class EditProfilePageState extends State<EditProfilePage> {
         height: size.height - 70,
         child: size.width < 1000
             ? SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     const SizedBox(
@@ -45,6 +46,7 @@ class EditProfilePageState extends State<EditProfilePage> {
                         ),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
                           padding: const EdgeInsets.symmetric(
                             horizontal: 5,
                             vertical: 10,
@@ -69,6 +71,7 @@ class EditProfilePageState extends State<EditProfilePage> {
                       height: size.height,
                       width: 230,
                       child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 25,
                           vertical: 10,

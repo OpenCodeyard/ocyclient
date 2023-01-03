@@ -34,6 +34,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
       useDarkAppBarColor: true,
       body: SingleChildScrollView(
         controller: sc,
+        physics: const BouncingScrollPhysics(),
         child: SizedBox(
           width: size.width,
           child: Column(

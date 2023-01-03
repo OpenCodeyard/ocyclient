@@ -67,6 +67,7 @@ class MemberHorizontal extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
             children: [
               if ((member.linkedIn ?? "").isNotEmpty)
                 getIconButton(

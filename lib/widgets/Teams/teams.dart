@@ -29,6 +29,7 @@ class _TeamsPageState extends State<TeamsPage> {
 
     return OcyScaffold(
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: SizedBox(
           width: size.width,
           child: Column(
