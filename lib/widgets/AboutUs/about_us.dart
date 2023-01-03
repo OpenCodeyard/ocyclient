@@ -76,8 +76,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                               style: TextStyle(
                                 fontFamily: "PublicSans",
                                 fontWeight: FontWeight.w700,
-                                color: index == 0
-                                    ? const Color(0xff4a1a71)
+                                color: index == Config.weAre.length - 1
+                                    ? const Color(0xff071a2b)
                                     : Config.weAreColors[index % 5],
                                 fontSize: getHeadingFontSize(size),
                               ),

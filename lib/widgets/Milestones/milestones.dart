@@ -23,6 +23,6 @@ class _MilestonesPageState extends State<MilestonesPage> {
       ),
     );
 
-    return ComingSoon();
+    return const ComingSoon();
   }
 }

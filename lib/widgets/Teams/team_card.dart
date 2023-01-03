@@ -25,6 +25,16 @@ class _TeamCardState extends State<TeamCard> {
   bool isExpanded = true;
 
   @override
+  void initState() {
+    if (widget.members.isEmpty) {
+      setState(() {
+        isExpanded = false;
+      });
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 25.0),
@@ -35,7 +45,7 @@ class _TeamCardState extends State<TeamCard> {
         ),
         color: const Color(0xff152839),
         child: ExpansionTile(
-          initiallyExpanded: true,
+          initiallyExpanded: widget.members.isNotEmpty,
           onExpansionChanged: (bool value) {
             setState(() {
               isExpanded = value;

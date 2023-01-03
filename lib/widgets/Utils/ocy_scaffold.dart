@@ -27,7 +27,31 @@ class OcyScaffold extends StatefulWidget {
   State<OcyScaffold> createState() => _OcyScaffoldState();
 }
 
-class _OcyScaffoldState extends State<OcyScaffold> {
+class _OcyScaffoldState extends State<OcyScaffold>
+    with TickerProviderStateMixin {
+  AnimationController? colorAnimationController;
+  Animation? _colorTween;
+
+  @override
+  void initState() {
+    colorAnimationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 0));
+    _colorTween = ColorTween(
+      begin: Colors.transparent,
+      end: !widget.useDarkAppBarColor ? const Color(0xff071a2b) : Colors.white,
+    ).animate(colorAnimationController!);
+
+    super.initState();
+  }
+
+  bool _scrollListener(ScrollNotification scrollInfo) {
+    if (scrollInfo.metrics.axis == Axis.vertical) {
+      colorAnimationController?.animateTo(scrollInfo.metrics.pixels / 350);
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -49,63 +73,80 @@ class _OcyScaffoldState extends State<OcyScaffold> {
     AuthenticationBloc ab,
     LocaleBLoc lb,
   ) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      drawer: size.width > 900 ? null : const AppDrawer(),
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: !widget.useDarkAppBarColor
-              ? Colors.white
-              : const Color(0xff152839),
-        ),
+    return NotificationListener<ScrollNotification>(
+      onNotification: _scrollListener,
+      child: Scaffold(
         backgroundColor: Colors.transparent,
-        toolbarHeight: 70,
-        elevation: 0,
-        titleSpacing: size.width > 900 ? 40 : 0,
-        centerTitle: size.width > 900 ? false : true,
-        title: size.width > 900
-            ? const SizedBox()
-            : RichText(
-                text: TextSpan(
-                  text: "{",
-                  style: TextStyle(
-                    fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "PublicSans",
-                    color: !widget.useDarkAppBarColor
-                        ? Colors.white
-                        : const Color(0xff152839),
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: " Open ",
-                      style: TextStyle(
-                        fontSize:
-                            size.width < 1100 && size.width > 900 ? 14 : 20,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    TextSpan(
-                      text: "Codeyard ",
-                      style: TextStyle(
-                        fontSize:
-                            size.width < 1100 && size.width > 900 ? 14 : 20,
-                      ),
-                    ),
-                    TextSpan(
-                      text: "} ;",
-                      style: TextStyle(
-                        fontSize:
-                            size.width < 1100 && size.width > 900 ? 14 : 20,
-                      ),
-                    ),
-                  ],
+        drawer: size.width > 900 ? null : const AppDrawer(),
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+          preferredSize: Size(size.width, 70),
+          child: AnimatedBuilder(
+            animation: colorAnimationController!,
+            builder: (context, state) {
+              return AppBar(
+                iconTheme: IconThemeData(
+                  color: !widget.useDarkAppBarColor
+                      ? Colors.white
+                      : const Color(0xff152839),
                 ),
-              ),
-        actions: getAppBarActions(nb, size, ab, lb),
+                backgroundColor: _colorTween == null
+                    ? Colors.transparent
+                    : _colorTween?.value,
+                toolbarHeight: 70,
+                elevation: 0,
+                titleSpacing: size.width > 900 ? 40 : 0,
+                centerTitle: size.width > 900 ? false : true,
+                title: size.width > 900
+                    ? const SizedBox()
+                    : RichText(
+                        text: TextSpan(
+                          text: "{",
+                          style: TextStyle(
+                            fontSize:
+                                size.width < 1100 && size.width > 900 ? 14 : 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "PublicSans",
+                            color: !widget.useDarkAppBarColor
+                                ? Colors.white
+                                : const Color(0xff152839),
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: " Open ",
+                              style: TextStyle(
+                                fontSize: size.width < 1100 && size.width > 900
+                                    ? 14
+                                    : 20,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "Codeyard ",
+                              style: TextStyle(
+                                fontSize: size.width < 1100 && size.width > 900
+                                    ? 14
+                                    : 20,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "} ;",
+                              style: TextStyle(
+                                fontSize: size.width < 1100 && size.width > 900
+                                    ? 14
+                                    : 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                actions: getAppBarActions(nb, size, ab, lb),
+              );
+            },
+          ),
+        ),
+        body: widget.body,
       ),
-      body: widget.body,
     );
   }
 
