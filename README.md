@@ -48,17 +48,6 @@ A higly configurable community website template built using Flutter
 - ### Built With
 
   [![Flutter][flutter-image]][flutter-url] &emsp; [![Firebase][firebase-image]][firebase-url]
-
-- ### We are participating in Hacktoberfest 2022
-   * Check [Contributing.md](https://github.com/OpenCodeyard/ocyclient/blob/dev/CONTRIBUTING.md) for guidelines on contributing to this repo.
-   * Check [https://hacktoberfest.com/participation/] for rules and details about hacktoberfest
-   * Get 4 pr merged and win goodies from Hacktobefest team
-   
-<p align="center">
-<br>
-  <a href="https://hacktoberfest.com/"><img width="600" height="300" src="https://camo.githubusercontent.com/adfb41a5209d18a5549b6bdb2c0fce42abc22e1956d75c75dcf3e9f667401173/68747470733a2f2f692e696d6775722e636f6d2f65633538634b492e6a7067"></a>
-  <br>
-</p>
  
 - <details>
   <summary id="screenshots"><b>Screenshots :iphone: </b></summary>
