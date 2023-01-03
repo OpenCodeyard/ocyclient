@@ -31,7 +31,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
     Size size = MediaQuery.of(context).size;
 
     return OcyScaffold(
-      useDarkAppBarColor: true,
       body: SingleChildScrollView(
         controller: sc,
         physics: const BouncingScrollPhysics(),

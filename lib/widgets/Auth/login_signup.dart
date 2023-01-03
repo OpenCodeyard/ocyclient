@@ -25,7 +25,6 @@ class LoginSignUpState extends State<LoginSignUp> {
     NavigationBloc nb = Provider.of<NavigationBloc>(context);
 
     return OcyScaffold(
-      useDarkAppBarColor: true,
       enableSelection: false,
       body: Center(
         child: SizedBox(
