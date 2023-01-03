@@ -108,7 +108,7 @@ samples, guidance on mobile development, and a full API reference.
     * Create a firebase project
     * Add android app with your package name in firebase console.
     * Enable Google Auth from `Authentication` menu in Firebase.
-    * Create a file named env and store github_access_token in it (See env_example.txt file in project root for example). Check [this link](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to see how to create a github access token. 
+    * Create a file named env and store github_access_token in it (See [env_example.txt](https://github.com/OpenCodeyard/ocyclient/blob/dev/env_example.txt) file in project root for example). Check [this link](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to see how to create a github access token. 
     * Generate `SHA-1 key hash` for your debug keystore from your pc. This needs to be added to `SHA certificate fingerprints` section under your android app in `Firebase project settings`. Without this step **Google login** won't work.
     * Enable ***Cloud Firestore***
       * Recommended rules for Firestore 
