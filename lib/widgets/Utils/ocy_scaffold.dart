@@ -14,13 +14,11 @@ import 'navigation_drawer.dart';
 class OcyScaffold extends StatefulWidget {
   final Widget body;
   final bool enableSelection;
-  final bool useDarkAppBarColor;
 
   const OcyScaffold({
     Key? key,
     required this.body,
     this.enableSelection = true,
-    this.useDarkAppBarColor = false,
   }) : super(key: key);
 
   @override
@@ -38,7 +36,7 @@ class _OcyScaffoldState extends State<OcyScaffold>
         AnimationController(vsync: this, duration: const Duration(seconds: 0));
     _colorTween = ColorTween(
       begin: Colors.transparent,
-      end: !widget.useDarkAppBarColor ? const Color(0xff071a2b) : Colors.white,
+      end: Colors.white,
     ).animate(colorAnimationController!);
 
     super.initState();
@@ -85,10 +83,8 @@ class _OcyScaffoldState extends State<OcyScaffold>
             animation: colorAnimationController!,
             builder: (context, state) {
               return AppBar(
-                iconTheme: IconThemeData(
-                  color: !widget.useDarkAppBarColor
-                      ? Colors.white
-                      : const Color(0xff152839),
+                iconTheme: const IconThemeData(
+                  color: Color(0xff152839),
                 ),
                 backgroundColor: _colorTween == null
                     ? Colors.transparent
@@ -107,9 +103,7 @@ class _OcyScaffoldState extends State<OcyScaffold>
                                 size.width < 1100 && size.width > 900 ? 14 : 20,
                             fontWeight: FontWeight.bold,
                             fontFamily: "PublicSans",
-                            color: !widget.useDarkAppBarColor
-                                ? Colors.white
-                                : const Color(0xff152839),
+                            color: const Color(0xff152839),
                           ),
                           children: <TextSpan>[
                             TextSpan(
@@ -162,13 +156,11 @@ class _OcyScaffoldState extends State<OcyScaffold>
           horizontal: MediaQuery.of(context).size.width < 1100 ? 5 : 10,
           vertical: 4),
       decoration: selected
-          ? BoxDecoration(
+          ? const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
                   width: 3,
-                  color: !widget.useDarkAppBarColor
-                      ? Colors.white
-                      : const Color(0xff152839),
+                  color: Color(0xff152839),
                 ),
               ),
             )
@@ -181,9 +173,7 @@ class _OcyScaffoldState extends State<OcyScaffold>
           label,
           style: TextStyle(
             fontSize: MediaQuery.of(context).size.width < 1100 ? 12 : 15,
-            color: !widget.useDarkAppBarColor
-                ? Colors.white
-                : const Color(0xff152839),
+            color: const Color(0xff152839),
             fontFamily: "PublicSans",
             fontWeight: FontWeight.w700,
           ),
@@ -213,9 +203,7 @@ class _OcyScaffoldState extends State<OcyScaffold>
                     fontSize: size.width < 1100 && size.width > 900 ? 14 : 20,
                     fontWeight: FontWeight.bold,
                     fontFamily: "PublicSans",
-                    color: !widget.useDarkAppBarColor
-                        ? Colors.white
-                        : const Color(0xff152839),
+                    color: const Color(0xff152839),
                   ),
                   children: <TextSpan>[
                     TextSpan(
@@ -273,13 +261,11 @@ class _OcyScaffoldState extends State<OcyScaffold>
                   child: DropdownButton<Language>(
                     borderRadius: BorderRadius.circular(10),
                     focusColor: Colors.transparent,
-                    icon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                    icon: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 6.0),
                       child: Icon(
                         FontAwesomeIcons.caretDown,
-                        color: !widget.useDarkAppBarColor
-                            ? Colors.white
-                            : const Color(0xff152839),
+                        color: Color(0xff152839),
                         size: 16,
                       ),
                     ),
@@ -312,9 +298,7 @@ class _OcyScaffoldState extends State<OcyScaffold>
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontFamily: "PublicSans",
-                              color: !widget.useDarkAppBarColor
-                                  ? Colors.white
-                                  : const Color(0xff152839),
+                              color: const Color(0xff152839),
                               fontSize: MediaQuery.of(context).size.width < 1100
                                   ? 12
                                   : 15,
@@ -347,12 +331,10 @@ class _OcyScaffoldState extends State<OcyScaffold>
                               ? Image.network(
                                   ab.userModel.profilePicUrl,
                                   errorBuilder: (ctx, _, __) {
-                                    return Icon(
+                                    return const Icon(
                                       FontAwesomeIcons.userSecret,
                                       size: 25,
-                                      color: !widget.useDarkAppBarColor
-                                          ? Colors.white
-                                          : const Color(0xff152839),
+                                      color: Color(0xff152839),
                                     );
                                   },
                                 )
@@ -377,21 +359,17 @@ class _OcyScaffoldState extends State<OcyScaffold>
                             )
                           : null,
                       child: TextButton.icon(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.login,
-                          color: !widget.useDarkAppBarColor
-                              ? Colors.white
-                              : const Color(0xff152839),
+                          color: Color(0xff152839),
                         ),
                         onPressed: () {
                           nb.toRoute("/auth");
                         },
-                        label: Text(
+                        label: const Text(
                           "Log In",
                           style: TextStyle(
-                            color: !widget.useDarkAppBarColor
-                                ? Colors.white
-                                : const Color(0xff152839),
+                            color: Color(0xff152839),
                           ),
                         ),
                       ),
