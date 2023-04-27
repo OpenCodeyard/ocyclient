@@ -30,7 +30,7 @@ A higly configurable community website template built using Flutter
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#project-setup">Project Setup</a></li>
-        <li><a href="#how-to-contribute">How to contribute</a></li>
+        <li><a href="#contribution">Contribution</a></li>
       </ul>
     </li>
     <!-- <li><a href="#roadmap">Roadmap</a></li> -->
@@ -129,8 +129,16 @@ samples, guidance on mobile development, and a full API reference.
     * (Optional) Enable ***Cloud Messaging*** from Firebase Console if you wan't notifications to work in your app
     * (Optional) If released to play store get `SHA-1 key hash` from playstore and upload them to firebase, otherwise google sign in won't work in play store app.
 
-* #### How to Contribute?
+* #### Contribution
   
+    ##### Check out our awesome contributors: <br>
+    <a href = "https://github.com/OpenCodeyard/ocyclient/graphs/contributors">
+      <img src = "https://contrib.rocks/image?repo=OpenCodeyard/ocyclient"/>
+    </a>
+
+    Made with [contributors-img](https://contrib.rocks).
+    <br>
+    
     Check [Contributing.md](https://github.com/OpenCodeyard/ocyclient/blob/dev/CONTRIBUTING.md) for guidelines on contributing to this repo.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
