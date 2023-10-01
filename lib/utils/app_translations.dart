@@ -20,7 +20,7 @@ class AppTranslations extends Translations {
         },
         'mt_IN':{
           "home":"मुख्यपृष्ठ",
-          "about_us":"आमच्या_बद्दल",
+          "about_us":"आमच्या बद्दल",
           "teams":"संघ"
         }
       };
