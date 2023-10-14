@@ -18,5 +18,10 @@ class AppTranslations extends Translations {
           "about_us": "हमारे बारे में",
           "teams": "दल",
         },
+        'mt_IN':{
+          "home":"मुख्यपृष्ठ",
+          "about_us":"आमच्या बद्दल",
+          "teams":"संघ"
+        }
       };
 }

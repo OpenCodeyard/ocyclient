@@ -8,7 +8,7 @@ class LocaleBLoc extends ChangeNotifier {
   static const String english = "en";
   static const String bengali = "bn";
   static const String hindi = "hn";
-
+  static const String marathi ="mt"
   Locale _currentLocale = const Locale(english, "US");
 
   Locale get currentLocale => _currentLocale;
@@ -31,6 +31,9 @@ class LocaleBLoc extends ChangeNotifier {
       case hindi:
         locale = Locale(language.languageCode, "IN");
         break;
+      case marathi:
+      locale = Locale(language.languageCode,"IN");
+      break;  
       default:
         locale = Locale(language.languageCode, 'US');
     }
